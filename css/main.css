@@ -86,7 +86,6 @@ body {
 }
 
 #main__contents {
-  /* border: solid 2px red; */
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -113,7 +112,7 @@ body {
   margin-right: 90px;
 }
 
-@media screen and (max-width:1150px) {
+@media (max-width:1150px) {
   .nav__nav-column>.nav__icon {
     display: none;
   }
