@@ -2,6 +2,7 @@ body {
   background-color: white;
   font-family: 'Poor Story', cursive;
   transition: background-color .5s;
+  height: 150vh;
 }
 
 
