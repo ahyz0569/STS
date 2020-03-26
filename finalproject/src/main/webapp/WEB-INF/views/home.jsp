@@ -9,6 +9,8 @@
 </head>
 <body>
     <h1>메인화면임</h1>
+    <a href="/login">로그인</a>
+    <a href="/logout">로그아웃</a>
 </body>
 </html>
 
