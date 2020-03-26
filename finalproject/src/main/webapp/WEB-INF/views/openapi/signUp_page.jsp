@@ -9,7 +9,7 @@
 <h1>
    singup
 </h1>
-<form action="/openapi/insertMember" method="POST">
+<form action="/insertMember" method="POST">
     <div>
         id : <input type="text" name="id" placeholder="Create ID">
         password : <input type="password" name="password" placeholder="Create password">
