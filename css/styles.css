@@ -2,7 +2,8 @@
 
 @import "reset.css";
 @import "main.css";
-@import "login.css";
+@import "logIn.css";
+@import "signUp.css";
 
 
 * {
@@ -10,10 +11,22 @@
   outline: none;
   text-decoration: none;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: #fdfdfd;
+}
+
+@media (max-width:1260px) {
+  .nav__nav-column>.nav__icon>a>span {
+    display: none;
+  }
 }
 
 @media (max-width:680px) {
-  h1 {
+
+  #login-form>h1 {
     font-size: 40px;
   }
 
@@ -30,13 +43,45 @@
     padding-top: 70px;
   }
 
+  .nav__icon+.nav__icon+.nav__icon+.nav__icon {
+    margin-right: 20px;
+  }
+
+  .nav__icon {
+    font-size: 15px;
+    margin-left: 20px;
+  }
+
+  #signUp-form>h1 {
+    font-size: 40px;
+  }
+
+  #signUp-form>p {
+    font-size: 20px;
+  }
 }
 
-@media (max-width:400px) {
 
+@media (max-width:400px) {
   h1 {
     font-size: 25px;
     padding-top: 5px;
+  }
+
+  #signUp-form>input {
+    font-size: 13px;
+  }
+
+  #signUp-form>h1 {
+    font-size: 30px;
+  }
+
+  #signUp-form>p {
+    font-size: 15px;
+  }
+
+  #signUp-check {
+    font-size: 14px;
   }
 
   #login-button,

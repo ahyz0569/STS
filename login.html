@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>LOGIN PAGE</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
   <link rel="stylesheet" href="css/styles.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -26,32 +26,33 @@
         </div>
       </div>
       <!--end--햄버거메뉴-->
-      <a href="main.html" target="main-logo">
+      <a href="main.html">
         <img class="main-logo" src="images/logo.png" alt="">
       </a>
       <!--start--우측 상단 메뉴 아이콘들 -->
       <div class="nav__nav-column">
         <span class="nav__icon">
           <a href="#.html">
-            <!-- <i class="fas fa-search"></i> -->
-            Search
+            <i class="fas fa-search"></i>
+            <span>Search</span>
           </a>
         </span>
         <span class="nav__icon">
           <a href="#.html">
-            <!-- <i class="fas fa-camera-retro"></i> -->
-            Camera
+            <i class="fas fa-camera-retro"></i>
+            <span>Camera</span>
           </a>
         </span>
         <span class="nav__icon">
-          <a href="#">
-            <!-- <i class="far fa-user"></i> -->
-            Log In
+          <a href="login.html">
+            <i class="far fa-bookmark"></i>
+            <span>Bookmark</span>
           </a>
         </span>
         <span class="nav__icon">
-          <a href="#">
-            Sign Up
+          <a href="login.html">
+            <i class="far fa-user"></i>
+            <span>User</span>
           </a>
         </span>
       </div>
@@ -80,7 +81,7 @@
             <h1>
               오늘 뭐 해먹지 ?
             </h1>
-            <input id="email-id" type="email" placeholder="Enter email">
+            <input id="email-id" type="email" placeholder="Enter email" autofocus>
             <input id="email-password" type="password" placeholder="Enter password">
             <button id="login-button" type="submit">
               로그인
@@ -109,9 +110,9 @@
     <!--end--메인컨텐츠-->
 
     <!--start--푸터-->
-    <!-- <footer id="main__footer">
-      @Copyright
-    </footer> -->
+    <footer id="main__footer">
+      @"오늘 뭐 해먹지?" Corp. All right reserved.
+    </footer>
     <!--end--푸터-->
 
   </div>
@@ -119,6 +120,8 @@
 
   <!--start--VanillaJS-->
   <script src="main.js"></script>
+  <script src="user.js"></script>
+
   <!--end--VanillaJS-->
 </body>
 

@@ -1,5 +1,5 @@
 body {
-  background-color: white;
+  background-color: #fdfdfd;
   font-family: 'Poor Story', cursive;
   transition: background-color .5s;
   height: 150vh;
@@ -16,13 +16,16 @@ body {
 }
 
 #main__container {
-  display: block;
   padding-top: 125px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #main__contents {
   width: 100%;
-  height: 500px;
+  height: 100%;
 }
 
 /* --- Menu-bar --- */
@@ -34,8 +37,8 @@ body {
   border: 0;
   background: transparent;
   border-radius: 0;
-  height: 70px;
-  width: 30px;
+  height: 40px;
+  width: 35px;
   cursor: pointer;
   pointer-events: auto;
   margin-left: 25px;
@@ -44,7 +47,7 @@ body {
 .icon-bar {
   display: block;
   width: 100%;
-  height: 3px;
+  height: 4px;
   background: black;
   transition: .3s;
 }
@@ -56,11 +59,6 @@ body {
 .nav__icon>a {
   color: black
 }
-
-#nav-container:focus-within .button {
-  pointer-events: none;
-}
-
 
 #nav-container:focus-within .icon-bar:nth-of-type(1) {
   transform: translate3d(0, 8px, 0) rotate(45deg);
@@ -76,8 +74,6 @@ body {
 
 /* --- Menu-bar end--- */
 
-
-
 #main__header {
   top: 0;
   left: 0;
@@ -87,7 +83,7 @@ body {
   display: flex;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   justify-content: space-between;
-  background: white;
+  background: #FDFDFD;
   align-items: center;
 }
 
@@ -115,13 +111,7 @@ body {
 }
 
 .nav__icon+.nav__icon+.nav__icon+.nav__icon {
-  margin-right: 90px;
-}
-
-@media (max-width:1150px) {
-  .nav__nav-column>.nav__icon {
-    display: none;
-  }
+  margin-right: 30px;
 }
 
 /* 햄버거메뉴 오픈 시 사이드 네비 */
@@ -132,20 +122,19 @@ body {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: white;
   overflow-x: hidden;
   transition: 1s;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: white;
 }
 
 .sidenav a {
-  margin-top: 40px;
+  margin-top: 50px;
   font-size: 30px;
   color: black;
-  background-color: white;
   display: block;
   transition: 0.5s;
   font-weight: bold;
@@ -157,7 +146,8 @@ body {
   top: 0;
   right: 30px;
   font-size: 60px;
-  background-color: white;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 /*---end--- 햄버거메뉴 오픈 시 사이드 네비 */
@@ -188,4 +178,8 @@ body {
 
 .nav-menu-6:hover {
   color: mediumvioletred;
+}
+
+.sidenav {
+  pointer-events: auto;
 }
