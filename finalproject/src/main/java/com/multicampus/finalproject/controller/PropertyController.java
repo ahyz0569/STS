@@ -94,4 +94,31 @@ public class PropertyController {
         }
     }
 
+    @RequestMapping(value = "/openapi/signUp_page", method = RequestMethod.GET)
+    public String signUp_page()throws Exception {
+        return "/openapi/signUp_page";
+    }
+    
+    @RequestMapping(value = "/openapi/insertMember", method = RequestMethod.POST)
+    //브라우저에서 요청과 함께 날라온 id , password , name 값을 매개변수로 받아 온다.
+    public String inser_member(
+        @RequestParam("id")String id,
+        @RequestParam("password")String password,
+        @RequestParam("name")String name
+    ) {
+        //매개변수의 값을 Member 생성자를 통해 member에 set해준다.
+        UserInfo userInfo = new UserInfo(id, password, name);
+        // Service에서 구현해 놓은 insert_Member메서드를 실행 시켜준다
+        
+        boolean isMemberExistDB = customUserDetailsService.Insert_Member(userInfo);
+       
+        if(isMemberExistDB == false){
+            return "redirect:/";
+        }
+        else{
+            return "redirect:/openapi/signUp_page";
+        }
+        //redirect를 통해 / <- url에 대한 servlet을 실행 시켜 준다.
+    }
+
 }
