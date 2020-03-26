@@ -11,3 +11,38 @@
   text-decoration: none;
   box-sizing: border-box;
 }
+
+@media (max-width:680px) {
+  h1 {
+    font-size: 40px;
+  }
+
+  #main__header {
+    height: 50px;
+  }
+
+  .main-logo {
+    /* visibility: hidden; */
+    height: 50px;
+  }
+
+  #main__container {
+    padding-top: 70px;
+  }
+
+}
+
+@media (max-width:400px) {
+
+  h1 {
+    font-size: 25px;
+    padding-top: 5px;
+  }
+
+  #login-button,
+  #google-login-btn,
+  #password-find,
+  #go-to-signUp {
+    font-size: 20px;
+  }
+}

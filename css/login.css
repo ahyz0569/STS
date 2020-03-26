@@ -122,10 +122,3 @@ input::placeholder {
   align-items: center;
   justify-content: center;
 }
-
-
-@media (max-width:680px) {
-  h1 {
-    font-size: 40px;
-  }
-}
