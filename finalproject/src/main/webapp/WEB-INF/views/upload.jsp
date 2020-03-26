@@ -5,16 +5,11 @@
     <meta charset="UTF-8">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>메인화면</title>
+    <title>api사진 테스트</title>
 </head>
 <body>
-    <h1>메인화면임</h1>
-    <hr>
-
-    <a href="/login">로그인</a>
-    <a href="/logout">로그아웃</a>
-    <a href="/testpost">API 테스트버튼</a>
-    <a href="/testjson">API 테스트버튼</a>
+    사진은!
+    <image src=${uploadedImage}></image>
 </body>
 </html>
 
