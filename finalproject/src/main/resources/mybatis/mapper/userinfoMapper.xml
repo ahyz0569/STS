@@ -4,4 +4,13 @@
     <select id="getAll" resultType="com.multicampus.finalproject.model.UserInfo">
         SELECT * FROM user;
     </select>
+
+    <select id="readUser" parameterType="String" resultType="com.multicampus.finalproject.model.UserInfo">
+        SELECT * FROM user WHERE username = #{username}
+    </select>
+
+    <select id="readAuthority" parameterType="String" resultType="String">
+        SELECT authority_name FROM authority WHERE username = #{username}
+    </select>
+    
 </mapper>

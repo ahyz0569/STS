@@ -12,4 +12,8 @@ import com.multicampus.finalproject.model.UserInfo;
 public interface UserMapper {
  
     public List<UserInfo> getAll() throws Exception;
+
+    public UserInfo readUser(String username);
+ 
+    public List<String> readAuthority(String username);
 }
