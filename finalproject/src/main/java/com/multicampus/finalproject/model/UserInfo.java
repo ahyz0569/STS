@@ -3,6 +3,7 @@ import java.util.Collection;
 
 import org.apache.ibatis.type.Alias;
 // Spring Security를 추가한 후 새로 넣은부분!
+import org.springframework.security.core.GrantedAuthority;
 
 import lombok.Data;
 
@@ -26,6 +27,7 @@ public class UserInfo {
     private boolean isEnabled;
     
     // Spring Security를 추가한 후 새로 넣은부분!
+    private Collection<? extends GrantedAuthority> authorities;
 
     public UserInfo(String username , String password , String name){
         this.username = username;
@@ -35,6 +37,7 @@ public class UserInfo {
         this.isAccountNonLocked = true;
         this.isCredentialsNonExpired = true;
         this.isEnabled = true;
+        this.authorities = null;
     }
 }
 
