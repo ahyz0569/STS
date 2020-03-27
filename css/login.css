@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .login__layout-form {
@@ -59,12 +60,13 @@ h1 {
   color: white;
   border: none;
   font-size: 25px;
-  background-color: salmon;
+  background: salmon;
 }
 
 #login-button:hover {
   cursor: pointer;
-  background-color: #ffb385;
+  /* background-color: #e55039; */
+  background-color: #e55039;
 }
 
 input::placeholder {
@@ -104,7 +106,7 @@ input::placeholder {
   font-size: 25px;
 }
 
-#go-to-signUp:hover {
+#go-to-signUp>a:hover {
   font-weight: bold;
 }
 

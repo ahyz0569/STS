@@ -12,11 +12,13 @@
   </style>
 </head>
 
+
 <body>
   <!--start--페이지 전체 컨테이너-->
   <div id='main__container'>
     <!--start--헤더 고정-->
     <header id="main__header">
+
       <!--start--햄버거메뉴-->
       <div id="nav-container" onclick="openNav()">
         <div class="button" tabindex="0">
@@ -26,9 +28,11 @@
         </div>
       </div>
       <!--end--햄버거메뉴-->
+
       <a href="main.html">
-        <img class="main-logo" src="images/logo.png" alt="">
+        <img class="main-logo" src="images/333.png" alt="">
       </a>
+
       <!--start--우측 상단 메뉴 아이콘들 -->
       <div class="nav__nav-column">
         <span class="nav__icon">
@@ -43,7 +47,7 @@
             <span>Camera</span>
           </a>
         </span>
-        <span class="nav__icon">
+        <span class=" nav__icon">
           <a href="login.html">
             <i class="far fa-bookmark"></i>
             <span>Bookmark</span>
@@ -64,11 +68,11 @@
     <!--start--햄버거메뉴바 클릭-->
     <div id="mySidenav" class="sidenav">
       <a class=" closebtn" onclick="closeNav()">&times;</a>
-      <a class="nav-menu-1" href="#">HOME</a>
+      <a class="nav-menu-1" href="main.html">HOME</a>
       <a class="nav-menu-2" href="#">GUIDE</a>
       <a class="nav-menu-3" href="#">SEARCH</a>
       <a class="nav-menu-4" href="#">BOOMARK</a>
-      <a class="nav-menu-5" href="#">USER</a>
+      <a class="nav-menu-5" href="login.html">USER</a>
       <a class="nav-menu-6" href="#">CONTACT</a>
     </div>
     <!--end--햄버거메뉴바 클릭-->
@@ -77,6 +81,7 @@
     <div id="main__contents">
       <div class="login__layout">
         <div class="login__layout-form">
+          <!--start--로그인 폼-->
           <form clss="loginForm" id="login-form" action="#" method="" enctype="multipart/form-data">
             <h1>
               오늘 뭐 해먹지 ?
@@ -93,17 +98,24 @@
               </span>
             </button>
           </form>
+          <!--end--로그인 폼-->
+
           <hr>
+          <!--아이디비번찾기모달창으로 만들기!-->
           <div id="user-help">
             <span id="password-find"><a href="">
                 아이디/비번 찾기
               </a>
             </span>
-            <span id="go-to-signUp"><a href="">
-                아직 계정이 없으신가요? 회원가입!
+            <span id="go-to-signUp">
+              아직 계정이 없으신가요?
+              <a href="signUp.html">
+                회원가입!
               </a>
             </span>
           </div>
+          <!--아이디비번찾기모달창으로 만들기!-->
+
         </div>
       </div>
     </div>

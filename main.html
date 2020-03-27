@@ -17,6 +17,7 @@
   <div id='main__container'>
     <!--start--헤더 고정-->
     <header id="main__header">
+
       <!--start--햄버거메뉴-->
       <div id="nav-container" onclick="openNav()">
         <div class="button" tabindex="0">
@@ -26,9 +27,14 @@
         </div>
       </div>
       <!--end--햄버거메뉴-->
+
+      <!--start--메인로고  -->
       <a href="main.html">
-        <img class="main-logo" src="images/logo.png" alt="">
+        <img class="main-logo" src="images/main-logo.png" alt="">
       </a>
+      <!--end--메인로고  -->
+
+
       <!--start--우측 상단 메뉴 아이콘들 -->
       <div class="nav__nav-column">
         <span class="nav__icon">
@@ -44,7 +50,7 @@
           </a>
         </span>
         <span class="nav__icon">
-          <a href="login.html">
+          <a href="">
             <i class="far fa-bookmark"></i>
             <span>Bookmark</span>
           </a>
@@ -64,11 +70,11 @@
     <!--start--햄버거메뉴바 클릭-->
     <div id="mySidenav" class="sidenav">
       <a class=" closebtn" onclick="closeNav()">&times;</a>
-      <a class="nav-menu-1" href="#">HOME</a>
+      <a class="nav-menu-1" href="main.html">HOME</a>
       <a class="nav-menu-2" href="#">GUIDE</a>
       <a class="nav-menu-3" href="#">SEARCH</a>
       <a class="nav-menu-4" href="#">BOOMARK</a>
-      <a class="nav-menu-5" href="#">USER</a>
+      <a class="nav-menu-5" href="login.html">USER</a>
       <a class="nav-menu-6" href="#">CONTACT</a>
     </div>
     <!--end--햄버거메뉴바 클릭-->

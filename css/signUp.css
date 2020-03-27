@@ -64,7 +64,7 @@ h1 {
 
 #signUp-button:hover {
   cursor: pointer;
-  background-color: #ffb385;
+  background-color: #e55039;
 }
 
 input::placeholder {
@@ -87,14 +87,19 @@ input::placeholder {
   background-color: darkturquoise;
 }
 
-#go-to-signUp {
+#go-to-login {
   margin-bottom: 10px;
   text-align: center;
   font-size: 25px;
 }
 
-#go-to-signUp:hover {
+#go-to-login>a {
   font-weight: bold;
+  color: dodgerblue;
+}
+
+#go-to-login>a:hover {
+  color: blue;
 }
 
 #user-help {
