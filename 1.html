@@ -5,53 +5,61 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="modalPractice.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+  <style>
+    .search-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: black;
+      height: 40px;
+      border-radius: 40px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .search-btn {
+      color: red;
+      float: right;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: yellow;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .search-txt {
+      height: 25px;
+      border: none;
+      background: none;
+      outline: none;
+      float: left;
+      color: white;
+      font-size: 16px;
+      transition: 0.5s;
+      width: 0;
+    }
+
+    .search-box:hover>.search-txt {
+      width: 240px;
+      padding: 0 6px;
+    }
+  </style>
 </head>
 
 <body>
-  <h1>레어어 팝업창 띄우기</h1>
-  <!-- 버튼 -->
-  <button class="trigger">이메일 보내기</button>
-
-  <!-- 팝업 될 레이어 -->
-  <div class="modal">
-    <div class="modal-content">
-      <span class="close-button">&times;</span>
-      <h1 class="title">메일 보내기</h1>
-      <form action="#post.php" method="POST">
-        <label for="email">Email</label>
-        <input type="email" name="email" placeholder="Your email" required="required">
-        <label></label>
-        <textarea name="message" placeholder="Test Message" required="required"></textarea>
-        <input type="button" id="cancel" value="취소">
-        <input type="submit" id="submit" value="보내기">
-      </form>
-    </div>
+  <div class="search-box">
+    <input class="search-txt" type="text" name="" placeholder="요리를 찾아보세요!">
+    <a href="#" class="search-btn">
+      <i class="fas fa-search"></i>
+    </a>
   </div>
-
-  <script type="text/javascript">
-    var modal = document.querySelector(".modal");
-    var trigger = document.querySelector(".trigger");
-    var closeButton = document.querySelector(".close-button");
-    var cancelButton = document.querySelector("#cancel");
-
-    //console.log(modal);
-
-    function toggleModal() {
-      modal.classList.toggle("show-modal");
-    }
-
-    function windowOnClick(event) {
-      if (event.target === modal) {
-        toggleModal();
-      }
-    }
-
-    trigger.addEventListener("click", toggleModal);
-    closeButton.addEventListener("click", toggleModal);
-    cancel.addEventListener("click", toggleModal);
-    window.addEventListener("click", windowOnClick);
-  </script>
 </body>
 
 </html>
