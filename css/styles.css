@@ -104,6 +104,52 @@ body {
   }
 }
 
+@media (max-width:550px) {
+  #recipe__search {
+    height: 50px;
+    font-size: 15px;
+  }
+
+  #recipe__category {
+    height: 30px;
+    padding: 7px 10px;
+    font-size: 17px;
+  }
+
+  .type__name {
+    width: 50px;
+    font-size: 50px;
+  }
+
+  #recipe__type {
+    font-size: 14px;
+  }
+
+  .menu__list-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .about__menu>h1 {
+    font-size: 12px;
+  }
+
+  .about__menu>span {
+    font-size: 10px;
+  }
+
+  .pagination {
+    width: 300px;
+    font-size: 12px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .pagination a {
+    padding: 5px 10px;
+  }
+}
+
 @media (max-width:480px) {
   #main__contents>.img__container {
     width: 350px;
