@@ -35,10 +35,17 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
         HttpSession session = request.getSession();
         if(session != null){
             String redirectUrl = (String) session.getAttribute("prevPage");
+<<<<<<< HEAD
             for(int i=0;i<10;i++){
                 System.out.println(redirectUrl);
                 
             }
+=======
+            // for(int i=0;i<10;i++){
+            //     System.out.println(redirectUrl);
+                
+            // }
+>>>>>>> origin/backend_version
             //URL확인해보기
             if(redirectUrl != null){
                 session.removeAttribute("prevPage");

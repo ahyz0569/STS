@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.GetMapping;
+=======
+>>>>>>> origin/backend_version
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,13 +22,17 @@ import javax.servlet.http.HttpServletRequest;
 import com.multicampus.finalproject.model.SecurityUserInfo;
 import com.multicampus.finalproject.model.UserInfo;
 import com.multicampus.finalproject.service.CustomUserDetailsService;
+<<<<<<< HEAD
 import com.multicampus.finalproject.service.RestTemplateService;
+=======
+>>>>>>> origin/backend_version
  
 @Controller
 public class PropertyController {
  
     @Autowired
     CustomUserDetailsService customUserDetailsService;
+<<<<<<< HEAD
 
     @Autowired
     RestTemplateService restTemplateService;
@@ -33,6 +40,9 @@ public class PropertyController {
     public String main() throws Exception{
         return "main";
     }
+=======
+    
+>>>>>>> origin/backend_version
     // 앞서 adapter에서 ignore 해놓은 openapi경로의 URL이다.
     @RequestMapping("/user/getProperty")
     public @ResponseBody String getProperty(@AuthenticationPrincipal SecurityUserInfo securityUserInfo) {
@@ -70,6 +80,7 @@ public class PropertyController {
         // log를 남긴다.
         
         // sb -> Member정보를 return한다. ResponseBody annotation을 사용했기 때문에 값을 화면에 보여준다.
+<<<<<<< HEAD
         return sb.toString();  
     }
 
@@ -89,6 +100,46 @@ public class PropertyController {
     }
 
     @RequestMapping(value = "/insertMember", method = RequestMethod.POST)
+=======
+        return sb.toString();
+        
+    }
+
+
+    //
+    @RequestMapping("/login")
+    public String login(HttpServletRequest request){
+        String referer;
+        if(request.getSession().getAttribute("prevPage")==null){
+            referer = request.getHeader("Referer");
+            request.getSession().setAttribute("prevPage",referer);
+        }
+        for(int i=0;i<10;i++){
+            System.out.println("uri는 : "+request.getSession().getAttribute("prevPage"));
+        }
+    
+        return "login";
+    }
+
+    @RequestMapping("/logout")
+    public void logout(HttpServletRequest request){
+        String referer;
+        if(request.getSession().getAttribute("prevPage")==null){
+            referer = request.getHeader("Referer");
+            request.getSession().setAttribute("prevPage",referer);
+        }
+        for(int i=0;i<10;i++){
+            System.out.println("logout uri는 : "+request.getSession().getAttribute("prevPage"));
+        }
+    }
+
+    @RequestMapping(value = "/openapi/signUp_page", method = RequestMethod.GET)
+    public String signUp_page()throws Exception {
+        return "/openapi/signUp_page";
+    }
+    
+    @RequestMapping(value = "/openapi/insertMember", method = RequestMethod.POST)
+>>>>>>> origin/backend_version
     //브라우저에서 요청과 함께 날라온 id , password , name 값을 매개변수로 받아 온다.
     public String inser_member(
         @RequestParam("id")String id,
@@ -98,16 +149,23 @@ public class PropertyController {
         //매개변수의 값을 Member 생성자를 통해 member에 set해준다.
         UserInfo userInfo = new UserInfo(id, password, name);
         // Service에서 구현해 놓은 insert_Member메서드를 실행 시켜준다
+<<<<<<< HEAD
         System.out.println("==========================");
         System.out.println("OK");
         System.out.println("==========================");
         System.out.println(id + password + name);
         
         boolean isMemberExistDB = (boolean)customUserDetailsService.Insert_Member(userInfo);
+=======
+        
+        boolean isMemberExistDB = customUserDetailsService.Insert_Member(userInfo);
+       
+>>>>>>> origin/backend_version
         if(isMemberExistDB == false){
             return "redirect:/";
         }
         else{
+<<<<<<< HEAD
             return "redirect:/signUp_page";
         }
         //redirect를 통해 / <- url에 대한 servlet을 실행 시켜 준다.
@@ -125,4 +183,11 @@ public class PropertyController {
         System.out.println("응답 받은 스트링은 "+content+" 입니다");
         System.out.println("응답 받은 스트링은 "+content+" 입니다");
     }
+=======
+            return "redirect:/openapi/signUp_page";
+        }
+        //redirect를 통해 / <- url에 대한 servlet을 실행 시켜 준다.
+    }
+
+>>>>>>> origin/backend_version
 }

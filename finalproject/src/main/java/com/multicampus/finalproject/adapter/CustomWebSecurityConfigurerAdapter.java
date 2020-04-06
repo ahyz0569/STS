@@ -17,6 +17,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+<<<<<<< HEAD
+=======
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+>>>>>>> origin/backend_version
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.multicampus.finalproject.service.CustomUserDetailsService;
@@ -37,10 +41,22 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
     // 로그인 성공 핸들러 작성 후 추가된부분
     // 로그인 성공 시의 로직을 커스텀하여 사용하겠다.
     @Bean
+<<<<<<< HEAD
     public AuthenticationSuccessHandler mySuccessHandler(){
         return new CustomLoginSuccessHandler("/");
     }
 
+=======
+    public AuthenticationSuccessHandler myLoginSuccessHandler(){
+        return new CustomLoginSuccessHandler("/");
+    }
+
+    @Bean
+    public LogoutSuccessHandler myLogoutSuccessHandler(){
+        return new CustomLogoutSuccessHandler("/");
+    }
+
+>>>>>>> origin/backend_version
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
@@ -59,9 +75,20 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
         .and()
         .formLogin().loginPage("/login")
         // .loginProcessingUrl("/login")
+<<<<<<< HEAD
         // //.defaultSuccessUrl("/home")
         // .failureUrl("/fail")
         .successHandler(mySuccessHandler())
+=======
+        // .defaultSuccessUrl("/home")
+        // .failureUrl("/fail")
+        .successHandler(myLoginSuccessHandler())
+
+        .and()
+        .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+        .logoutSuccessHandler(myLogoutSuccessHandler())
+        .invalidateHttpSession(true);
+>>>>>>> origin/backend_version
         ;
     }
  

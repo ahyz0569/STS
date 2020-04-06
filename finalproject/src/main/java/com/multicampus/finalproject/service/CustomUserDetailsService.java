@@ -49,13 +49,18 @@ public class CustomUserDetailsService implements UserDetailsService{
         roles.forEach(role -> list.add(new SimpleGrantedAuthority(ROLE_PREFIX + role)));
         return list;
     }
+<<<<<<< HEAD
     
     // @Transactional
+=======
+
+>>>>>>> origin/backend_version
     public boolean Insert_Member(UserInfo userInfo){
         //db에 비밀번호를 입력하기 전에 사용자의 보안을 위해 password를 암호화 해준다
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         //암호화된 password를 member 변수에 set해 준다
         userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
+<<<<<<< HEAD
 
         //input username이 db에 없다면 null을 반환하여 true를 return한다.
         UserInfo user = userMapper.readUser(userInfo.getUsername());
@@ -74,4 +79,20 @@ public class CustomUserDetailsService implements UserDetailsService{
     }
 
  
+=======
+        // //userMapper에 정의 되어 있는 insert 가 실행 된다.
+        UserInfo user = userMapper.readUser(userInfo.getUsername());
+        String insertUsername = userInfo.getUsername();
+
+        if(user != null){
+            return true;
+        }
+        else{
+            userMapper.insertMember(userInfo);
+            userMapper.insertAuthority(insertUsername);
+            return false;
+        }
+    }
+    
+>>>>>>> origin/backend_version
 }

@@ -22,8 +22,11 @@ public class UserInfoService {
     public List<UserInfo> getAll() throws Exception{
         return userMapper.getAll();
     }
+<<<<<<< HEAD
 
     public void insertMember(UserInfo userInfo){
         userMapper.insertMember(userInfo);
     }
+=======
+>>>>>>> origin/backend_version
 }

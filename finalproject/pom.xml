@@ -20,16 +20,39 @@
 	</properties>
 
 	<dependencies>
+<<<<<<< HEAD
+=======
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.9</version>
+		</dependency>
+
+
+		
+>>>>>>> origin/backend_version
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+<<<<<<< HEAD
 		<!-- <dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency> -->
 
+=======
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+
+		
+>>>>>>> origin/backend_version
 		<dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
@@ -38,7 +61,13 @@
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
 		</dependency>
+<<<<<<< HEAD
 		
+=======
+
+
+
+>>>>>>> origin/backend_version
 		<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
@@ -47,16 +76,41 @@
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
 		</dependency>
+<<<<<<< HEAD
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+=======
+>>>>>>> origin/backend_version
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>2.1.2</version>
 		</dependency>
+<<<<<<< HEAD
+=======
+
+
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+
+
+
+		
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+>>>>>>> origin/backend_version
 		<dependency>
 			<groupId>org.springframework.session</groupId>
 			<artifactId>spring-session-core</artifactId>
@@ -68,22 +122,30 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+<<<<<<< HEAD
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.12</version>
 			<scope>provided</scope>
 		</dependency>
+=======
+
+>>>>>>> origin/backend_version
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
+<<<<<<< HEAD
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>4.5.9</version>
 		</dependency>
+=======
+
+>>>>>>> origin/backend_version
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -96,6 +158,10 @@
 			</exclusions>
 		</dependency>
 	</dependencies>
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/backend_version
 	<build>
 		<plugins>
 			<plugin>
