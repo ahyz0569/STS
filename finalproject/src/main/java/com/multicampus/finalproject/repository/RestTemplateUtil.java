@@ -18,7 +18,7 @@ public class RestTemplateUtil {
     public static String getStringResponse(){
         System.out.println("1");
         //restTemplate 라이브러리의 getForObject를 사용해서 첫번째 매개변수로는 외부 api url , 두번째 매개변수로는 return 타입을 작성한다. 
-        String content = restTemplate.getForObject("http://52.79.151.210:5000/json", String.class);
+        String content = restTemplate.getForObject("http://13.125.245.245:5000/json", String.class);
         System.out.println("2");
         //return 으로 String 타입의 conotent를 반환한다.
         return content;
