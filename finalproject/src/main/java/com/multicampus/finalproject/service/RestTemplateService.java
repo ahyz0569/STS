@@ -1,19 +1,5 @@
 package com.multicampus.finalproject.service;
 
-<<<<<<< HEAD
-import com.multicampus.finalproject.repository.RestTemplateUtil;
-
-import org.springframework.stereotype.Service;
-
-import lombok.extern.slf4j.Slf4j;
-
-@Service
-@Slf4j
-public class RestTemplateService {
-    public String getStringData(){
-        return RestTemplateUtil.getStringResponse();
-    }
-=======
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -41,5 +27,4 @@ public class RestTemplateService {
         return RestTemplateUtil.post(imgString);
     }
 
->>>>>>> origin/backend_version
 }

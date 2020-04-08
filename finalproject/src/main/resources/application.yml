@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-spring.mvc.view.prefix: WEB-INF/views/
-=======
 spring.mvc.view.prefix: /WEB-INF/views/
->>>>>>> origin/backend_version
 spring.mvc.view.suffix: .jsp
 

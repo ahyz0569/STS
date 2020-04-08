@@ -12,10 +12,6 @@
     <select id="readAuthority" parameterType="String" resultType="String">
         SELECT authority_name FROM authority WHERE username = #{username}
     </select>
-<<<<<<< HEAD
-=======
-    
->>>>>>> origin/backend_version
 
     <insert id="insertMember" parameterType = "com.multicampus.finalproject.model.UserInfo">
         INSERT INTO `user` (`username`, `password`, `name`, `isAccountNonExpired`, `isAccountNonLocked`, `isCredentialsNonExpired`, `isEnabled`)
@@ -23,10 +19,6 @@
     </insert>
 
     <insert id="insertAuthority" parameterType = "String">
-<<<<<<< HEAD
        INSERT INTO `authority` (`username`, `authority_name`) VALUES (#{dbUsername, jdbcType = VARCHAR}, 'USER')
-=======
-        INSERT INTO `authority` (`username`, `authority_name`) VALUES (#{dbUsername, jdbcType = VARCHAR}, 'USER')
->>>>>>> origin/backend_version
     </insert>
 </mapper>
