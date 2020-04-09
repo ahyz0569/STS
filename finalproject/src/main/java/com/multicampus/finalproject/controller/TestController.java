@@ -30,25 +30,26 @@ public class TestController{
     
     @RequestMapping("/")
     public String home(){
-        return "home";
+        return "main";
+    }
+    @RequestMapping("/search")
+    public String search(){
+        return "search";
+    }
+    @RequestMapping("/guide")
+    public String guide(){
+        return "guide";
     }
 
-    //Database연동 성공 확인하기
-    @RequestMapping("/query")
-    public @ResponseBody List<UserInfo> query() throws Exception{
-        return userInfoService.getAll();
+    @RequestMapping("/camera")
+    public String camera(){
+        return "camera";
     }
 
-    @RequestMapping("/testimg")
-    public String testimg(){
-        
-        return "testimg";
-    }
+    @RequestMapping("/upload_img")
+    public String upload_img(Model model,@RequestParam("file") MultipartFile img){
 
-
-    @RequestMapping("/upload")
-    public String upload(Model model,@RequestParam("file") MultipartFile img){
-       
+               
         byte[] imgtext;
         String imgtext2;
         try{
@@ -57,6 +58,8 @@ public class TestController{
 
             System.out.println(imgtext2.length());
             ResponseEntity<String> a=restTemplateService.addData(imgtext2);
+            
+            System.out.println(a.getBody().length());
 
             StringBuilder sb = new StringBuilder();
             sb.append("data:image/jpg;base64,");
@@ -68,16 +71,60 @@ public class TestController{
             System.out.println("파일이 이상함!");
         }
         
-        
-        return "upload";
+        return "semi-result";
     }
 
-    @RequestMapping("/testJson")
-    @ResponseBody
-    public String testJson(){
-        ResponseEntity<JsonVO> a = restTemplateService.getJsonData();
-        System.out.println(a.getBody().getName());
-        System.out.println(a.getStatusCode());
-        return a.getBody().getName();
+    @RequestMapping("/bookmark")
+    public String bookmark(){
+        return "bookmark";
     }
+
+    
+    // //Database연동 성공 확인하기
+    // @RequestMapping("/query")
+    // public @ResponseBody List<UserInfo> query() throws Exception{
+    //     return userInfoService.getAll();
+    // }
+
+    // @RequestMapping("/testimg")
+    // public String testimg(){
+        
+    //     return "testimg";
+    // }
+
+
+    // @RequestMapping("/upload")
+    // public String upload(Model model,@RequestParam("file") MultipartFile img){
+       
+    //     byte[] imgtext;
+    //     String imgtext2;
+    //     try{
+    //         imgtext = Base64.encodeBase64(img.getBytes());
+    //         imgtext2 = new String(imgtext);
+
+    //         System.out.println(imgtext2.length());
+    //         ResponseEntity<String> a=restTemplateService.addData(imgtext2);
+
+    //         StringBuilder sb = new StringBuilder();
+    //         sb.append("data:image/jpg;base64,");
+    //         sb.append(a.getBody());
+    //         model.addAttribute("uploadedImage",sb);
+
+    //     }
+    //     catch(IOException except){
+    //         System.out.println("파일이 이상함!");
+    //     }
+        
+        
+    //     return "upload";
+    // }
+
+    // @RequestMapping("/testJson")
+    // @ResponseBody
+    // public String testJson(){
+    //     ResponseEntity<JsonVO> a = restTemplateService.getJsonData();
+    //     System.out.println(a.getBody().getName());
+    //     System.out.println(a.getStatusCode());
+    //     return a.getBody().getName();
+    // }
 }
