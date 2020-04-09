@@ -123,27 +123,55 @@ def test():
 
 @app.route('/recomandApi',methods=["POST","GET"])
 def recomand():
+    # try:
     labels = request.get_data().decode("utf-8")
     labelsXml = elemTree.fromstring(labels)
 
-    
+    items = []
+    items_KOR = ""
     for item in labelsXml.findall("./item"):
-    	print(item.text)
+    	items.append(item.text)
+    	print('*'+item.text+'*')
 
-    # print(itemList)
-    # df=recommend('대파 양파 돼지고기 계란 고추 감자','돼지고기')
-    # for index , i in enumerate(data.iloc[df['idx_filtering'][0]]):
-    #     if i!='':
-    #         print(index ,":",i)
+    for i in range(len(items)):
+    	if(items[i] == "chilli"):
+    		items[i] ="고추"
+    	elif(items[i] == "pa"):
+    		items[i] ="파"
+    	elif(items[i] == "potato"):
+    		items[i] = "감자"
+    	elif(items[i] == "pa"):
+    		items[i] ="파"
+    	elif(items[i] == "egg"):
+    		items[i] = "계란"
+    	elif(items[i] == "onion"):
+    		items[i] ="양파"
+    	elif(items[i] == "pork meat"):
+    		items[i] = "돼지고기"
 
+    items_KOR = " ".join(items)
+    print("하하하하: " + items_KOR)
+    df=recommend(items_KOR,'돼지고기')
+    print("type: ",type(data.iloc[df['idx_filtering'][0]]))
+    print("list_type: ",type(data.iloc[df['idx_filtering'][0]].tolist()))
 
-    return jsonify(recomandResult = ["test"])
+    for index , i in enumerate(data.iloc[df['idx_filtering'][0]]):
+        if i!='':
+            print(index ,":",i)
+	# except:
+	# 	recomandResult = ["한가지 이상의 음식을 촬영해주세요"]
+
+	#int64변수가 있어서 send 오류
+    return jsonify(recomandResult = data.iloc[df['idx_filtering'][0]].tolist())
 
 
 if __name__ == '__main__':
     labels = ['chilli', 'egg', 'pork meat', 'potato', 'pa', 'onion']
     vectorize = HashingVectorizer()
     data = pd.read_csv('static/recipeData/crawling_200407.csv')
+    data = data.fillna(0)
+    data["id"] = data['id'].astype("float")
+
     ingre = data['ingre_main_oneline']
     ingre = np.array(ingre.tolist())
     model = core.Model.load('static/model/ingredients_weights_ver01_0326.pth', labels)
