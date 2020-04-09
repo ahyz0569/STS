@@ -5,6 +5,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+
+import com.multicampus.finalproject.model.JsonVO;
+import com.multicampus.finalproject.model.LabelJsonVO;
+
 @Component
 public class RestTemplateUtil {
 
@@ -15,6 +20,13 @@ public class RestTemplateUtil {
         this.restTemplate=restTemplate;
     }
 
+    // public static XmlVo getXmlResponse(){
+    //     return restTemplate.getForObject("http://localhost:8080/xml", XmlVo.class);
+    // }
+
+
+
+    
     // public static ResponseEntity<String> getResponseEntity(String key){
     //     //header setting
     //     HttpHeaders headers = new HttpHeaders();
@@ -30,10 +42,13 @@ public class RestTemplateUtil {
     //     return restTemplate.exchange("http://localhost:8080/entity?name={name}", HttpMethod.GET, httpEntity, String.class, params);
     // }
 
-    public static ResponseEntity<String> post(String imgString){
+    public static ResponseEntity<JsonVO> post(String imgString){
         // MultiValueMap<String,String> map = new LinkedMultiValueMap<String,String>();
         
-        return restTemplate.postForEntity("http://70.12.50.158:5000/testapi",imgString, String.class);
+        return restTemplate.postForEntity("http://70.12.50.158:5000/testapi",imgString, JsonVO.class);
         // return restTemplate.getForEntity("http://localhost:5000/testapi", String.class);
+    }
+    public static ResponseEntity<LabelJsonVO> postRecomandJsonRsponse(ArrayList<String> label){
+        return restTemplate.postForEntity("http://70.12.50.158:5000/recomandApi",label, LabelJsonVO.class);
     }
 }

@@ -10,6 +10,12 @@
 <body>
     사진은!
     <image src=${uploadedImage}></image>
+    <form action="/recomand" method="GET">
+        <input type="text" name="label" value="${label[0]}">
+        <input type="text" name="label" value="${label[1]}">
+        <input type="text" name="label" value="${label[2]}">
+        <input type="submit">
+    </form>
 </body>
 </html>
 
