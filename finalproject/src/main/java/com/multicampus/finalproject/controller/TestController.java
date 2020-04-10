@@ -95,7 +95,7 @@ public class TestController{
         ResponseEntity<LabelJsonVO> recomandResult = restTemplateService.getRecomandData(name);
         ArrayList<String> recomandList = recomandResult.getBody().getRecomandResult();
         System.out.println(recomandList);
-
+        model.addAttribute("recipe", recomandList);
         return "recomand";
     }
     
