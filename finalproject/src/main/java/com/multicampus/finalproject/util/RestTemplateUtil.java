@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.multicampus.finalproject.model.JsonVO;
+
 @Component
 public class RestTemplateUtil {
 
@@ -15,6 +17,15 @@ public class RestTemplateUtil {
         this.restTemplate=restTemplate;
     }
 
+    // public static XmlVo getXmlResponse(){
+    //     return restTemplate.getForObject("http://localhost:8080/xml", XmlVo.class);
+    // }
+
+    public static ResponseEntity<JsonVO> getJsonRsponse(){
+        return restTemplate.getForEntity("http://localhost:5000/testjson", JsonVO.class);
+    }
+
+    
     // public static ResponseEntity<String> getResponseEntity(String key){
     //     //header setting
     //     HttpHeaders headers = new HttpHeaders();
