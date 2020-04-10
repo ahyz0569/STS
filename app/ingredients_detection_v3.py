@@ -3,6 +3,7 @@ from torchvision import transforms
 from matplotlib import patches
 import matplotlib.pyplot as plt
 from detecto import core, utils, visualize
+from skimage import io
 
 def detect_ingredients(image, boxes, labels=None):
     plt.rcParams.update({'font.size': 14})
