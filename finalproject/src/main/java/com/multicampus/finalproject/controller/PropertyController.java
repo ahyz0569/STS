@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.multicampus.finalproject.model.SecurityUserInfo;
 import com.multicampus.finalproject.model.UserInfo;
 import com.multicampus.finalproject.service.CustomUserDetailsService;
+import com.multicampus.finalproject.service.RestTemplateService;
  
 @Controller
 public class PropertyController {
