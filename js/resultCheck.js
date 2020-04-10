@@ -2,6 +2,8 @@ const resultForm = document.getElementById("result__form");
 const plusText = document.getElementById("plus__text");
 let resultInfo = document.getElementById("result__info");
 
+
+//--start-- 재료 데이터 받는 곳//
 let analyzed__ingredients,
   i,
   ingredient__lists = "";
@@ -18,11 +20,12 @@ for (i in analyzed__ingredients.name) {
   ele.className = "info";
   ele.innerHTML = `<span style="cursor:pointer" onclick="fnc()">${analyzed__ingredients.name[i]}</span> <div class="info-close-btn">&times;</div>`;
   frag.appendChild(ele);
-  ele
-    .getElementsByClassName("info-close-btn")[0]
-    .addEventListener("click", deleteLi);
+  ele.getElementsByClassName("info-close-btn")[0].addEventListener("click", deleteLi);
 }
+//--end--재료 데이터 받는 곳//
 
+
+//--start-- 재료 삭제 버튼//
 function deleteLi(event) {
   const btn = event.target;
   const li = btn.parentNode;
@@ -30,12 +33,18 @@ function deleteLi(event) {
 }
 resultInfo.appendChild(frag);
 resultInfo.appendChild(plusBtn);
+//--end-- 재료 삭제 버튼//
 
+
+//--start-- 메인 재료 선정 - 미구현
 function fnc() {
   console.log(this);
 }
+//--end-- 메인 재료 선정 - 미구현
 
-// 재료 직접 추가
+
+
+//--start-- 재료추가 타이핑
 function handleSubmit(event) {
   event.preventDefault();
   let currentValue = plusText.value;
@@ -44,13 +53,10 @@ function handleSubmit(event) {
 }
 
 function paintToDo(text) {
-  console.log(text);
   let ele = document.createElement("li");
   ele.className = "info";
   ele.innerHTML = `<span style="cursor:pointer" onclick="fnc()">${text}</span> <div class="info-close-btn">&times;</div>`;
-  ele
-    .getElementsByClassName("info-close-btn")[0]
-    .addEventListener("click", deleteLi);
+  ele.getElementsByClassName("info-close-btn")[0].addEventListener("click", deleteLi);
   frag.appendChild(ele);
   resultInfo.appendChild(frag);
   resultInfo.appendChild(plusBtn);
@@ -59,5 +65,5 @@ function paintToDo(text) {
 function init() {
   resultForm.addEventListener("submit", handleSubmit);
 }
-console.log(5);
 init();
+//--end-- 재료추가 타이핑

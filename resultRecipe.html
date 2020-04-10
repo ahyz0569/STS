@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RESULT PAGE</title>
+  <title>MAIN PAGE</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -79,29 +79,15 @@
 
     <!--start--메인컨텐츠-->
     <div id="main__contents">
-      <form id="result__form" action="" method="post" enctype="multipart/form-data">
-        <div class="result__container">
-          <div class="result__img-container">
-            <img id="result__img" src="/">
-          </div>
-
-
-          <header id="result-header">분석결과</header>
-
-          <div id="result-main">
-            <ul id="result__info">
-            </ul>
-          </div>
-          <div id="info-plus-btn">+</div>
-
-          <button id="next-btn" type="button">다음</button>
+      <div id="result-recipe__container">
+        <div id="result-img__container">
+          <img id="result-img" src="" alt="">
         </div>
-        <input id="plus__text" type="text" placeholder="추가하실 재료">
-      </form>
-      <!--end img__container-->
+        <div id="result-recipe-info">
+          <!-- resultRecipe.js에서 데이터 들어옴 -->
+        </div>
 
-
-
+      </div>
     </div>
     <!--end--메인컨텐츠-->
 
@@ -116,9 +102,8 @@
 
   <!--start--VanillaJS-->
   <script src="js/main.js"></script>
-  <script src="js/result.js"></script>
+  <script src="js/resultRecipe.js"></script>
   <!--end--VanillaJS-->
-
 </body>
 
 </html>
