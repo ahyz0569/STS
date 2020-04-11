@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MAIN PAGE</title>
+  <title>RESULT PAGE</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body id="main-page">
+<body>
   <!--start--페이지 전체 컨테이너-->
   <div id='main__container'>
     <!--start--헤더 고정-->
@@ -79,8 +79,29 @@
 
     <!--start--메인컨텐츠-->
     <div id="main__contents">
-      <img id="main__bg-one" src="images/main_img.jpg">
-      <img id="main__bg-two" src="images/main_img_mobile.jpg">
+      <form id="result__form" action="" method="post" enctype="multipart/form-data">
+        <div class="result__container">
+          <div class="result__img-container">
+            <img id="result__img" th:src=${uploadedImage}>
+          </div>
+
+
+          <header id="result-header">분석결과</header>
+
+          <div id="result-main">
+            <ul id="result__info">
+            </ul>
+          </div>
+          <div id="info-plus-btn">+</div>
+
+          <button id="next-btn" type="button">다음</button>
+        </div>
+        <input id="plus__text" type="text" placeholder="추가하실 재료">
+      </form>
+      <!--end img__container-->
+
+
+
     </div>
     <!--end--메인컨텐츠-->
 
@@ -95,7 +116,9 @@
 
   <!--start--VanillaJS-->
   <script src="js/main.js"></script>
+  <script src="js/resultCheck.js" th:inline="text"></script>
   <!--end--VanillaJS-->
+
 </body>
 
 </html>

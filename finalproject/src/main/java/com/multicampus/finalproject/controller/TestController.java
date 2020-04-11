@@ -85,7 +85,7 @@ public class TestController{
             System.out.println("파일이 이상함!");
         }
         
-        return "semi-result";
+        return "resultCheck";
     }
     @RequestMapping(value="/recomand", method=RequestMethod.GET)
     public String recomand(Model model ,@RequestParam("label") ArrayList<String> name) throws Exception {
