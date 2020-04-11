@@ -43,11 +43,11 @@ public class RestTemplateUtil {
     // }
 
     public static ResponseEntity<JsonVO> post(String imgString){
-        // return restTemplate.postForEntity("http://70.12.50.158:5000/testapi",imgString, JsonVO.class);
-        return restTemplate.postForEntity("http://localhost:5000/testapi",imgString, JsonVO.class);
+        return restTemplate.postForEntity("http://70.12.50.158:5000/testapi",imgString, JsonVO.class);
+        // return restTemplate.postForEntity("http://localhost:5000/testapi",imgString, JsonVO.class);
     }
     public static ResponseEntity<LabelJsonVO> postRecomandJsonRsponse(ArrayList<String> label){
-        // return restTemplate.postForEntity("http://70.12.50.158:5000/recomandApi",label, LabelJsonVO.class);
-        return restTemplate.postForEntity("http://localhost:5000/recomandApi",label, LabelJsonVO.class);
+        return restTemplate.postForEntity("http://70.12.50.158:5000/recomandApi",label, LabelJsonVO.class);
+        // return restTemplate.postForEntity("http://localhost:5000/recomandApi",label, LabelJsonVO.class);
     }
 }

@@ -1,5 +1,5 @@
+console.log(label);
 
-alert("${label}")
 const resultForm = document.getElementById("result__form");
 const plusText = document.getElementById("plus__text");
 let resultInfo = document.getElementById("result__info");
@@ -11,18 +11,20 @@ let analyzed__ingredients,
   ingredient__lists = "";
 
 analyzed__ingredients = {
-  name: ["egg", "onion", "potato", "carrot", "cucumber", "tomato"],
+  name: label,
 };
 
 let frag = document.createDocumentFragment();
 let plusBtn = document.getElementById("info-plus-btn");
 
 for (i in analyzed__ingredients.name) {
-  let ele = document.createElement("li");
-  ele.className = "info";
-  ele.innerHTML = `<span style="cursor:pointer" onclick="fnc()">${analyzed__ingredients.name[i]}</span> <div class="info-close-btn">&times;</div>`;
+  let ele = document.createElement("input");
+  // ele.className = "info";
+  ele.setAttribute("type", "text");
+  ele.setAttribute("name", "label");
+  ele.setAttribute("value", analyzed__ingredients.name[i]);
   frag.appendChild(ele);
-  ele.getElementsByClassName("info-close-btn")[0].addEventListener("click", deleteLi);
+  // ele.getElementsByClassName("info-close-btn")[0].addEventListener("click", deleteLi);
 }
 //--end--재료 데이터 받는 곳//
 
@@ -65,7 +67,7 @@ function paintToDo(text) {
 }
 
 function init() {
-  resultForm.addEventListener("submit", handleSubmit);
+  resultForm.addEventListener(plusText, handleSubmit);
 }
 init();
 //--end-- 재료추가 타이핑

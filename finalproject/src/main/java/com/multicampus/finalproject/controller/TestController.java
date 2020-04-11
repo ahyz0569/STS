@@ -92,12 +92,12 @@ public class TestController{
         // for(String label : name){
         //     System.out.println(label);
         // }
-
+        System.out.println("추천 전: " + name);
         ResponseEntity<LabelJsonVO> recomandResult = restTemplateService.getRecomandData(name);
         ArrayList<String> recomandList = recomandResult.getBody().getRecomandResult();
         
         model.addAttribute("recipe", recomandList);
-        return "recomand";
+        return "resultRecipe";
     }
     
 }

@@ -102,8 +102,17 @@
 
   <!--start--VanillaJS-->
   <script src="js/main.js"></script>
-  <script src="js/resultRecipe.js" type="text/javascript" th:inline="javascript"></script>
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+        var recipe = /*[[${recipe}]]*/ "recipe";
+    /*]]>*/
+  </script>
+  <script src="js/resultRecipe.js"></script>
   <!--end--VanillaJS-->
 </body>
+
+
+
+
 
 </html>

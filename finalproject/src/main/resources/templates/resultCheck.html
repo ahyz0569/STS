@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -79,7 +79,7 @@
 
     <!--start--메인컨텐츠-->
     <div id="main__contents">
-      <form id="result__form" action="" method="post" enctype="multipart/form-data">
+      <form id="result__form" action="/recomand" method="GET">
         <div class="result__container">
           <div class="result__img-container">
             <img id="result__img" th:src=${uploadedImage}>
@@ -89,14 +89,14 @@
           <header id="result-header">분석결과</header>
 
           <div id="result-main">
-            <ul id="result__info">
-            </ul>
+            <div id="result__info">
+            </div>
           </div>
           <div id="info-plus-btn">+</div>
-
-          <button id="next-btn" type="button">다음</button>
+          <button id="next-btn" type="submit">다음</button>
         </div>
-        <input id="plus__text" type="text" placeholder="추가하실 재료">
+      <input id="plus__text" type="text" placeholder="추가하실 재료">
+
       </form>
       <!--end img__container-->
 
@@ -116,9 +116,13 @@
 
   <!--start--VanillaJS-->
   <script src="js/main.js"></script>
-  <script src="js/resultCheck.js" th:inline="text"></script>
+  <!-- <script src="js/resultCheck.js" th:inline="javascript"> -->
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    var label = /*[[${label}]]*/ "label";
+    /*]]>*/
+  </script>
+  <script src="js/resultCheck.js"></script>
   <!--end--VanillaJS-->
-
 </body>
-
 </html>
