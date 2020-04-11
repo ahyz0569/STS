@@ -34,25 +34,26 @@ public class TestController{
     
     @RequestMapping("/")
     public String home(){
-        return "home";
+        return "main";
+    }
+    @RequestMapping("/search")
+    public String search(){
+        return "search";
+    }
+    @RequestMapping("/guide")
+    public String guide(){
+        return "guide";
     }
 
-    //Database연동 성공 확인하기
-    @RequestMapping("/query")
-    public @ResponseBody List<UserInfo> query() throws Exception{
-        return userInfoService.getAll();
+    @RequestMapping("/camera")
+    public String camera(){
+        return "camera";
     }
 
-    @RequestMapping("/testimg")
-    public String testimg(){
-        
-        return "testimg";
-    }
+    @RequestMapping("/upload_img")
+    public String upload_img(Model model,@RequestParam("file") MultipartFile img){
 
-
-    @RequestMapping("/upload")
-    public String upload(Model model,@RequestParam("file") MultipartFile img){
-       
+               
         byte[] imgtext;
         String imgtext2;
         try{
@@ -84,7 +85,7 @@ public class TestController{
             System.out.println("파일이 이상함!");
         }
         
-        return "upload";
+        return "semi-result";
     }
     @RequestMapping(value="/recomand", method=RequestMethod.GET)
     public String recomand(Model model ,@RequestParam("label") ArrayList<String> name) throws Exception {
