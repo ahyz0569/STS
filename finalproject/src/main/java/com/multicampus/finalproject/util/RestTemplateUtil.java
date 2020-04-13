@@ -44,7 +44,7 @@ public class RestTemplateUtil {
     public static ResponseEntity<String> post(String imgString){
         // MultiValueMap<String,String> map = new LinkedMultiValueMap<String,String>();
         
-        return restTemplate.postForEntity("http://localhost:5000/testapi",imgString, String.class);
+        return restTemplate.postForEntity("http://70.12.50.158:5000/testapi",imgString, String.class);
         // return restTemplate.getForEntity("http://localhost:5000/testapi", String.class);
     }
 }

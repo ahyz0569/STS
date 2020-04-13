@@ -49,12 +49,19 @@ public class TestController{
     @RequestMapping("/upload_img")
     public String upload_img(Model model,@RequestParam("file") MultipartFile img){
 
+<<<<<<< HEAD
                
+=======
+    @RequestMapping("/upload")
+    public String upload(Model model,@RequestParam("file") MultipartFile img){
+       
+>>>>>>> 7e4921b43e106ec000075a8d78b420b3fffc64c9
         byte[] imgtext;
         String imgtext2;
         try{
             imgtext = Base64.encodeBase64(img.getBytes());
             imgtext2 = new String(imgtext);
+<<<<<<< HEAD
 
             System.out.println(imgtext2.length());
             ResponseEntity<String> a=restTemplateService.addData(imgtext2);
@@ -63,6 +70,15 @@ public class TestController{
 
             StringBuilder sb = new StringBuilder();
             sb.append("data:image/jpg;base64,");
+=======
+            
+            ResponseEntity<String> a=restTemplateService.addData(imgtext2);
+            // System.out.print(a.getBody());
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("data:image/jpg;base64,");
+            // sb.append(imgtext2);
+>>>>>>> 7e4921b43e106ec000075a8d78b420b3fffc64c9
             sb.append(a.getBody());
             model.addAttribute("uploadedImage",sb);
 

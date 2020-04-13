@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.multicampus.finalproject.model.SecurityUserInfo;
 import com.multicampus.finalproject.model.UserInfo;
 import com.multicampus.finalproject.service.CustomUserDetailsService;
+import com.multicampus.finalproject.service.RestTemplateService;
  
 @Controller
 public class PropertyController {
@@ -31,11 +33,33 @@ public class PropertyController {
         return "user/info";
     }
     
+<<<<<<< HEAD
     // @RequestMapping("/login")
     // public String login(){
     //     return "login";
     // }
 
+=======
+    // 로그인 이후 접근할 수 있는 getMember URL
+    @RequestMapping("/getMember")
+    // @AuthenticationPrincipal annotation을 사용하여 SecurityMember를 자동으로 Autowired받아 사용한다.
+    public @ResponseBody String getMember(@AuthenticationPrincipal SecurityUserInfo securityUserInfo) {
+        
+        StringBuffer sb = new StringBuffer();
+        
+        // 로그인 이후 접근할 수 있으므로 정상적으로 받아온다.
+        if(securityUserInfo != null) {
+            sb.append("securityMember.getIp()=")
+            .append(securityUserInfo.getIp())
+            .append(securityUserInfo.getUsername());
+        }
+        
+        // log를 남긴다.
+        
+        // sb -> Member정보를 return한다. ResponseBody annotation을 사용했기 때문에 값을 화면에 보여준다.
+        return sb.toString();
+    }
+>>>>>>> 7e4921b43e106ec000075a8d78b420b3fffc64c9
     @RequestMapping("/login")
     public String login(HttpServletRequest request){
         String referer;
@@ -64,8 +88,11 @@ public class PropertyController {
         //매개변수의 값을 Member 생성자를 통해 member에 set해준다.
         UserInfo userInfo = new UserInfo(id, password, name);
         // Service에서 구현해 놓은 insert_Member메서드를 실행 시켜준다
+<<<<<<< HEAD
         
         System.out.println("id"+id);
+=======
+>>>>>>> 7e4921b43e106ec000075a8d78b420b3fffc64c9
         boolean isMemberExistDB = customUserDetailsService.Insert_Member(userInfo);
        
         if(isMemberExistDB == false){

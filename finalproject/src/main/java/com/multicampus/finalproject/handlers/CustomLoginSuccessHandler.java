@@ -18,8 +18,6 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
     public CustomLoginSuccessHandler(String defaultUrl){
         setDefaultTargetUrl(defaultUrl);
     }
-
-
     // 로그인 성공 시 동작을 정의해준다.
     // 로그인 성공 시 SecurityMember(세션정보 객체)에 IP정보를 추가해준다.
     // getClientIp 메소드를 통해 받아온다.
@@ -52,8 +50,6 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
             super.onAuthenticationSuccess(request, response, authentication);
         }
     }
-
-
     public static String getClientIp(HttpServletRequest request) {
         String ip = request.getHeader("X-Forwarded-For");
          if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {

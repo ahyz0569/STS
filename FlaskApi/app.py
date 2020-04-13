@@ -85,14 +85,26 @@ def test2():
 
     return "성공"
 
+<<<<<<< HEAD
 @app.route('/testjson')
 def json():
     # flask 에서 기본적으로 제공하는 jsonify함수를 통해 값을 json형태로 전환할 수 있다.
     
     return jsonify(name="JKS")
+=======
+# @app.route('/testjson')
+# def json():
+#     # flask 에서 기본적으로 제공하는 jsonify함수를 통해 값을 json형태로 전환할 수 있다.
+#     print(jsonify(name='JKS'))
+#     return jsonify(name='JKS')
+>>>>>>> 7e4921b43e106ec000075a8d78b420b3fffc64c9
 
 
 if __name__ == '__main__':
     labels = ['chilli', 'egg', 'pork meat', 'potato', 'pa', 'onion']
     model = core.Model.load('static/model/ingredients_weights_ver01_0326.pth', labels)
+<<<<<<< HEAD
     app.run(debug=True)
+=======
+    app.run(debug=True , host='0.0.0.0')
+>>>>>>> 7e4921b43e106ec000075a8d78b420b3fffc64c9

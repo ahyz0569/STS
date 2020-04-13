@@ -49,7 +49,8 @@ public class CustomUserDetailsService implements UserDetailsService{
         roles.forEach(role -> list.add(new SimpleGrantedAuthority(ROLE_PREFIX + role)));
         return list;
     }
-
+    
+    // @Transactional
     public boolean Insert_Member(UserInfo userInfo){
         //db에 비밀번호를 입력하기 전에 사용자의 보안을 위해 password를 암호화 해준다
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
