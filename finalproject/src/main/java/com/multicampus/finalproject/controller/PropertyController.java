@@ -38,6 +38,25 @@ public class PropertyController {
     //     return "login";
     // }
 
+    // 로그인 이후 접근할 수 있는 getMember URL
+    @RequestMapping("/getMember")
+    // @AuthenticationPrincipal annotation을 사용하여 SecurityMember를 자동으로 Autowired받아 사용한다.
+    public @ResponseBody String getMember(@AuthenticationPrincipal SecurityUserInfo securityUserInfo) {
+        
+        StringBuffer sb = new StringBuffer();
+        
+        // 로그인 이후 접근할 수 있으므로 정상적으로 받아온다.
+        if(securityUserInfo != null) {
+            sb.append("securityMember.getIp()=")
+            .append(securityUserInfo.getIp())
+            .append(securityUserInfo.getUsername());
+        }
+        
+        // log를 남긴다.
+        
+        // sb -> Member정보를 return한다. ResponseBody annotation을 사용했기 때문에 값을 화면에 보여준다.
+        return sb.toString();
+    }
     @RequestMapping("/login")
     public String login(HttpServletRequest request){
         String referer;
