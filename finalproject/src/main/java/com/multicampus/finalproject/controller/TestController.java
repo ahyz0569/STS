@@ -52,10 +52,6 @@ public class TestController{
 
     @RequestMapping("/upload_img")
     public String upload_img(Model model,@RequestParam("file") MultipartFile img){
-
-    @RequestMapping("/upload")
-    public String upload(Model model,@RequestParam("file") MultipartFile img){
-       
         byte[] imgtext;
         String imgtext2;
         try{
@@ -77,7 +73,6 @@ public class TestController{
             sb.append("data:image/jpg;base64,");
             sb.append(img_json);
             //model 객체를 통해 앞단으로 보낸다.
-            sb.append(a.getBody());
             model.addAttribute("uploadedImage",sb);
             System.out.println("라벨은: "+label_json);
             model.addAttribute("label", label_json);

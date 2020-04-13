@@ -117,7 +117,6 @@ def test():
 
     with open('static/images/detection_result.jpg','rb') as img:
         response_img = base64.b64encode(img.read())
-<<<<<<< HEAD
     print(type(response_img.decode('utf-8')))
 
     return jsonify(response_img = response_img.decode('utf-8') , labels = labels)
@@ -164,9 +163,6 @@ def recomand():
 
 	#int64변수가 있어서 send 오류
     return jsonify(recomandResult = data.iloc[df['idx_filtering'][0]].tolist())
-=======
-
-    return response_img
 
 
 @app.route('/testModel',methods=["POST","GET"])
@@ -175,20 +171,16 @@ def test2():
 
     return "성공"
 
-<<<<<<< HEAD
 @app.route('/testjson')
 def json():
     # flask 에서 기본적으로 제공하는 jsonify함수를 통해 값을 json형태로 전환할 수 있다.
     
     return jsonify(name="JKS")
-=======
 # @app.route('/testjson')
 # def json():
 #     # flask 에서 기본적으로 제공하는 jsonify함수를 통해 값을 json형태로 전환할 수 있다.
 #     print(jsonify(name='JKS'))
 #     return jsonify(name='JKS')
->>>>>>> 7e4921b43e106ec000075a8d78b420b3fffc64c9
->>>>>>> de88b8c3a223e1a10bf833309aec7c0e5e92f6a1
 
 
 if __name__ == '__main__':
@@ -201,15 +193,7 @@ if __name__ == '__main__':
     ingre = data['ingre_main_oneline']
     ingre = np.array(ingre.tolist())
     model = core.Model.load('static/model/ingredients_weights_ver01_0326.pth', labels)
-<<<<<<< HEAD
     #load model
     with open('static/model/hv.pkl', 'rb') as f:
         X = pickle.load(f)
     app.run(debug=True , host='0.0.0.0')
-=======
-<<<<<<< HEAD
-    app.run(debug=True)
-=======
-    app.run(debug=True , host='0.0.0.0')
->>>>>>> 7e4921b43e106ec000075a8d78b420b3fffc64c9
->>>>>>> de88b8c3a223e1a10bf833309aec7c0e5e92f6a1
