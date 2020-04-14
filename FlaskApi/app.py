@@ -165,24 +165,6 @@ def recomand():
     return jsonify(recomandResult = data.iloc[df['idx_filtering'][0]].tolist())
 
 
-@app.route('/testModel',methods=["POST","GET"])
-def test2():
-    
-
-    return "성공"
-
-@app.route('/testjson')
-def json():
-    # flask 에서 기본적으로 제공하는 jsonify함수를 통해 값을 json형태로 전환할 수 있다.
-    
-    return jsonify(name="JKS")
-# @app.route('/testjson')
-# def json():
-#     # flask 에서 기본적으로 제공하는 jsonify함수를 통해 값을 json형태로 전환할 수 있다.
-#     print(jsonify(name='JKS'))
-#     return jsonify(name='JKS')
-
-
 if __name__ == '__main__':
     labels = ['chilli', 'egg', 'pork meat', 'potato', 'pa', 'onion']
     vectorize = HashingVectorizer()
