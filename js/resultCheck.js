@@ -1,6 +1,6 @@
-const resultForm = document.getElementById("result__form");
-const plusText = document.getElementById("plus__text");
+let resultForm = document.getElementById("result__form");
 let resultInfo = document.getElementById("result__info");
+const plusText = document.getElementById("plus__text");
 
 
 //--start-- 재료 데이터 받는 곳//
@@ -9,30 +9,42 @@ let analyzed__ingredients,
   ingredient__lists = "";
 
 analyzed__ingredients = {
-  name: ["egg", "onion", "potato", "carrot", "cucumber", "tomato"],
+  name: label
 };
 
 let frag = document.createDocumentFragment();
 let plusBtn = document.getElementById("info-plus-btn");
 
 for (i in analyzed__ingredients.name) {
-  let ele = document.createElement("li");
-  ele.className = "info";
-  ele.innerHTML = `<span style="cursor:pointer" onclick="fnc()">${analyzed__ingredients.name[i]}</span> <div class="info-close-btn">&times;</div>`;
+  let ele = document.createElement("input");
+  ele.readOnly = true;
+  // ele.className = "info";
+  ele.setAttribute("type", "text");
+  ele.setAttribute("name", "label");
+  ele.setAttribute("value", analyzed__ingredients.name);
   frag.appendChild(ele);
-  ele.getElementsByClassName("info-close-btn")[0].addEventListener("click", deleteLi);
+
+  let deleteBtn = document.createElement("button");
+  deleteBtn.setAttribute("type", "button");
+  deleteBtn.innerHTML = "X"
+  deleteBtn.className = "info-delete-btn";
+  frag.appendChild(deleteBtn);
+  deleteBtn.addEventListener("click", deleteLi);
+
+  resultInfo.appendChild(frag);
+  resultInfo.appendChild(plusBtn);
 }
+
 //--end--재료 데이터 받는 곳//
 
 
 //--start-- 재료 삭제 버튼//
 function deleteLi(event) {
   const btn = event.target;
-  const li = btn.parentNode;
-  resultInfo.removeChild(li);
+  const prevBtn = btn.previousSibling;
+  btn.remove();
+  prevBtn.remove();
 }
-resultInfo.appendChild(frag);
-resultInfo.appendChild(plusBtn);
 //--end-- 재료 삭제 버튼//
 
 
@@ -43,27 +55,24 @@ function fnc() {
 //--end-- 메인 재료 선정 - 미구현
 
 
-
-//--start-- 재료추가 타이핑
-function handleSubmit(event) {
-  event.preventDefault();
+function addIng() {
   let currentValue = plusText.value;
-  paintToDo(currentValue);
-  plusText.value = "";
-}
+  let eles = document.createElement("input");
+  eles.setAttribute("type", "text");
+  eles.setAttribute("name", "label");
+  eles.setAttribute("value", currentValue);
+  frag.appendChild(eles);
 
-function paintToDo(text) {
-  let ele = document.createElement("li");
-  ele.className = "info";
-  ele.innerHTML = `<span style="cursor:pointer" onclick="fnc()">${text}</span> <div class="info-close-btn">&times;</div>`;
-  ele.getElementsByClassName("info-close-btn")[0].addEventListener("click", deleteLi);
-  frag.appendChild(ele);
+  let deleteBtn = document.createElement("button");
+  deleteBtn.setAttribute("type", "button");
+  deleteBtn.innerHTML = "X"
+  deleteBtn.className = "info-delete-btn";
+  deleteBtn.addEventListener("click", deleteLi);
+  frag.appendChild(deleteBtn);
+
   resultInfo.appendChild(frag);
   resultInfo.appendChild(plusBtn);
-}
 
-function init() {
-  resultForm.addEventListener("submit", handleSubmit);
+  eles.readOnly = true;
+  plusText.value = "";
 }
-init();
-//--end-- 재료추가 타이핑
