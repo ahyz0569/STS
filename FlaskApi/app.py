@@ -21,6 +21,8 @@ import torchvision
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
+from sqlalchemy import create_engine
+import mysql.connector
 
 app = Flask(__name__)
 
@@ -122,6 +124,8 @@ def test():
 
     return jsonify(response_img = response_img.decode('utf-8') , labels = labels)
 
+
+
 @app.route('/recomandApi',methods=["POST","GET"])
 def recomand():
     # try:
@@ -132,7 +136,7 @@ def recomand():
     items_KOR = ""
     for item in labelsXml.findall("./item"):
     	items.append(item.text)
-    	print('*'+item.text+'*')
+    	# print('*'+item.text+'*')
 
     for i in range(len(items)):
     	if(items[i] == "chilli"):
@@ -151,19 +155,27 @@ def recomand():
     		items[i] = "돼지고기"
 
     items_KOR = " ".join(items)
-    print("하하하하: " + items_KOR)
+    # print("하하하하: " + items_KOR)
     df=recommend(items_KOR,'돼지고기')
-    print("type: ",type(data.iloc[df['idx_filtering'][0]]))
-    print("list_type: ",type(data.iloc[df['idx_filtering'][0]].tolist()))
+    
+    responseData = []
+    for i in range(100):
+        responseData.append(data.iloc[df['idx_filtering'][i]]['id'])
+    
+    # print("type: ",type(data.iloc[df['idx_filtering'][0]]))
+    # print("list_type: ",type(data.iloc[df['idx_filtering'][0]].tolist()))
 
-    for index , i in enumerate(df['idx_filtering']):
-        if i!='':
-            print(index ,":",i)
+    # for index , i in enumerate(data.iloc[df['idx_filtering'][0]]):
+    #     if i!='':
+    #         print(index ,":",i)
 	# except:
 	# 	recomandResult = ["한가지 이상의 음식을 촬영해주세요"]
-
+    for col in df.columns:
+        print(df[col].dtypes)
 	#int64변수가 있어서 send 오류
-    return jsonify(recomandResult = df['idx_filtering'].tolist())
+    
+    print(responseData)
+    return jsonify(recomandResult = responseData)
 
 
 @app.route('/testModel',methods=["POST","GET"])
@@ -187,13 +199,10 @@ def json():
 if __name__ == '__main__':
     labels = ['chilli', 'egg', 'pork meat', 'potato', 'pa', 'onion']
     vectorize = HashingVectorizer()
-    
-    engine = create_engine('mysql://root:1234@localhost:3307/final?charset=utf8', convert_unicode=True,encoding='UTF-8')
-    conn = engine.connect() 
-    data = pd.read_sql_table('recipe', conn)
-    ingre = data['ingre_main_oneline']
-    ingre = np.array(ingre.tolist())    
 
+    engine = create_engine('mysql://root:1234@localhost:3307/testdb?charset=utf8', convert_unicode=True,encoding='UTF-8')
+    conn = engine.connect()
+    data = pd.read_sql_table('recipe', conn)
     data = data.fillna(0)
     data["id"] = data['id'].astype("float")
     data["size"] = data['size'].astype("float")

@@ -9,5 +9,5 @@ import lombok.Getter;
 @Getter
 public class LabelJsonVO {
     @XmlElement(name="recomandResult")
-    private ArrayList<String> recomandResult;
+    private ArrayList<Integer> recomandResult;
 }

@@ -1,8 +1,11 @@
 package com.multicampus.finalproject.repository;
  
+import java.util.ArrayList;
 import java.util.List;
 
 import com.multicampus.finalproject.model.BookmarkVO;
+import com.multicampus.finalproject.model.RecommandListVO;
+ 
 import com.multicampus.finalproject.model.UserInfo;
 
 
@@ -27,4 +30,5 @@ public interface UserMapper {
 
     public BookmarkVO selectBookmark(BookmarkVO bookmarkVO);
     
+    public List<RecommandListVO> readRecipeList(ArrayList<Integer> idList);
 }
