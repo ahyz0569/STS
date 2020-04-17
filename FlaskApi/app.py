@@ -8,8 +8,10 @@ from PIL import Image
 from io import BytesIO
 from torchvision import transforms
 from detecto import core, utils, visualize
+from sqlalchemy import create_engine
 import pandas as pd
 import xml.etree.ElementTree as elemTree
+import mysql.connector
 import numpy as np
 import csv
 import pickle
@@ -112,7 +114,6 @@ def test():
     #모든 객체중 정확도가 가장 높은 객체 감지
     predictions = model.predict_top(image)
     labels, boxes, scores = predictions
-    detection_class2=list(set(labels))
     show_labeled_image(image, boxes, labels)
 
     with open('static/images/detection_result.jpg','rb') as img:
@@ -155,14 +156,14 @@ def recomand():
     print("type: ",type(data.iloc[df['idx_filtering'][0]]))
     print("list_type: ",type(data.iloc[df['idx_filtering'][0]].tolist()))
 
-    for index , i in enumerate(data.iloc[df['idx_filtering'][0]]):
+    for index , i in enumerate(df['idx_filtering']):
         if i!='':
             print(index ,":",i)
 	# except:
 	# 	recomandResult = ["한가지 이상의 음식을 촬영해주세요"]
 
 	#int64변수가 있어서 send 오류
-    return jsonify(recomandResult = data.iloc[df['idx_filtering'][0]].tolist())
+    return jsonify(recomandResult = df['idx_filtering'].tolist())
 
 
 @app.route('/testModel',methods=["POST","GET"])
@@ -186,10 +187,18 @@ def json():
 if __name__ == '__main__':
     labels = ['chilli', 'egg', 'pork meat', 'potato', 'pa', 'onion']
     vectorize = HashingVectorizer()
-    data = pd.read_csv('static/recipeData/crawling_200407.csv')
+    
+    engine = create_engine('mysql://root:1234@localhost:3307/final?charset=utf8', convert_unicode=True,encoding='UTF-8')
+    conn = engine.connect() 
+    data = pd.read_sql_table('recipe', conn)
+    ingre = data['ingre_main_oneline']
+    ingre = np.array(ingre.tolist())    
+
     data = data.fillna(0)
     data["id"] = data['id'].astype("float")
-
+    data["size"] = data['size'].astype("float")
+    data["time"] = data['time'].astype("float")
+    print(data.dtypes)
     ingre = data['ingre_main_oneline']
     ingre = np.array(ingre.tolist())
     model = core.Model.load('static/model/ingredients_weights_ver01_0326.pth', labels)
