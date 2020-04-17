@@ -1,30 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RESULT LIST PAGE</title>
+  <title>MAIN PAGE</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body>
+<body id="main-page">
   <!--start--페이지 전체 컨테이너-->
   <div id='main__container'>
-
     <!--start--헤더 고정-->
     <header id="main__header">
-
       <!--start--햄버거메뉴바 클릭-->
       <div id="mySidenav" class="sidenav">
-        <a class="nav-menu-1" href="main.html">HOME</a>
-        <a class="nav-menu-1" href="search.html">SEARCH</a>
-        <a class="nav-menu-2" href="#">GUIDE</a>
+        <a class="nav-menu-6" href="">HOME</a>
+        <a class="nav-menu-1" href="/search">SEARCH</a>
+        <a class="nav-menu-2" href="/guide">GUIDE</a>
         <a class="closebtn" onclick="closeNav()">&times;</a>
-        <a class="nav-menu-3" href="camera.html">CAMERA</a>
-        <a class="nav-menu-4" href="#">BOOMARK</a>
-        <a class="nav-menu-5" href="login.html">USER</a>
+        <a class="nav-menu-3" href="/camera">CAMERA</a>
+        <a class="nav-menu-4" href="/bookmark">BOOKMARK</a>
+        <a class="nav-menu-5" href="/user/info">USER</a>
       </div>
       <!--end--햄버거메뉴바 클릭-->
 
@@ -40,7 +38,7 @@
       <!--end--햄버거메뉴-->
 
       <!--start--메인로고  -->
-      <a href="main.html">
+      <a href="/">
         <img class="main-logo" src="images/main-logo.png">
         <img class="main-logo2" src="images/main-logo2.png">
       </a>
@@ -50,25 +48,25 @@
       <!--start--우측 상단 메뉴 아이콘들 -->
       <div class="nav__nav-column">
         <span class="nav__icon">
-          <a href="search.html">
+          <a href="/search">
             <i class="fas fa-search"></i>
             <span>검색</span>
           </a>
         </span>
         <span class="nav__icon">
-          <a href="camera.html">
+          <a href="/camera">
             <i class="fas fa-camera-retro"></i>
             <span>촬영</span>
           </a>
         </span>
         <span class="nav__icon">
-          <a href="">
+          <a href="/bookmark">
             <i class="far fa-bookmark"></i>
             <span>북마크</span>
           </a>
         </span>
         <span class="nav__icon">
-          <a href="login.html">
+          <a href="/login">
             <i class="far fa-user"></i>
             <span>로그인</span>
           </a>
@@ -81,23 +79,55 @@
 
     <!--start--메인컨텐츠-->
     <div id="main__contents">
-
-      <!--start--서치컨텐츠-->
-      <div id="search__contents">
-        <div id="recipe__category">
-          <span>레시피 목록</span>
+      <div id="result-recipe__container">
+        <div id="result-recipe-info">
+          <!-- resultRecipe.js에서 데이터 들어옴 -->
+        </div>
+        <div id="recipe-info">
+          <div id="serving-info">
+            <img src="images/serving.png">
+            <span class="serving-info">
+              몇인분
+            </span>
+          </div>
+          <div id="time-info">
+            <img src="images/time.png">
+            <span class="time-info">
+              시간
+            </span>
+          </div>
+          <div id="difficulty-info">
+            <img src="images/difficulty.png">
+            <span class="difficulty-info">
+              난이도
+            </span>
+          </div>
+        </div>
+        <div id="ingredients-infos">
+          <div id="main-ingredients-info">
+            <span class="main-ingredients-info">주재료:</span>
+          </div>
+          <div id="minor-ingredients-info">
+            <span class="minor-ingredients-info">부재료:</span>
+          </div>
         </div>
 
-        <ul id="menu__lists">
-          <!-- 메뉴 리스트 들어오는 곳 -->
-        </ul>
+        <header id="recipe-steps-header">
+          조리순서:
+        </header>
+
+        <div id="recipe__steps">
+          <div id="recipe-steps-info">
+
+          </div>
+        </div>
+
       </div>
-      <!--end--서치컨텐츠-->
     </div>
     <!--end--메인컨텐츠-->
 
     <!--start--푸터-->
-    <footer id=" main__footer">
+    <footer id="main__footer">
       @"추천해주는 세끼" Corp. All right reserved.
     </footer>
     <!--end--푸터-->
@@ -107,9 +137,17 @@
 
   <!--start--VanillaJS-->
   <script src="js/main.js"></script>
-  <script src="js/resultList.js"></script>
-  <script src="js/pagination.js"></script>
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    // var recipe = /*[[${recipe}]]*/ "recipe";
+    /*]]>*/
+  </script>
+  <script src="js/resultRecipe.js"></script>
   <!--end--VanillaJS-->
 </body>
+
+
+
+
 
 </html>
