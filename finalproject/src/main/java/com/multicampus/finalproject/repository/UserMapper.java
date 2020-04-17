@@ -1,6 +1,8 @@
 package com.multicampus.finalproject.repository;
  
+import java.util.ArrayList;
 import java.util.List;
+import com.multicampus.finalproject.model.RecommandListVO;
  
 import com.multicampus.finalproject.model.UserInfo;
 
@@ -20,4 +22,6 @@ public interface UserMapper {
     public void insertMember(UserInfo userInfo);
 
     public void insertAuthority(String username);
+
+    public List<RecommandListVO> readRecipeList(ArrayList<Integer> idList);
 }

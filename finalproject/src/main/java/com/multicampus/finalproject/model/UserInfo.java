@@ -9,7 +9,7 @@ import lombok.Data;
 
 
 @Data
-//@Alias("UserInfo")
+// @Alias("UserInfo")
 public class UserInfo {
  
     private String username;

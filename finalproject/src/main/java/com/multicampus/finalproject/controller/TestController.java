@@ -9,6 +9,8 @@ import com.multicampus.finalproject.model.LabelJsonVO;
 import com.multicampus.finalproject.model.UserInfo;
 import com.multicampus.finalproject.service.RestTemplateService;
 import com.multicampus.finalproject.service.UserInfoService;
+import com.multicampus.finalproject.model.RecommandListVO;
+
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 
 
 @Controller
@@ -91,9 +94,16 @@ public class TestController{
         // }
         System.out.println("추천 전: " + name);
         ResponseEntity<LabelJsonVO> recomandResult = restTemplateService.getRecomandData(name);
-        ArrayList<String> recomandList = recomandResult.getBody().getRecomandResult();
+        ArrayList<Integer> recomandList = recomandResult.getBody().getRecomandResult();
         
-        model.addAttribute("recipe", recomandList);
+        // for(int i=0;i<recomandList.size();i++){
+        //     System.out.println(recomandList.get(i));
+        // }
+        
+
+        List<RecommandListVO> recipeList = userInfoService.readRecipeList(recomandList);
+        model.addAttribute("recipe", recipeList);
+
         return "resultRecipe";
     }
     
