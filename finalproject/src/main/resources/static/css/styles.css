@@ -3,7 +3,6 @@
 @import "logIn.css";
 @import "signUp.css";
 @import "camera.css";
-<<<<<<< HEAD
 @import "resultList.css";
 @import "resultCheck.css";
 @import "resultRecipe.css";
@@ -11,13 +10,6 @@
 @font-face {
   font-family: omniGothic;
   src: url('/font/omniGothic.ttf');
-=======
-@import "search.css";
-
-@font-face {
-  font-family: omniGothic;
-  src: url('static/font/omniGothic.ttf');
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 }
 
 * {
@@ -29,11 +21,7 @@
 }
 
 body {
-<<<<<<< HEAD
   background-color: white;
-=======
-  background-color: #fdfdfd;
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 }
 
 @media (max-width:1550px) {
@@ -163,13 +151,10 @@ body {
     width: 120px;
     height: 120px;
   }
-<<<<<<< HEAD
 
   #bg {
     top: 51px;
   }
-=======
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 }
 
 @media (max-width:550px) {

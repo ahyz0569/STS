@@ -21,7 +21,6 @@
 }
 
 #recipe__category {
-<<<<<<< HEAD
   margin-top: 5px;
   width: 90%;
   height: 60px;
@@ -34,16 +33,6 @@
   border-radius: 2px;
   display: flex;
   align-items: center;
-=======
-  width: 90%;
-  max-width: 700px;
-  background-color: #576574;
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
-  padding: 10px;
-  border-radius: 2px;
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 }
 
 #recipe__types {
@@ -79,10 +68,7 @@
 #menu__lists {
   width: 90%;
   max-width: 700px;
-<<<<<<< HEAD
   margin-top: 0;
-=======
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 }
 
 .menu__list {
@@ -96,20 +82,11 @@
 .about__menu {
   display: flex;
   flex-direction: column;
-<<<<<<< HEAD
   justify-content: space-between;
 }
 
 .about__menu>h1 {
   font-size: 23px;
-=======
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.about__menu>h1 {
-  font-size: 20px;
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
   font-weight: bold;
 }
 
@@ -117,7 +94,6 @@
   font-size: 17px;
 }
 
-<<<<<<< HEAD
 .about__menu>.recipe-image {
   width: 190px;
   height: 190px;
@@ -125,8 +101,6 @@
 
 }
 
-=======
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 .menu__list-image {
   width: 190px;
   height: 190px;
@@ -135,7 +109,6 @@
 
 /*--end--메뉴 리스트 */
 
-<<<<<<< HEAD
 
 #recipe-main-ingredients {
   margin-top: 10px;
@@ -148,30 +121,3 @@
   margin-bottom: 8px;
   font-size: 19px;
 }
-=======
-/*--start-- pagination */
-.pagination {
-  display: inline-block;
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-
-.pagination a {
-  color: black;
-  padding: 8px 16px;
-  text-decoration: none;
-}
-
-.pagination a.active {
-  background-color: #4CAF50;
-  color: white;
-  border-radius: 5px;
-}
-
-.pagination a:hover:not(.active) {
-  background-color: #ddd;
-  border-radius: 5px;
-}
-
-/*--end-- pagination */
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205

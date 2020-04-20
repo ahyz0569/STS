@@ -22,10 +22,7 @@
 }
 
 #signUp-form>h1 {
-<<<<<<< HEAD
   margin-top: 40px;
-=======
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
   font-weight: 600;
   font-size: 40px;
 }
@@ -154,18 +151,6 @@ input::placeholder {
   position: absolute;
 }
 
-<<<<<<< HEAD
-=======
-.modal__content {
-  background-color: white;
-  padding: 50px 100px;
-  text-align: center;
-  position: relative;
-  top: 0px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  border-radius: 20px;
-}
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 
 #policy-modal__open {
   cursor: pointer;
