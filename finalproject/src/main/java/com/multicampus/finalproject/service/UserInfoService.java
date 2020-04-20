@@ -1,9 +1,6 @@
 package com.multicampus.finalproject.service;
  
-<<<<<<< HEAD
 import java.util.ArrayList;
-=======
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 import java.util.List;
  
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +8,7 @@ import org.springframework.stereotype.Service;
  
 import com.multicampus.finalproject.model.UserInfo;
 import com.multicampus.finalproject.repository.UserMapper;
-<<<<<<< HEAD
 import com.multicampus.finalproject.model.RecommandListVO;
-=======
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 
 // Service로 정의하고 Autowired를 통해 testMapper와의 의존성을 주입해준다.
 @Service
@@ -30,11 +24,8 @@ public class UserInfoService {
     public List<UserInfo> getAll() throws Exception{
         return userMapper.getAll();
     }
-<<<<<<< HEAD
 
     public List<RecommandListVO> readRecipeList(ArrayList<Integer> idList){
         return userMapper.readRecipeList(idList);
     }
-=======
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 }

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
 
 import com.multicampus.finalproject.model.BookmarkVO;
 import com.multicampus.finalproject.model.JsonVO;
@@ -15,26 +14,14 @@ import com.multicampus.finalproject.service.RestTemplateService;
 import com.multicampus.finalproject.service.UserInfoService;
 import com.multicampus.finalproject.model.RecommandListVO;
 
-=======
-import com.multicampus.finalproject.model.JsonVO;
-import com.multicampus.finalproject.model.LabelJsonVO;
-import com.multicampus.finalproject.model.UserInfo;
-import com.multicampus.finalproject.service.RestTemplateService;
-import com.multicampus.finalproject.service.UserInfoService;
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-<<<<<<< HEAD
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
-=======
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,10 +29,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 @Controller
 public class TestController{
 
@@ -54,15 +37,10 @@ public class TestController{
 
     @Autowired
     RestTemplateService restTemplateService;
-<<<<<<< HEAD
     
     @Autowired
     BookmarkService bookmarkService;
 
-=======
-
-    
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
     @RequestMapping("/")
     public String home(){
         return "main";
@@ -83,11 +61,6 @@ public class TestController{
 
     @RequestMapping("/upload_img")
     public String upload_img(Model model,@RequestParam("file") MultipartFile img){
-<<<<<<< HEAD
-=======
-
-               
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
         byte[] imgtext;
         String imgtext2;
         try{
@@ -95,10 +68,6 @@ public class TestController{
             imgtext = Base64.encodeBase64(img.getBytes());
             // Flask_API로 보내줘야 하기 때문에 String으로 변환한다
             imgtext2 = new String(imgtext);
-<<<<<<< HEAD
-=======
-
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
             // string으로 바꾼 img를 api로 보내주고 만들어 놓은 JsonVO형태로 Flask api에서 보내준 Json을 받는다.
             ResponseEntity<JsonVO> detectResultJson = restTemplateService.addData(imgtext2);
             
@@ -122,18 +91,13 @@ public class TestController{
             System.out.println("파일이 이상함!");
         }
         
-<<<<<<< HEAD
         return "resultCheck";
-=======
-        return "semi-result";
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
     }
     @RequestMapping(value="/recomand", method=RequestMethod.GET)
     public String recomand(Model model ,@RequestParam("label") ArrayList<String> name) throws Exception {
         // for(String label : name){
         //     System.out.println(label);
         // }
-<<<<<<< HEAD
         System.out.println("추천 전: " + name);
         ResponseEntity<LabelJsonVO> recomandResult = restTemplateService.getRecomandData(name);
         ArrayList<Integer> recomandList = recomandResult.getBody().getRecomandResult();
@@ -173,14 +137,4 @@ public class TestController{
         
         return bookmarkVO;
     }
-=======
-
-        ResponseEntity<LabelJsonVO> recomandResult = restTemplateService.getRecomandData(name);
-        ArrayList<String> recomandList = recomandResult.getBody().getRecomandResult();
-        System.out.println(recomandList);
-        model.addAttribute("recipe", recomandList);
-        return "recomand";
-    }
-    
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 }
