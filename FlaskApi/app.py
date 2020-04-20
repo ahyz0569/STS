@@ -183,6 +183,7 @@ def recomand():
     for col in df.columns:
         print(df[col].dtypes)
 	#int64변수가 있어서 send 오류
+<<<<<<< HEAD
     
     print(responseData)
     return jsonify(recomandResult = responseData)
@@ -220,6 +221,9 @@ def json():
 #     # flask 에서 기본적으로 제공하는 jsonify함수를 통해 값을 json형태로 전환할 수 있다.
 #     print(jsonify(name='JKS'))
 #     return jsonify(name='JKS')
+=======
+    return jsonify(recomandResult = data.iloc[df['idx_filtering'][0]].tolist())
+>>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 
 
 if __name__ == '__main__':

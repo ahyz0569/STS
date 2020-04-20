@@ -11,8 +11,12 @@ public class HttpConnectionConfig{
 
     @Bean
     public RestTemplate getCustomRestTemplate(){
+<<<<<<< HEAD
         HttpComponentsClientHttpRequestFactory httpRequestFactory 
                         = new HttpComponentsClientHttpRequestFactory();
+=======
+        HttpComponentsClientHttpRequestFactory httpRequestFactory = new HttpComponentsClientHttpRequestFactory();
+>>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
         httpRequestFactory.setConnectTimeout(10000000);
         httpRequestFactory.setReadTimeout(10000000);
         //connetPool 설정

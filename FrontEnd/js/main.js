@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const mainHeader = document.getElementById("main__header");
 
 //--start--헤더 전체
@@ -59,6 +60,8 @@ mainHeader.innerHTML =
 
 
 
+=======
+>>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 // 햄버거 메뉴바 열기
 function openNav() {
   document.querySelector(".sidenav").style.width = "250px";

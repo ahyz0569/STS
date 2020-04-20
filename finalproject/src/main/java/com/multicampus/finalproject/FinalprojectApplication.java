@@ -10,4 +10,8 @@ public class FinalprojectApplication {
 		SpringApplication.run(FinalprojectApplication.class, args);
 	}
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205

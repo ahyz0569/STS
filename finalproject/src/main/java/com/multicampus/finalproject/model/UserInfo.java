@@ -9,7 +9,11 @@ import lombok.Data;
 
 
 @Data
+<<<<<<< HEAD
 // @Alias("UserInfo")
+=======
+//@Alias("UserInfo")
+>>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 public class UserInfo {
  
     private String username;

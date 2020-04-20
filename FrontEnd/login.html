@@ -1,5 +1,9 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html>
+=======
+<html lang="en">
+>>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 
 <head>
   <meta charset="UTF-8">
@@ -14,26 +18,100 @@
 
 
 <body>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
   <!--start--페이지 전체 컨테이너-->
   <div id='main__container'>
     <!--start--헤더 고정-->
     <header id="main__header">
+<<<<<<< HEAD
       <!-- main.js 참고 -->
     </header>
     <!--end--헤더 고정-->
 
+=======
+      <!--start--햄버거메뉴 -->
+      <div id="bg" onclick="closeNav()"></div>
+      <div id="nav-container" onclick="openNav()">
+        <div class="button" tabindex="0">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </div>
+      </div>
+      <!--end--햄버거메뉴-->
+
+      <a href="main.html">
+        <img class="main-logo" src="images/main-logo.png">
+        <img class="main-logo2" src="images/main-logo2.png">
+      </a>
+
+      <!--start--우측 상단 메뉴 아이콘들 -->
+      <div class="nav__nav-column">
+        <span class="nav__icon">
+          <a href="search.html">
+            <i class="fas fa-search"></i>
+            <span>검색</span>
+          </a>
+        </span>
+        <span class="nav__icon">
+          <a href="camera.html">
+            <i class="fas fa-camera-retro"></i>
+            <span>촬영</span>
+          </a>
+        </span>
+        <span class="nav__icon">
+          <a href="login.html">
+            <i class="far fa-bookmark"></i>
+            <span>북마크</span>
+          </a>
+        </span>
+        <span class="nav__icon">
+          <a href="login.html">
+            <i class="far fa-user"></i>
+            <span>로그인</span>
+          </a>
+        </span>
+      </div>
+      <!--end--우측 상단 메뉴 아이콘들 -->
+
+    </header>
+    <!--end--헤더 고정-->
+
+    <!--start--햄버거메뉴바 클릭 -->
+    <div id="mySidenav" class="sidenav">
+      <a class="closebtn" onclick="closeNav()">&times;</a>
+      <a class="nav-menu-1" href="main.html">HOME</a>
+      <a class="nav-menu-1" href="search.html">SEARCH</a>
+      <a class="nav-menu-2" href="#">GUIDE</a>
+      <a class="nav-menu-3" href="camera.html">CAMERA</a>
+      <a class="nav-menu-4" href="#">BOOKMARK</a>
+      <a class="nav-menu-5" href="login.html">USER</a>
+      <a class="nav-menu-6" href="#">CONTACT</a>
+    </div>
+    <!--end--햄버거메뉴바 클릭-->
+
+>>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
     <!--start--메인컨텐츠-->
     <div id="main__contents">
       <div class="login__layout">
         <div class="login__layout-form">
           <!--start--로그인 폼-->
+<<<<<<< HEAD
 
           <form class="loginForm" id="login-form" action="/login" method="POST">
             <h1>오늘 뭐 해먹지?</h1>
             <input id="email-id" type="email" name="email" placeholder="이메일을 입력해주세요." autofocus autocomplete="off">
             <input id="email-password" type="password" name="password" placeholder="비밀번호를 입력해주세요." autocomplete="off">
+=======
+          <form class="loginForm" id="login-form" action="#" method="POST" enctype="multipart/form-data">
+            <h1>오늘 뭐 해먹지?</h1>
+            <input id="email-id" type="email" placeholder="이메일을 입력해주세요." autofocus autocomplete="off">
+            <input id="email-password" type="password" placeholder="비밀번호를 입력해주세요." autocomplete="off">
+>>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
             <button id="login-button" type="submit">
               로그인
             </button>
@@ -55,7 +133,11 @@
             </span>
             <span id="go-to-signUp">
               아직 계정이 없으신가요?
+<<<<<<< HEAD
               <a href="/signUp_page">
+=======
+              <a href="signUp.html">
+>>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
                 회원가입!
               </a>
             </span>
@@ -64,6 +146,11 @@
 
         </div>
       </div>
+<<<<<<< HEAD
+=======
+      <!-- <img id="img-left" src="images/img-left.jpg" alt="">
+      <img id="img-right" src="images/img-right.jpg" alt=""> -->
+>>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
     </div>
     <!--end--메인컨텐츠-->
 
@@ -76,9 +163,17 @@
   </div>
   <!--end--페이지 전체 컨테이너-->
 
+<<<<<<< HEAD
   <script src="js/main.js"></script>
   <script src="js/autofocus.js"></script>
 
+=======
+  <!--start--VanillaJS-->
+  <script src="js/main.js"></script>
+  <script src="js/autofocus.js"></script>
+
+  <!--end--VanillaJS-->
+>>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 </body>
 
 </html>
