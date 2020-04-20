@@ -109,9 +109,13 @@ public class TestController{
         
 
         List<RecommandListVO> recipeList = userInfoService.readRecipeList(recomandList);
-        model.addAttribute("recipe", recipeList);
+        
+        // for(int i=0;i<recipeList.size();i++){
+        //     System.out.println(recipeList.get(i).getImg());
+        // }
+        model.addAttribute("recipeList", recipeList);
 
-        return "resultRecipe";
+        return "resultList";
     }
     @RequestMapping(value="/testFetch", method=RequestMethod.POST)
     @ResponseBody public BookmarkVO requestMethodName(@RequestBody BookmarkVO resBody, @AuthenticationPrincipal SecurityUserInfo securityUserInfo) {

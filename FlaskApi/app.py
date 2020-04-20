@@ -2,7 +2,6 @@ from flask import Flask, jsonify, escape, request, render_template
 
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer, HashingVectorizer
 from sklearn.metrics.pairwise import linear_kernel
-<<<<<<< HEAD
 from PIL import Image
 from io import BytesIO
 from torchvision import transforms
@@ -11,9 +10,6 @@ from sqlalchemy import create_engine
 import pandas as pd
 import xml.etree.ElementTree as elemTree
 import mysql.connector
-=======
-import pandas as pd
->>>>>>> origin/FlaskAPI
 import numpy as np
 import xml.etree.ElementTree as elemTree
 import csv
@@ -28,12 +24,9 @@ from torchvision import transforms
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
-<<<<<<< HEAD
 from sqlalchemy import create_engine
 import mysql.connector
 
-=======
->>>>>>> origin/FlaskAPI
 app = Flask(__name__)
 
 model = None
@@ -132,11 +125,7 @@ def test():
     # 모든 객체중 정확도가 가장 높은 객체 감지
     predictions = model.predict_top(image)
     labels, boxes, scores = predictions
-<<<<<<< HEAD
-    show_labeled_image(image, boxes, labels)
-=======
     show_labeled_image(image, boxes, labels, scores)
->>>>>>> origin/FlaskAPI
 
     with open('static/images/detection_result.jpg', 'rb') as img:
         response_img = base64.b64encode(img.read())
@@ -145,13 +134,7 @@ def test():
     return jsonify(response_img=response_img.decode('utf-8'), labels=labels)
 
 
-<<<<<<< HEAD
-
-
-@app.route('/recomandApi',methods=["POST","GET"])
-=======
 @app.route('/recomandApi', methods=["POST", "GET"])
->>>>>>> origin/FlaskAPI
 def recomand():
     # try:
     labels = request.get_data().decode("utf-8")
@@ -160,13 +143,8 @@ def recomand():
     items = []
     items_KOR = ""
     for item in labelsXml.findall("./item"):
-<<<<<<< HEAD
-    	items.append(item.text)
-    	# print('*'+item.text+'*')
-=======
         items.append(item.text)
         print('*' + item.text + '*')
->>>>>>> origin/FlaskAPI
 
     for i in range(len(items)):
         if (items[i] == "chilli"):
@@ -187,7 +165,6 @@ def recomand():
             items[i] = "오이"
 
     items_KOR = " ".join(items)
-<<<<<<< HEAD
     # print("하하하하: " + items_KOR)
     df=recommend(items_KOR,'돼지고기')
     
@@ -209,22 +186,22 @@ def recomand():
     
     print(responseData)
     return jsonify(recomandResult = responseData)
-=======
-    print("하하하하: " + items_KOR)
-    df = recommend(items_KOR, '돼지고기')
-    print("type: ", type(data.iloc[df['idx_filtering'][0]]))
-    print("list_type: ", type(data.iloc[df['idx_filtering'][0]].tolist()))
 
-    for index, i in enumerate(data.iloc[df['idx_filtering'][0]]):
-        if i != '':
-            print(index, ":", i)
-    # except:
-    # 	recomandResult = ["한가지 이상의 음식을 촬영해주세요"]
+    ###############################
+    # print("하하하하: " + items_KOR)
+    # df = recommend(items_KOR, '돼지고기')
+    # print("type: ", type(data.iloc[df['idx_filtering'][0]]))
+    # print("list_type: ", type(data.iloc[df['idx_filtering'][0]].tolist()))
 
-    # int64변수가 있어서 send 오류
-    return jsonify(recomandResult=data.iloc[df['idx_filtering'][0]].tolist())
->>>>>>> origin/FlaskAPI
+    # for index, i in enumerate(data.iloc[df['idx_filtering'][0]]):
+    #     if i != '':
+    #         print(index, ":", i)
+    # # except:
+    # # 	recomandResult = ["한가지 이상의 음식을 촬영해주세요"]
 
+    # # int64변수가 있어서 send 오류
+    # return jsonify(recomandResult=data.iloc[df['idx_filtering'][0]].tolist())
+    ################################
 
 @app.route('/testModel', methods=["POST", "GET"])
 def test2():
