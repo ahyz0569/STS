@@ -52,22 +52,42 @@ function insertBookmark(recipeID) {
         }
     })
 }
+//bookmark를 load하기 위한 로직
 function loadBookmark(){
-    let newDiv = document.createElement("div");
-    let div = document.getElementById("list");
     const odj = {
+        //권한 설정이 되어 있을때만 fetch실행
         credentials: 'same-origin'
     };
     fetch("http://localhost:8080/loadBookmark",odj)
         .then(res =>{
+            //정상 응답이 왔을 때 로직 실행
             if (res.status == 200){
                 res
                 .json()
-                .then(json => newDiv.innerHTML = json.recipeIDList);
-                // .then(console.log(json.recipeIDList));
+                // .then(json => newDiv.innerHTML = json.recommandList)
+                .then(json => printJsonList(json.recommandList));
             }
         });
+    
+}
+//json에 포함되어 있는 list를 li태그를 사용해서 출력하기 위한 함수
+function printJsonList(list){
+    //li를 담을 div태그 생성
+    let newDiv = document.createElement("div");
+    //newDiv를 append할 list id를 가진 div 
+    let div = document.getElementById("list");
+    //json의 list를 출력하기 위한 for문
+    for(key in list){
+        let li = document.createElement('li')
+        li.innerHTML = list[key]["title"];
+        newDiv.appendChild(li);
+
+        // console.log(list[key]);
+        // newDiv.innerHTML = "<li>" + list[key]["title"] + "</li>";
+    }
     div.appendChild(newDiv);
+    
+    
 }
 //hyeon
 
