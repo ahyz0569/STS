@@ -11,6 +11,7 @@ for (i in recipeList) {
   menuList.className = "menu__list";
   let aboutMenu = document.createElement("div");
   aboutMenu.className = "about__menu";
+
   let recipeTitle = document.createElement("h1");
   recipeTitle.innerHTML = recipeList[i].title;
   let recipeMain = document.createElement("span");
@@ -19,11 +20,20 @@ for (i in recipeList) {
   let recipeMinor = document.createElement("span");
   recipeMinor.id = "recipe-minor-ingredients"
   recipeMinor.innerHTML = `<span style="font-weight:bold";>ㅇ부재료:</span> ${recipeList[i].minor}`;
-  let recipeImg = document.createElement("img");
+  let recipeImg = document.createElement("div");
+  recipeImg.style.backgroundImage = `url('${recipeList[i].img_complete}')`
   recipeImg.className = "menu__list-image";
-  recipeImg.src = recipeList[i].img_complete;
   recipeImg.href = "/recipe" + "/" + recipeList[i].id.toString()
-  recipeImg.addEventListener('click',function event(){ location.href = this.href});
+  recipeImg.addEventListener('click', function event() {
+    location.href = this.href
+  });
+
+  let bmImg = document.createElement("img");
+  bmImg.className = "bookmark-image"
+  bmImg.src = "images/bm-logo.png";
+  bmImg.addEventListener("click", addBookmark);
+  recipeImg.appendChild(bmImg);
+
 
   menuList.appendChild(aboutMenu);
   aboutMenu.appendChild(recipeTitle);
@@ -36,5 +46,12 @@ for (i in recipeList) {
   menuLists.appendChild(frag);
 }
 
-function getId(event) {
-  location.href = "/recipe/6924266"}
+function addBookmark(event) {
+  event.stopPropagation();
+  const addBm = event.target;
+  if (addBm.getAttribute('src') == "images/bm-logo.png") {
+    addBm.setAttribute('src', 'images/bm-logo-checked.png');
+  } else if (addBm.getAttribute('src') == "images/bm-logo-checked.png") {
+    addBm.setAttribute('src', 'images/bm-logo.png');
+  }
+};
