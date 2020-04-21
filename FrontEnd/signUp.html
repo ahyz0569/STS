@@ -16,74 +16,11 @@
   <div id='main__container'>
     <!--start--헤더 고정-->
     <header id="main__header">
-<<<<<<< HEAD
       <!-- main.js 참고 -->
     </header>
     <!--end--헤더 고정-->
 
-=======
 
-      <!--start--햄버거메뉴-->
-      <div id="bg" onclick="closeNav()"></div>
-      <div id="nav-container" onclick="openNav()">
-        <div class="button" tabindex="0">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </div>
-      </div>
-      <!--end--햄버거메뉴-->
-
-      <a href="main.html">
-        <img class="main-logo" src="images/main-logo.png">
-        <img class="main-logo2" src="images/main-logo2.png">
-      </a>
-      <!--start--우측 상단 메뉴 아이콘들 -->
-      <div class="nav__nav-column">
-        <span class="nav__icon">
-          <a href="search.html">
-            <i class="fas fa-search"></i>
-            <span>검색</span>
-          </a>
-        </span>
-        <span class="nav__icon">
-          <a href="camera.html">
-            <i class="fas fa-camera-retro"></i>
-            <span>촬영</span>
-          </a>
-        </span>
-        <span class="nav__icon">
-          <a href="#">
-            <i class="far fa-bookmark"></i>
-            <span>북마크</span>
-          </a>
-        </span>
-        <span class="nav__icon">
-          <a href="login.html">
-            <i class="far fa-user"></i>
-            <span>로그인</span>
-          </a>
-        </span>
-      </div>
-      <!--end--우측 상단 메뉴 아이콘들 -->
-
-    </header>
-    <!--end--헤더 고정-->
-
-    <!--start--햄버거메뉴바 클릭-->
-    <div id="mySidenav" class="sidenav">
-      <a class=" closebtn" onclick="closeNav()">&times;</a>
-      <a class="nav-menu-1" href="main.html">HOME</a>
-      <a class="nav-menu-1" href="search.html">SEARCH</a>
-      <a class="nav-menu-2" href="#">GUIDE</a>
-      <a class="nav-menu-3" href="camera.html">CAMERA</a>
-      <a class="nav-menu-4" href="#">BOOKMARK</a>
-      <a class="nav-menu-5" href="login.html">USER</a>
-      <a class="nav-menu-6" href="#">CONTACT</a>
-    </div>
-    <!--end--햄버거메뉴바 클릭-->
-
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
     <!--start--메인컨텐츠-->
     <div id="main__contents">
       <div class="login__layout">
@@ -92,33 +29,26 @@
         <div class="login__layout-form">
 
           <!--start--회원가입 폼-->
-<<<<<<< HEAD
-          <form clss="signUpForm" id="signUp-form" action="signUp" method="POST" enctype="multipart/form-data">
+          <form name="join" class="signUpForm" id="signUp-form" action="signUp" method="POST"
+            onsubmit="return validate()" enctype="multipart/form-data">
             <h1>회원가입</h1>
             <p>"오늘 뭐 해먹지?"에 가입하고,</p>
             <p>남은 재료들을 이용한 특별한 요리에 도전해보세요!</p>
-            <input id="email-id" name="email" type="email" placeholder="사용하실 이메일을 입력해주세요." autocomplete="off" autofocus>
-            <input id="email-password" name="password" type="password" placeholder="사용하실 비밀번호를 입력해주세요."
+            <input id="email-id" name="mail" type="email" placeholder="사용하실 이메일을 입력해주세요." autocomplete="off" autofocus>
+            <input id="email-password" name="password1" type="password" placeholder="사용하실 비밀번호를 입력해주세요."
               autocomplete="off">
-            <input id="email-password-check" type="password" placeholder="사용하실 비밀번호를 다시 한 번 입력해주세요." autocomplete="off">
-            <input id="name" name="name" type="text" placeholder="이름을 입력해주세요." autocomplete="off" autofocus>
-=======
-          <form clss="signUpForm" id="signUp-form" action="#" method="POST" enctype="multipart/form-data">
-            <h1>회원가입</h1>
-            <p>"오늘 뭐 해먹지?"에 가입하고,</p>
-            <p>남은 재료들을 이용한 특별한 요리에 도전해보세요!</p>
-            <input id="email-id" type="email" placeholder="사용하실 이메일을 입력해주세요." autocomplete="off" autofocus>
-            <input id="email-password" type="password" placeholder="사용하실 비밀번호를 입력해주세요." autocomplete="off">
-            <input id="email-password-check" type="password" placeholder="사용하실 비밀번호를 다시 한 번 입력해주세요." autocomplete="off">
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
+            <input id="email-password-check" name="password2" type="password" placeholder="사용하실 비밀번호를 다시 한 번 입력해주세요."
+              autocomplete="off">
+            <!-- <input id="name" name="name" type="text" placeholder="이름을 입력해주세요." autocomplete="off" autofocus> -->
+
             <div id="signUp-check">
-              <input type="checkbox">
+              <input id="sign-up-checkbox" type="checkbox">
               <span id="policy-modal__open">이용약관</span>과<span id="privacy-modal__open">개인정보취급방침</span>에 동의합니다.
             </div>
             <button id="login-button" type="submit">
               회원가입
             </button>
-            <button id="google-signUp-btn" type="submit">
+            <button id="google-signUp-btn">
               <img src="images/google-logo.png">
               <span style="padding-left: 10px; padding-right: 20px;">
                 구글로 회원가입
@@ -126,10 +56,6 @@
             </button>
           </form>
           <!--end--회원가입 폼-->
-<<<<<<< HEAD
-=======
-
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
           <hr>
 
           <!--start--유저헬프-->
@@ -157,11 +83,7 @@
         <div class="modal__content">
           <h1>이용약관</h1> <button id="policy-modal__close">X</button>
           <textarea cols="40" rows="30" readonly>
-<<<<<<< HEAD
-            제1조(목적) 이 약관은 OO 회사(전자상거래 사업자)가 운영하는 OO 사이버 몰(이하 “몰”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리․의무 및 책임사항을 규정함을 목적으로 합니다.
-=======
             제1조(목적) 이 약관은 '추천해주는 세끼' 회사(전자상거래 사업자)가 운영하는 '오늘 뭐 해먹지?' 사이버 몰(이하 “몰”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리․의무 및 책임사항을 규정함을 목적으로 합니다.
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 
   ※「PC통신, 무선 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는 한 이 약관을 준용합니다.」
 
@@ -462,18 +384,10 @@
     </div>
     <!--end--페이지 전체 컨테이너-->
 
-<<<<<<< HEAD
-=======
-    <!--start--VanillaJS-->
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
     <script src="js/main.js"></script>
     <script src="js/autofocus.js"></script>
     <script src="js/signUp.js"></script>
 
-<<<<<<< HEAD
-=======
-    <!--end--VanillaJS-->
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 </body>
 
 </html>
