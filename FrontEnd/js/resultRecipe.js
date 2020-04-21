@@ -1,5 +1,4 @@
 // let recipe__infos = {}
-<<<<<<< HEAD
 let recipe__info = [
   "id",
   "비오는날 막걸리 안주에 딱인 감자김치전",
@@ -33,17 +32,11 @@ let recipe__info = [
     "https://recipe1.ezmember.co.kr/cache/recipe/2020/03/09/b74826852c7d5dcded23f4f3e9612fec1.gif",
   ],
 ];
-=======
-
-let recipe__info = ["1234", "첫번째 요리", "2인분", "조리시간", "난이도", "설명", "주재료", "부재료", "소스", "완성사진", "조리순서", "조리순서 사진"];
-
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 
 let frag = document.createDocumentFragment();
 let resultRecipeInfo = document.getElementById("result-recipe-info");
 
 let recipeImg = document.createElement("img");
-<<<<<<< HEAD
 recipeImg.id = "result-img";
 recipeImg.src = "images/1.jpg";
 
@@ -97,17 +90,3 @@ let stepsEnd = document.createElement("div");
 stepsEnd.id = "steps-end";
 stepsEnd.innerHTML = "- - - END - - -";
 recipeStepsInfo.appendChild(stepsEnd);
-=======
-let recipeHeader = document.createElement("header");
-let recipeDescription = document.createElement("p");
-
-
-// recipeHeader.className = "";
-recipeHeader.innerHTML = recipe__info[1];
-recipeDescription.innerHTML = recipe__info[5];
-recipeImg.src = recipe__info[9];
-
-resultRecipeInfo.appendChild(recipeImg);
-resultRecipeInfo.appendChild(recipeHeader);
-resultRecipeInfo.appendChild(recipeDescription);
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205

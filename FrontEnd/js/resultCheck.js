@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 let resultForm = document.getElementById("result__form");
 let resultInfo = document.getElementById("result__info");
 const plusText = document.getElementById("plus__text");
@@ -6,20 +5,12 @@ let plusBtn = document.getElementById("info-plus-btn");
 let closeBtn = document.getElementById("close__text-add");
 
 let frag = document.createDocumentFragment();
-=======
-const resultForm = document.getElementById("result__form");
-const plusText = document.getElementById("plus__text");
-let resultInfo = document.getElementById("result__info");
-
-
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 //--start-- 재료 데이터 받는 곳//
 let analyzed__ingredients,
   i,
   ingredient__lists = "";
 
 analyzed__ingredients = {
-<<<<<<< HEAD
   name: label
 };
 
@@ -47,38 +38,15 @@ for (i in analyzed__ingredients.name) {
   resultInfo.appendChild(plusBtn);
 }
 
-=======
-  name: ["egg", "onion", "potato", "carrot", "cucumber", "tomato"],
-};
-
-let frag = document.createDocumentFragment();
-let plusBtn = document.getElementById("info-plus-btn");
-
-for (i in analyzed__ingredients.name) {
-  let ele = document.createElement("li");
-  ele.className = "info";
-  ele.innerHTML = `<span style="cursor:pointer" onclick="fnc()">${analyzed__ingredients.name[i]}</span> <div class="info-close-btn">&times;</div>`;
-  frag.appendChild(ele);
-  ele.getElementsByClassName("info-close-btn")[0].addEventListener("click", deleteLi);
-}
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 //--end--재료 데이터 받는 곳//
 
 
 //--start-- 재료 삭제 버튼//
 function deleteLi(event) {
   const btn = event.target;
-<<<<<<< HEAD
   const prevBtn = btn.parentNode;
   prevBtn.remove();
 }
-=======
-  const li = btn.parentNode;
-  resultInfo.removeChild(li);
-}
-resultInfo.appendChild(frag);
-resultInfo.appendChild(plusBtn);
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 //--end-- 재료 삭제 버튼//
 
 
@@ -89,7 +57,6 @@ function fnc() {
 //--end-- 메인 재료 선정 - 미구현
 
 
-<<<<<<< HEAD
 function addIng() {
   // enter 시 자동 submit기능 방지.
   event.preventDefault()
@@ -135,29 +102,3 @@ function closeAddModal() {
   plusBtn.style.display = "block";
 
 }
-=======
-
-//--start-- 재료추가 타이핑
-function handleSubmit(event) {
-  event.preventDefault();
-  let currentValue = plusText.value;
-  paintToDo(currentValue);
-  plusText.value = "";
-}
-
-function paintToDo(text) {
-  let ele = document.createElement("li");
-  ele.className = "info";
-  ele.innerHTML = `<span style="cursor:pointer" onclick="fnc()">${text}</span> <div class="info-close-btn">&times;</div>`;
-  ele.getElementsByClassName("info-close-btn")[0].addEventListener("click", deleteLi);
-  frag.appendChild(ele);
-  resultInfo.appendChild(frag);
-  resultInfo.appendChild(plusBtn);
-}
-
-function init() {
-  resultForm.addEventListener("submit", handleSubmit);
-}
-init();
-//--end-- 재료추가 타이핑
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205

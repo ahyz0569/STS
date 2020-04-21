@@ -3,14 +3,9 @@
 @import "logIn.css";
 @import "signUp.css";
 @import "camera.css";
-<<<<<<< HEAD
 @import "resultList.css";
 @import "resultCheck.css";
 @import "resultRecipe.css";
-=======
-@import "search.css";
-@import "resultCheck.css";
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 
 @font-face {
   font-family: omniGothic;
