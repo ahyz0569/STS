@@ -6,6 +6,11 @@ import java.util.List;
 
 import com.multicampus.finalproject.model.BookmarkVO;
 import com.multicampus.finalproject.model.RecipeIDList;
+import java.util.List;
+
+import com.multicampus.finalproject.model.BookmarkVO;
+import com.multicampus.finalproject.model.RecommandListVO;
+ 
 import com.multicampus.finalproject.model.UserInfo;
 
 
@@ -37,4 +42,7 @@ public interface UserMapper {
 
 
     
+    public List<RecommandListVO> readRecipeList(ArrayList<Integer> idList);
+
+    public RecommandListVO readRecipe(int recipeId);
 }

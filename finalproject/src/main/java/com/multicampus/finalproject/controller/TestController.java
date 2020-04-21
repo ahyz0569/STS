@@ -14,6 +14,8 @@ import com.multicampus.finalproject.model.SecurityUserInfo;
 import com.multicampus.finalproject.service.BookmarkService;
 import com.multicampus.finalproject.service.RestTemplateService;
 import com.multicampus.finalproject.service.UserInfoService;
+import com.multicampus.finalproject.model.RecommandListVO;
+
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,8 +64,6 @@ public class TestController{
 
     @RequestMapping("/upload_img")
     public String upload_img(Model model,@RequestParam("file") MultipartFile img){
-
-               
         byte[] imgtext;
         String imgtext2;
         try{
@@ -70,7 +71,6 @@ public class TestController{
             imgtext = Base64.encodeBase64(img.getBytes());
             // Flask_API로 보내줘야 하기 때문에 String으로 변환한다
             imgtext2 = new String(imgtext);
-
             // string으로 바꾼 img를 api로 보내주고 만들어 놓은 JsonVO형태로 Flask api에서 보내준 Json을 받는다.
             ResponseEntity<JsonVO> detectResultJson = restTemplateService.addData(imgtext2);
             
@@ -103,10 +103,21 @@ public class TestController{
         // }
         System.out.println("추천 전: " + name);
         ResponseEntity<LabelJsonVO> recomandResult = restTemplateService.getRecomandData(name);
-        ArrayList<String> recomandList = recomandResult.getBody().getRecomandResult();
-        System.out.println("recipeID" + recomandList);
-        model.addAttribute("recipe", recomandList);
-        return "resultRecipe";
+        ArrayList<Integer> recomandList = recomandResult.getBody().getRecomandResult();
+        
+        // for(int i=0;i<recomandList.size();i++){
+        //     System.out.println(recomandList.get(i));
+        // }
+        
+
+        List<RecommandListVO> recipeList = userInfoService.readRecipeList(recomandList);
+        
+        // for(int i=0;i<recipeList.size();i++){
+        //     System.out.println(recipeList.get(i).getImg());
+        // }
+        model.addAttribute("recipeList", recipeList);
+
+        return "resultList";
     }
     @RequestMapping(value="/insertBookmark", method=RequestMethod.POST)
     @ResponseBody public BookmarkVO insertBookmark(@RequestBody BookmarkVO resBody, @AuthenticationPrincipal SecurityUserInfo securityUserInfo) {
@@ -141,5 +152,15 @@ public class TestController{
         
         return bookmarkVO;
     }
-    
+
+    @RequestMapping(value="/recipe/{recipeId}")
+    public String viewRecipe(Model model,@PathVariable("recipeId")int recipeId){
+        RecommandListVO recipe = userInfoService.readRecipe(recipeId);
+        
+        System.out.println(recipe.getDescription());
+        System.out.println(recipe.getImg_complete());
+        System.out.println(recipe.getDescription());
+        model.addAttribute("recipe",recipe);
+        return "resultRecipe";
+    }
 }
