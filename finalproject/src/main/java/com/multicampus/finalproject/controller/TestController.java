@@ -152,8 +152,8 @@ public class TestController{
             bookmarkVO.setRecipeIDList(bookmarkService.loadBookmark(userID));
 
             List<RecommandListVO> recommandList = userInfoService.readRecipeList(bookmarkRecipeIDLists);
-            System.out.println("re" + recommandList);
-            System.out.println(bookmarkRecipeIDLists);
+            // System.out.println("re" + recommandList);
+            // System.out.println(bookmarkRecipeIDLists);
             bookmarkVO.setRecommandList(recommandList);
         }
         

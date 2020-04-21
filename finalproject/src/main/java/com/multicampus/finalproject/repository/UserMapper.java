@@ -1,11 +1,11 @@
 package com.multicampus.finalproject.repository;
  
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import com.multicampus.finalproject.model.BookmarkVO;
-import com.multicampus.finalproject.model.RecipeIDList;
 import java.util.List;
 
 import com.multicampus.finalproject.model.BookmarkVO;
@@ -35,7 +35,7 @@ public interface UserMapper {
 
     public BookmarkVO selectBookmark(BookmarkVO bookmarkVO);
 
-    public List<RecipeIDList> loadBookmark(String userID);
+    public ArrayList<Integer> loadBookmark(String userID);
     // public int[] loadBookmark(String userID);
     // public ArrayList<Float> loadBookmark(String userID);
     // public HashMap<String,Integer> loadBookmark(String userID);

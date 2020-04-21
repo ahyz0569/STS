@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.multicampus.finalproject.model.BookmarkVO;
-import com.multicampus.finalproject.model.RecipeIDList;
 import com.multicampus.finalproject.repository.UserMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class BookmarkService {
     public void deleteBookmark(BookmarkVO bookmarkVO){
         userMapper.deleteBookmark(bookmarkVO);
     }
-    public List<RecipeIDList> loadBookmark(String userID){
+    public ArrayList<Integer> loadBookmark(String userID){
         return userMapper.loadBookmark(userID);
     }
     // public int[] loadBookmark(String userID){

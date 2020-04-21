@@ -9,7 +9,8 @@ import lombok.Data;
 public class BookmarkVO {
     private String userID;
     private int recipeID;
-    private List<RecipeIDList> recipeIDList; 
+    private List<Integer> recipeIDList; 
+    private List<RecommandListVO> recommandList;
 
     public BookmarkVO(){}
     public BookmarkVO(String userID, int recipeID){

@@ -39,7 +39,7 @@
     </insert>
 
     <select id="readRecipeList" parameterType="java.util.ArrayList" resultType="com.multicampus.finalproject.model.RecommandListVO">
-        SELECT * FROM recipe WHERE id IN 
+        SELECT * FROM recipe WHERE id IN
         <foreach collection="list" item="item" separator="," open="(" close=")">
             #{item.value}
         </foreach>
