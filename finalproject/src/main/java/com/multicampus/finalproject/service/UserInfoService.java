@@ -28,4 +28,7 @@ public class UserInfoService {
     public List<RecommandListVO> readRecipeList(ArrayList<Integer> idList){
         return userMapper.readRecipeList(idList);
     }
+    public RecommandListVO readRecipe(int recipeId){
+        return userMapper.readRecipe(recipeId);
+    }
 }

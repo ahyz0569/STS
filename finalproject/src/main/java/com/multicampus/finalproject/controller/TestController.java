@@ -21,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -136,5 +137,16 @@ public class TestController{
         System.out.println("userID: " + bookmarkVO.getUserID() + "recipeID: " + bookmarkVO.getRecipeID());
         
         return bookmarkVO;
+    }
+
+    @RequestMapping(value="/recipe/{recipeId}")
+    public String viewRecipe(Model model,@PathVariable("recipeId")int recipeId){
+        RecommandListVO recipe = userInfoService.readRecipe(recipeId);
+        
+        System.out.println(recipe.getDescription());
+        System.out.println(recipe.getImg_complete());
+        System.out.println(recipe.getDescription());
+        model.addAttribute("recipe",recipe);
+        return "resultRecipe";
     }
 }

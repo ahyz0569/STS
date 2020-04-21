@@ -45,4 +45,8 @@
         </foreach>
     </select>
 
+    <select id="readRecipe" parameterType="Integer" resultType="com.multicampus.finalproject.model.RecommandListVO">
+        SELECT * FROM recipe WHERE id = #{recipeId}
+    </select>
+
 </mapper>

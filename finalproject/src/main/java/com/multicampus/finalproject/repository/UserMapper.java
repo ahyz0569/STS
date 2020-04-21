@@ -31,4 +31,6 @@ public interface UserMapper {
     public BookmarkVO selectBookmark(BookmarkVO bookmarkVO);
     
     public List<RecommandListVO> readRecipeList(ArrayList<Integer> idList);
+
+    public RecommandListVO readRecipe(int recipeId);
 }

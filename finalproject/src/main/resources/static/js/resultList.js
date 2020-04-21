@@ -21,8 +21,9 @@ for (i in recipeList) {
   recipeMinor.innerHTML = `<span style="font-weight:bold";>ㅇ부재료:</span> ${recipeList[i].minor}`;
   let recipeImg = document.createElement("img");
   recipeImg.className = "menu__list-image";
-  recipeImg.src = recipeList[i].img_complete;;
-
+  recipeImg.src = recipeList[i].img_complete;
+  recipeImg.href = "/recipe" + "/" + recipeList[i].id.toString()
+  recipeImg.addEventListener('click',function event(){ location.href = this.href});
 
   menuList.appendChild(aboutMenu);
   aboutMenu.appendChild(recipeTitle);
@@ -34,3 +35,6 @@ for (i in recipeList) {
   frag.appendChild(menuList);
   menuLists.appendChild(frag);
 }
+
+function getId(event) {
+  location.href = "/recipe/6924266"}
