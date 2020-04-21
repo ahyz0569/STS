@@ -145,9 +145,16 @@ public class TestController{
         String userID = securityUserInfo.getUsername();
 
         BookmarkVO bookmarkVO = new BookmarkVO();
+        ArrayList<Integer> bookmarkRecipeIDLists = bookmarkService.loadBookmark(userID);
+
 
         if(bookmarkService.loadBookmark(userID) != null){
             bookmarkVO.setRecipeIDList(bookmarkService.loadBookmark(userID));
+
+            List<RecommandListVO> recommandList = userInfoService.readRecipeList(bookmarkRecipeIDLists);
+            System.out.println("re" + recommandList);
+            System.out.println(bookmarkRecipeIDLists);
+            bookmarkVO.setRecommandList(recommandList);
         }
         
         return bookmarkVO;
