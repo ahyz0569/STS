@@ -24,8 +24,8 @@ mainHeader.innerHTML =
 
 
       <a href="/">
-        <img class="main-logo" src="images/main-logo.png">
-        <img class="main-logo2" src="images/main-logo2.png">
+        <img class="main-logo" src="/images/main-logo.png">
+        <img class="main-logo2" src="/images/main-logo2.png">
       </a>
 
 
