@@ -28,7 +28,7 @@
         <div class="login__layout-form">
 
           <!--start--회원가입 폼-->
-          <form onsubmit="return validate()" clss="signUpForm" id="signUp-form" action="signUp" method="POST"
+          <form onsubmit="return validate()" clss="signUpForm" id="signUp-form" action="/signUp" method="POST"
             enctype="multipart/form-data">
             <h1>회원가입</h1>
             <p>"오늘 뭐 해먹지?"에 가입하고,</p>
@@ -37,7 +37,7 @@
             <input id="email-password" name="password" type="password" placeholder="사용하실 비밀번호를 입력해주세요."
               autocomplete="off">
             <input id="email-password-check" type="password" placeholder="사용하실 비밀번호를 다시 한 번 입력해주세요." autocomplete="off">
-            <!-- <input id="name" name="name" type="text" placeholder="이름을 입력해주세요." autocomplete="off" autofocus> -->
+            <input id="name" name="name" type="text" placeholder="이름을 입력해주세요." autocomplete="off" autofocus>
             <div id="signUp-check">
               <input type="checkbox">
               <span id="policy-modal__open">이용약관</span>과<span id="privacy-modal__open">개인정보취급방침</span>에 동의합니다.
