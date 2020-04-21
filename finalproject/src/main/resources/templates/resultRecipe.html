@@ -86,8 +86,11 @@
         <div id="result-recipe-info">
           <!-- resultRecipe.js에서 데이터 들어옴 -->
         </div>
-        3236: <input type="checkbox" onclick="bookmarkSwitch(3236)" name="id" value="3236">
-        39415: <input type="checkbox" onclick="bookmarkSwitch(39415)" name="id" value="39415">
+        3236: <input type="checkbox" onclick="insertBookmark(3236)" name="id" value="3236">
+        39415: <input type="checkbox" onclick="insertBookmark(39415)" name="id" value="39415">
+        <div id = "list">
+        </div>
+        <button id="bookmarkButton" onclick="loadBookmark()"> 버튼 </button>
       </div>
     </div>
     <!--end--메인컨텐츠-->

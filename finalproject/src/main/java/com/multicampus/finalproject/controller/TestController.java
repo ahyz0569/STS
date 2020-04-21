@@ -2,8 +2,10 @@ package com.multicampus.finalproject.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map.Entry;
 
 import com.multicampus.finalproject.model.BookmarkVO;
 import com.multicampus.finalproject.model.JsonVO;
@@ -106,8 +108,8 @@ public class TestController{
         model.addAttribute("recipe", recomandList);
         return "resultRecipe";
     }
-    @RequestMapping(value="/testFetch", method=RequestMethod.POST)
-    @ResponseBody public BookmarkVO requestMethodName(@RequestBody BookmarkVO resBody, @AuthenticationPrincipal SecurityUserInfo securityUserInfo) {
+    @RequestMapping(value="/insertBookmark", method=RequestMethod.POST)
+    @ResponseBody public BookmarkVO insertBookmark(@RequestBody BookmarkVO resBody, @AuthenticationPrincipal SecurityUserInfo securityUserInfo) {
         //세션에 저장 되어 있는 id를 가져옴
         String userID = securityUserInfo.getUsername();
         //브라우저에서 json으로 넘어온 레시피 id를 int로 변환
@@ -115,16 +117,29 @@ public class TestController{
         //체크 되었는지 안되었는지 확인 할 수 있는 변수
         //db로 보낼 VO객체 생성
         BookmarkVO bookmarkVO = new BookmarkVO(userID, recipeID);
-
+        
         if(bookmarkService.selectBookmark(bookmarkVO) != null){
             bookmarkService.deleteBookmark(bookmarkVO);
         }
         else{
             bookmarkService.insertBookmark(bookmarkVO);
         }
-
         System.out.println("userID: " + bookmarkVO.getUserID() + "recipeID: " + bookmarkVO.getRecipeID());
+        System.out.println(bookmarkService.loadBookmark(userID));
+        bookmarkVO.setRecipeIDList(bookmarkService.loadBookmark(userID));
+        return bookmarkVO;
+    }
+    @RequestMapping(value="/loadBookmark", method=RequestMethod.GET)
+    @ResponseBody public BookmarkVO loadBookmark(@AuthenticationPrincipal SecurityUserInfo securityUserInfo) {
+        String userID = securityUserInfo.getUsername();
+
+        BookmarkVO bookmarkVO = new BookmarkVO();
+
+        if(bookmarkService.loadBookmark(userID) != null){
+            bookmarkVO.setRecipeIDList(bookmarkService.loadBookmark(userID));
+        }
         
         return bookmarkVO;
     }
+    
 }
