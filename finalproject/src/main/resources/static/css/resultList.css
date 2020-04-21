@@ -82,11 +82,6 @@
 .about__menu {
   display: flex;
   flex-direction: column;
-<<<<<<< HEAD
-  justify-content: space-between;
-  flex-wrap: wrap;
-=======
->>>>>>> 6204729855d7c8c62ea27e2504185948be300eb3
 }
 
 .about__menu>h1 {

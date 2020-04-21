@@ -41,7 +41,6 @@ for (i in recipeList) {
   bmImg.addEventListener("click", addBookmark);
   recipeImgContainer.appendChild(bmImgCover);
 
-  menuList.appendChild(recipeID);
   menuList.appendChild(aboutMenu);
   aboutMenu.appendChild(recipeTitle);
   aboutMenu.appendChild(recipeMain);
