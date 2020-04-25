@@ -59,6 +59,11 @@ public class TestController {
         return "camera";
     }
 
+    @RequestMapping("/bookmark")
+    public String bookmark() {
+        return "bookmark";
+    }
+
     @RequestMapping("/upload_img")
     public String upload_img(Model model, @RequestParam("file") MultipartFile img) {
         byte[] imgtext;
