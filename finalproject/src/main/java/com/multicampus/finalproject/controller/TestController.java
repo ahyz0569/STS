@@ -97,10 +97,12 @@ public class TestController{
         return "resultCheck";
     }
     @RequestMapping(value="/recomand", method=RequestMethod.GET)
-    public String recomand(Model model ,@RequestParam("label") ArrayList<String> name) throws Exception {
+    public String recomand(Model model ,@RequestParam("label") ArrayList<String> name, @AuthenticationPrincipal SecurityUserInfo securityUserInfo) throws Exception {
         // for(String label : name){
         //     System.out.println(label);
         // }
+        
+        
         System.out.println("추천 전: " + name);
         ResponseEntity<LabelJsonVO> recomandResult = restTemplateService.getRecomandData(name);
         ArrayList<Integer> recomandList = recomandResult.getBody().getRecomandResult();
@@ -111,6 +113,12 @@ public class TestController{
         
 
         List<RecommandListVO> recipeList = userInfoService.readRecipeList(recomandList);
+        for(int i = 0; i < recipeList.size(); i++){
+            System.out.print(bookmarkService.isBookmark(securityUserInfo.getUsername(), recipeList.get(i).getId()));
+            recipeList.get(i).setBookmarkIsCheck(
+                bookmarkService.isBookmark(securityUserInfo.getUsername(), recipeList.get(i).getId())
+            );
+        }
         
         // for(int i=0;i<recipeList.size();i++){
         //     System.out.println(recipeList.get(i).getImg());

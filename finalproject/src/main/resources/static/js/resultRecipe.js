@@ -68,7 +68,6 @@ function loadBookmark(){
                 .then(json => printJsonList(json.recommandList));
             }
         });
-    
 }
 //json에 포함되어 있는 list를 li태그를 사용해서 출력하기 위한 함수
 function printJsonList(list){
@@ -86,8 +85,6 @@ function printJsonList(list){
         // newDiv.innerHTML = "<li>" + list[key]["title"] + "</li>";
     }
     div.appendChild(newDiv);
-    
-    
 }
 //hyeon
 

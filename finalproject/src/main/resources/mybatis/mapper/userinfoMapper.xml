@@ -48,9 +48,11 @@
             #{item}
         </foreach>
     </select>
-
     <select id="readRecipe" parameterType="Integer" resultType="com.multicampus.finalproject.model.RecommandListVO">
         SELECT * FROM recipe WHERE id = #{recipeId}
+    </select>
+    <select id="isBookmark" resultType="Integer">
+        SELECT EXISTS (SELECT * from bookmark WHERE userid = #{userID} AND recipeid=#{recipeID})
     </select>
 
 </mapper>

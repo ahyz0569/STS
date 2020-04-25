@@ -28,13 +28,7 @@ public class BookmarkService {
     public ArrayList<Integer> loadBookmark(String userID){
         return userMapper.loadBookmark(userID);
     }
-    // public int[] loadBookmark(String userID){
-    //     return userMapper.loadBookmark(userID);
-    // }
-    // public ArrayList<Float> loadBookmark(String userID){
-    //     return userMapper.loadBookmark(userID);
-    // }
-    // public HashMap<String, Integer> loadBookmark(String userID){
-    //     return userMapper.loadBookmark(userID);
-    // }
+    public int isBookmark(String userID , int recipeID){
+        return userMapper.isBookmark(userID, recipeID);
+    }
 }

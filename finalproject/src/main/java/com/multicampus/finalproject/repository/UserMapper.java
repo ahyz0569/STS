@@ -45,4 +45,6 @@ public interface UserMapper {
     public List<RecommandListVO> readRecipeList(ArrayList<Integer> idList);
 
     public RecommandListVO readRecipe(int recipeId);
+
+    public int isBookmark(String userID , int recipeID);
 }
