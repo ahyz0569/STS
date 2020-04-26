@@ -3,6 +3,14 @@ const recipeSearch = document.getElementById('recipe__search');
 
 recipeSearch.src = `/search/${recipeSearch.value}/1`;
 
+function search_fun(){
+    location.href=`/search/${recipeSearch.value}/1`
+}
+function enterkey(){
+    if(window.event.keyCode==13){
+        search_fun()
+    }
+}
 
 // let i = "";
 // let frag = document.createDocumentFragment();
