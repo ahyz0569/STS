@@ -1,3 +1,6 @@
+resultCheckFunction();
+function resultCheckFunction(){
+  
 let resultForm = document.getElementById("result__form");
 let resultInfo = document.getElementById("result__info");
 const plusText = document.getElementById("plus__text");
@@ -71,6 +74,7 @@ function addIng() {
   eles.setAttribute("value", currentValue);
   ingredientsTypes.appendChild(eles);
 
+
   let deleteBtn = document.createElement("button");
   deleteBtn.setAttribute("type", "button");
   deleteBtn.innerHTML = "X"
@@ -88,7 +92,6 @@ function addIng() {
   let input = document.getElementById("plus__text").focus();
 }
 
-
 function openAddModal() {
   let addModal = document.getElementById("add-modal-cover");
   addModal.classList.remove("hidden");
@@ -101,4 +104,5 @@ function closeAddModal() {
   addModal.classList.add("hidden");
   plusBtn.style.display = "block";
 
+}
 }

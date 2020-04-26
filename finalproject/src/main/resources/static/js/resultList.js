@@ -1,7 +1,7 @@
+resultListFunction();
+function resultListFunction(){
+  
 const menuLists = document.getElementById("menu__lists");
-
-let i = "";
-let frag = document.createDocumentFragment();
 
 for (i in recipeList) {
   // console.log(i);
@@ -14,10 +14,10 @@ for (i in recipeList) {
   recipeTitle.innerHTML = recipeList[i].title;
   let recipeMain = document.createElement("span");
   recipeMain.id = "recipe-main-ingredients";
-  recipeMain.innerHTML = `<span style="font-weight:bold";>ㅇ주재료:</span> ${recipeList[i].main}`;
+  recipeMain.innerHTML = `<span style="font-weight:bold";>ㅇ주재료:<br></span> ${recipeList[i].main.replace("[", "").replace("]", "")}`;
   let recipeMinor = document.createElement("span");
   recipeMinor.id = "recipe-minor-ingredients";
-  recipeMinor.innerHTML = `<span style="font-weight:bold";>ㅇ부재료:</span> ${recipeList[i].minor}`;
+  recipeMinor.innerHTML = `<span style="font-weight:bold";>ㅇ부재료:<br></span> ${recipeList[i].minor.replace("[", "").replace("]", "")}`;
 
 
   let recipeImgContainer = document.createElement("div")
@@ -52,6 +52,8 @@ for (i in recipeList) {
   aboutMenu.appendChild(recipeMain);
   aboutMenu.appendChild(recipeMinor);
   menuList.appendChild(recipeImgContainer);
+
+  let frag = document.createDocumentFragment();
 
   frag.appendChild(menuList);
   menuLists.appendChild(frag);
@@ -93,4 +95,5 @@ function addBookmark(event) {
   } else if (addBm.getAttribute("src") == "images/bm-logo-checked.png") {
     addBm.setAttribute("src", "images/bm-logo.png");
   }
+}
 }
