@@ -33,4 +33,8 @@ public interface UserMapper {
     public List<RecommandListVO> readRecipeList(ArrayList<Integer> idList);
 
     public RecommandListVO readRecipe(int recipeId);
+
+    public int getSearchPageNum(String keyword);
+
+    public List<RecommandListVO> searchRecipeList(int page, String keyword);
 }

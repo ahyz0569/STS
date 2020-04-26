@@ -46,10 +46,7 @@ public class TestController{
     public String home(){
         return "main";
     }
-    @RequestMapping("/search")
-    public String search(){
-        return "search";
-    }
+    
     @RequestMapping("/guide")
     public String guide(){
         return "guide";
@@ -148,5 +145,31 @@ public class TestController{
         System.out.println(recipe.getDescription());
         model.addAttribute("recipe",recipe);
         return "resultRecipe";
+    }
+
+
+    @RequestMapping(value="/search")
+    public String search(){
+        return "search";
+    }
+    
+    @RequestMapping(value="/search/{keyword}/{page}")
+    public String searchResult(Model model
+        ,@PathVariable(required=false, value="keyword") String keyword
+        ,@PathVariable(required=false, value="page")int page
+        ){
+        page = (page-1 )*10;
+        int pageNum = userInfoService.getSearchPageNum(keyword);
+
+        if(pageNum %10 !=0){
+            pageNum = pageNum/10 +1;
+        }
+
+        List<RecommandListVO> searchResult = userInfoService.searchRecipeList(page, keyword);
+
+        
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("recipeList", searchResult);
+        return "resultList";
     }
 }
