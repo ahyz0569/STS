@@ -1,7 +1,7 @@
 body {
   font-family: "omniGothic";
   transition: background-color .5s;
-  height: 150vh;
+  /* height: 150vh; */
 }
 
 #main__footer {

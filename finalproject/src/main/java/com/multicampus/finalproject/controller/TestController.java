@@ -2,7 +2,10 @@ package com.multicampus.finalproject.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 import com.multicampus.finalproject.model.BookmarkVO;
 import com.multicampus.finalproject.model.JsonVO;
@@ -42,11 +45,6 @@ public class TestController {
     @RequestMapping("/")
     public String home() {
         return "main";
-    }
-
-    @RequestMapping("/search")
-    public String search() {
-        return "search";
     }
 
     @RequestMapping("/guide")
@@ -94,10 +92,12 @@ public class TestController {
     }
 
     @RequestMapping(value = "/recomand", method = RequestMethod.GET)
-    public String recomand(Model model, @RequestParam("label") ArrayList<String> name) throws Exception {
+    public String recomand(Model model, @RequestParam("label") ArrayList<String> name,
+            @AuthenticationPrincipal SecurityUserInfo securityUserInfo) throws Exception {
         // for(String label : name){
         // System.out.println(label);
         // }
+
         System.out.println("추천 전: " + name);
         ResponseEntity<LabelJsonVO> recomandResult = restTemplateService.getRecomandData(name);
         ArrayList<Integer> recomandList = recomandResult.getBody().getRecomandResult();
@@ -107,6 +107,12 @@ public class TestController {
         // }
 
         List<RecommandListVO> recipeList = userInfoService.readRecipeList(recomandList);
+        System.out.println("사이즈는 : " + recipeList.size());
+        for (int i = 0; i < recipeList.size(); i++) {
+            System.out.print(bookmarkService.isBookmark(securityUserInfo.getUsername(), recipeList.get(i).getId()));
+            recipeList.get(i).setBookmarkIsCheck(
+                    bookmarkService.isBookmark(securityUserInfo.getUsername(), recipeList.get(i).getId()));
+        }
 
         // for(int i=0;i<recipeList.size();i++){
         // System.out.println(recipeList.get(i).getImg());
@@ -116,9 +122,9 @@ public class TestController {
         return "resultList";
     }
 
-    @RequestMapping(value = "/testFetch", method = RequestMethod.POST)
+    @RequestMapping(value = "/insertBookmark", method = RequestMethod.POST)
     @ResponseBody
-    public BookmarkVO requestMethodName(@RequestBody BookmarkVO resBody,
+    public BookmarkVO insertBookmark(@RequestBody BookmarkVO resBody,
             @AuthenticationPrincipal SecurityUserInfo securityUserInfo) {
         // 세션에 저장 되어 있는 id를 가져옴
         String userID = securityUserInfo.getUsername();
@@ -133,8 +139,28 @@ public class TestController {
         } else {
             bookmarkService.insertBookmark(bookmarkVO);
         }
-
         System.out.println("userID: " + bookmarkVO.getUserID() + "recipeID: " + bookmarkVO.getRecipeID());
+        System.out.println(bookmarkService.loadBookmark(userID));
+        bookmarkVO.setRecipeIDList(bookmarkService.loadBookmark(userID));
+        return bookmarkVO;
+    }
+
+    @RequestMapping(value = "/loadBookmark", method = RequestMethod.GET)
+    @ResponseBody
+    public BookmarkVO loadBookmark(@AuthenticationPrincipal SecurityUserInfo securityUserInfo) {
+        String userID = securityUserInfo.getUsername();
+
+        BookmarkVO bookmarkVO = new BookmarkVO();
+        ArrayList<Integer> bookmarkRecipeIDLists = bookmarkService.loadBookmark(userID);
+
+        if (bookmarkService.loadBookmark(userID) != null) {
+            bookmarkVO.setRecipeIDList(bookmarkService.loadBookmark(userID));
+
+            List<RecommandListVO> recommandList = userInfoService.readRecipeList(bookmarkRecipeIDLists);
+            // System.out.println("re" + recommandList);
+            // System.out.println(bookmarkRecipeIDLists);
+            bookmarkVO.setRecommandList(recommandList);
+        }
 
         return bookmarkVO;
     }
@@ -150,4 +176,32 @@ public class TestController {
         return "resultRecipe";
     }
 
+    @RequestMapping(value = "/search")
+    public String search() {
+        return "search";
+    }
+
+    @RequestMapping(value = "/search/{keyword}/{page}")
+    public String searchResult(Model model, @AuthenticationPrincipal SecurityUserInfo securityUserInfo,
+            @PathVariable(required = false, value = "keyword") String keyword,
+            @PathVariable(required = false, value = "page") int page) {
+        page = (page - 1) * 10;
+        int pageNum = userInfoService.getSearchPageNum(keyword);
+
+        if (pageNum % 10 != 0) {
+            pageNum = pageNum / 10 + 1;
+        }
+
+        List<RecommandListVO> searchResult = userInfoService.searchRecipeList(page, keyword);
+
+        for (int i = 0; i < searchResult.size(); i++) {
+            System.out.print(bookmarkService.isBookmark(securityUserInfo.getUsername(), searchResult.get(i).getId()));
+            searchResult.get(i).setBookmarkIsCheck(
+                    bookmarkService.isBookmark(securityUserInfo.getUsername(), searchResult.get(i).getId()));
+        }
+
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("recipeList", searchResult);
+        return "searchResult";
+    }
 }

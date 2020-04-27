@@ -45,6 +45,10 @@ body {
 }
 
 @media (max-width: 1260px) {
+  .bookmark-content-lists {
+    height: 80%;
+  }
+
   .nav__nav-column>.nav__icon>a>span {
     display: none;
   }
