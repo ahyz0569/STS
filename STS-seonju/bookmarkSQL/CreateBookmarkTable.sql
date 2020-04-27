@@ -1,4 +1,4 @@
-CREATE TABLE `bookmark`(
+TABLE `bookmark`(
 	`bookmarkid` int(10) PRIMARY KEY AUTO_INCREMENT,
 	`userid` VARCHAR(1000),
 	`recipeid` int(20)
