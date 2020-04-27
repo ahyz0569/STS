@@ -97,7 +97,6 @@ public class TestController {
         // for(String label : name){
         // System.out.println(label);
         // }
-
         System.out.println("추천 전: " + name);
         ResponseEntity<LabelJsonVO> recomandResult = restTemplateService.getRecomandData(name);
         ArrayList<Integer> recomandList = recomandResult.getBody().getRecomandResult();
@@ -105,21 +104,22 @@ public class TestController {
         // for(int i=0;i<recomandList.size();i++){
         // System.out.println(recomandList.get(i));
         // }
-
         List<RecommandListVO> recipeList = userInfoService.readRecipeList(recomandList);
-        System.out.println("사이즈는 : " + recipeList.size());
-        for (int i = 0; i < recipeList.size(); i++) {
-            System.out.print(bookmarkService.isBookmark(securityUserInfo.getUsername(), recipeList.get(i).getId()));
-            recipeList.get(i).setBookmarkIsCheck(
-                    bookmarkService.isBookmark(securityUserInfo.getUsername(), recipeList.get(i).getId()));
+        try {
+            for (int i = 0; i < recipeList.size(); i++) {
+                System.out.print(bookmarkService.isBookmark(securityUserInfo.getUsername(), recipeList.get(i).getId()));
+                recipeList.get(i).setBookmarkIsCheck(
+                        bookmarkService.isBookmark(securityUserInfo.getUsername(), recipeList.get(i).getId()));
+            }
+
+            model.addAttribute("recipeList", recipeList);
+
+            return "resultList";
+        } catch (NullPointerException e) {
+            model.addAttribute("recipeList", recipeList);
+
+            return "resultList";
         }
-
-        // for(int i=0;i<recipeList.size();i++){
-        // System.out.println(recipeList.get(i).getImg());
-        // }
-        model.addAttribute("recipeList", recipeList);
-
-        return "resultList";
     }
 
     @RequestMapping(value = "/insertBookmark", method = RequestMethod.POST)
@@ -133,7 +133,7 @@ public class TestController {
         // 체크 되었는지 안되었는지 확인 할 수 있는 변수
         // db로 보낼 VO객체 생성
         BookmarkVO bookmarkVO = new BookmarkVO(userID, recipeID);
-
+        System.out.println(bookmarkVO.getRecipeID());
         if (bookmarkService.selectBookmark(bookmarkVO) != null) {
             bookmarkService.deleteBookmark(bookmarkVO);
         } else {
@@ -193,15 +193,25 @@ public class TestController {
         }
 
         List<RecommandListVO> searchResult = userInfoService.searchRecipeList(page, keyword);
+        try {
+            for (int i = 0; i < searchResult.size(); i++) {
+                System.out
+                        .print(bookmarkService.isBookmark(securityUserInfo.getUsername(), searchResult.get(i).getId()));
+                searchResult.get(i).setBookmarkIsCheck(
+                        bookmarkService.isBookmark(securityUserInfo.getUsername(), searchResult.get(i).getId()));
+            }
 
-        for (int i = 0; i < searchResult.size(); i++) {
-            System.out.print(bookmarkService.isBookmark(securityUserInfo.getUsername(), searchResult.get(i).getId()));
-            searchResult.get(i).setBookmarkIsCheck(
-                    bookmarkService.isBookmark(securityUserInfo.getUsername(), searchResult.get(i).getId()));
+            model.addAttribute("pageNum", pageNum);
+            model.addAttribute("recipeList", searchResult);
+            System.out.println(searchResult);
+
+            return "searchResult";
+        } catch (NullPointerException e) {
+
+            model.addAttribute("pageNum", pageNum);
+            model.addAttribute("recipeList", searchResult);
+            return "searchResult";
         }
 
-        model.addAttribute("pageNum", pageNum);
-        model.addAttribute("recipeList", searchResult);
-        return "searchResult";
     }
 }
