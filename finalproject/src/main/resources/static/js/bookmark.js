@@ -7,7 +7,6 @@ const mainContents = document.getElementById("main__contents");
 let i = "";
 let frag = document.createDocumentFragment();
 
-
 // 레시피 리스트 우측 사진 별표 모양 북마크 기능
 function addBookmark(event) {
   bookmarkDeleteModal();
@@ -20,10 +19,7 @@ function addBookmark(event) {
   }
 }
 
-
-
-
-// 북마크 클릭 시 북마크한 레시피가 저장되어 있는 모달창을 띄움 
+// 북마크 클릭 시 북마크한 레시피가 저장되어 있는 모달창을 띄움
 const bookmarkOpenModal = () => {
   // 왼쪽 네비바에서 북마크 클릭 시 네비바 닫고 북마크 모달 열기
   closeNav();
@@ -33,7 +29,7 @@ const bookmarkOpenModal = () => {
 
   let bookmarkCloseModalOverlay = document.createElement("div");
   bookmarkCloseModalOverlay.className = "modal__overlay";
-  bookmarkCloseModalOverlay.setAttribute("onclick", "bookmarkCloseModal()")
+  bookmarkCloseModalOverlay.setAttribute("onclick", "bookmarkCloseModal()");
 
   let bmc = document.createElement("ul");
   bmc.className = "bookmark-modal-content";
@@ -41,13 +37,13 @@ const bookmarkOpenModal = () => {
   let bookmarkCloseModal = document.createElement("button");
   bookmarkCloseModal.innerHTML = "X";
   bookmarkCloseModal.id = "bookmark-modal__close";
-  bookmarkCloseModal.setAttribute("onclick", "bookmarkCloseModal()")
+  bookmarkCloseModal.setAttribute("onclick", "bookmarkCloseModal()");
 
   bmc.appendChild(bookmarkCloseModal);
   bookmarkContents.appendChild(bookmarkCloseModalOverlay);
   bookmarkContents.appendChild(bmc);
 
-  frag.appendChild(bookmarkContents)
+  frag.appendChild(bookmarkContents);
   mainContents.appendChild(frag);
 
   ///////////////////////////////이부분은 안건들어도 댐!!!!!!
@@ -57,20 +53,19 @@ const bookmarkOpenModal = () => {
 
   const odj = {
     //권한 설정이 되어 있을때만 fetch실행
-    credentials: 'same-origin'
+    credentials: "same-origin",
   };
-  fetch("http://localhost:8080/loadBookmark", odj)
-    .then(res => {
-      //정상 응답이 왔을 때 로직 실행
-      if (res.status == 200) {
-        res
-          .json()
-          // .then(json => newDiv.innerHTML = json.recommandList)
-          // .then(json => printJsonList(json.recommandList));
-          .then(json => printJsonList(json.recommandList));
-      }
-    });
-}
+  fetch("http://localhost:8080/loadBookmark", odj).then((res) => {
+    //정상 응답이 왔을 때 로직 실행
+    if (res.status == 200) {
+      res
+        .json()
+        // .then(json => newDiv.innerHTML = json.recommandList)
+        // .then(json => printJsonList(json.recommandList));
+        .then((json) => printJsonList(json.recommandList));
+    }
+  });
+};
 
 ///////////////////////////////이부분은 안건들어도 댐!!!!!!
 ///////////////////////////////이부분은 안건들어도 댐!!!!!!
@@ -78,7 +73,6 @@ const bookmarkOpenModal = () => {
 ///////////////////////////////이부분은 안건들어도 댐!!!!!!
 ///////////////////////////////이부분은 안건들어도 댐!!!!!!
 ///////////////////////////////이부분은 안건들어도 댐!!!!!!
-
 
 //printJsonList함수는 매개변수 즉 printJsonList(recipeList) <- 괄호 안에 들어가는 recipeList를 가져오는 함수이고
 //매개변수 recipeList는 경석이가 말하던 타입리프 써서 가저온 변수랑 똑같은데 우리는 fetch를 사용해서 html에서 값을 가져오는게 아니라 js에서 가져오는 거라 #{} <-요거 안써도 댐
@@ -104,41 +98,45 @@ function printJsonList(recipeList) {
     let aboutMenu = document.createElement("div");
     aboutMenu.className = "about__menu";
 
-    //제목 
+    //제목
     let recipeTitle = document.createElement("h1");
     //타이틀 찍어보기
-    console.log(recipeList[i]["title"])
+    console.log(recipeList[i]["title"]);
     recipeTitle.innerHTML = recipeList[i]["title"];
 
     //주재료
     let recipeMain = document.createElement("span");
     recipeMain.id = "recipe-main-ingredients";
-    console.log(recipeList[i]["main"])
-    recipeMain.innerHTML = `<span style="font-weight:bold";>ㅇ주재료:<br></span>` + recipeList[i]["main"].replace("[", "").replace("]", "");
+    console.log(recipeList[i]["main"]);
+    recipeMain.innerHTML =
+      `<span style="font-weight:bold";>ㅇ주재료:<br></span>` +
+      recipeList[i]["main"].replace("[", "").replace("]", "");
 
     //부재료
     let recipeMinor = document.createElement("span");
     recipeMinor.id = "recipe-minor-ingredients";
-    console.log(recipeList[i]["minor"])
-    recipeMinor.innerHTML = `<span style="font-weight:bold";>ㅇ부재료:<br></span>` + recipeList[i]["minor"].replace("[", "").replace("]", "");
+    console.log(recipeList[i]["minor"]);
+    recipeMinor.innerHTML =
+      `<span style="font-weight:bold";>ㅇ부재료:<br></span>` +
+      recipeList[i]["minor"].replace("[", "").replace("]", "");
 
     //레시피 리스트 우측에 완성 이미지 틀, 내용
-    let recipeImgContainer = document.createElement("div")
-    recipeImgContainer.className = "recipe-img-container"
-    let recipeImgCover = document.createElement("div")
-    recipeImgCover.className = "recipe-img-cover"
+    let recipeImgContainer = document.createElement("div");
+    recipeImgContainer.className = "recipe-img-container";
+    let recipeImgCover = document.createElement("div");
+    recipeImgCover.className = "recipe-img-cover";
     let recipeImg = document.createElement("img");
     recipeImgContainer.appendChild(recipeImgCover);
-    recipeImgCover.appendChild(recipeImg)
+    recipeImgCover.appendChild(recipeImg);
     recipeImg.src = recipeList[i]["img_complete"];
     recipeImg.className = "menu__list-image";
 
     //북마크 별표 틀 만들기
     let bmImgCover = document.createElement("div");
-    bmImgCover.className = "bm-img-cover"
+    bmImgCover.className = "bm-img-cover";
     let bmImg = document.createElement("img");
     bmImgCover.appendChild(bmImg);
-    bmImg.className = "bookmark-image"
+    bmImg.className = "bookmark-image";
     bmImg.src = "images/bm-logo.png";
     bmImg.addEventListener("click", addBookmark);
     recipeImgContainer.appendChild(bmImgCover);
@@ -163,8 +161,7 @@ function printJsonList(recipeList) {
       location.href = this.href;
     });
   }
-};
-
+}
 
 //오버레이, X버튼 누르면 북마크 닫기
 const bookmarkCloseModal = () => {
@@ -173,7 +170,7 @@ const bookmarkCloseModal = () => {
 };
 
 function bookmarkDeleteModal(e) {
-  let aa = e.target
+  let aa = e.target;
   let pn = aa.parentNode.parentNode.parentNode;
   let allPn = aa.parentNode.parentNode.parentNode.parentNode;
   pn.remove();
