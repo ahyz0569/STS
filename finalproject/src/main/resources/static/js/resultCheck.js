@@ -1,3 +1,6 @@
+resultCheckFunction();
+function resultCheckFunction(){
+  
 let resultForm = document.getElementById("result__form");
 let resultInfo = document.getElementById("result__info");
 const plusText = document.getElementById("plus__text");
@@ -101,4 +104,5 @@ function closeAddModal() {
   addModal.classList.add("hidden");
   plusBtn.style.display = "block";
 
+}
 }

@@ -2,7 +2,10 @@ package com.multicampus.finalproject.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 import com.multicampus.finalproject.model.BookmarkVO;
 import com.multicampus.finalproject.model.JsonVO;
@@ -92,12 +95,13 @@ public class TestController {
 
         return "resultCheck";
     }
-
-    @RequestMapping(value = "/recomand", method = RequestMethod.GET)
-    public String recomand(Model model, @RequestParam("label") ArrayList<String> name) throws Exception {
+    @RequestMapping(value="/recomand", method=RequestMethod.GET)
+    public String recomand(Model model ,@RequestParam("label") ArrayList<String> name, @AuthenticationPrincipal SecurityUserInfo securityUserInfo) throws Exception {
         // for(String label : name){
         // System.out.println(label);
         // }
+        
+        
         System.out.println("추천 전: " + name);
         ResponseEntity<LabelJsonVO> recomandResult = restTemplateService.getRecomandData(name);
         ArrayList<Integer> recomandList = recomandResult.getBody().getRecomandResult();
@@ -107,7 +111,13 @@ public class TestController {
         // }
 
         List<RecommandListVO> recipeList = userInfoService.readRecipeList(recomandList);
-
+        for(int i = 0; i < recipeList.size(); i++){
+            System.out.print(bookmarkService.isBookmark(securityUserInfo.getUsername(), recipeList.get(i).getId()));
+            recipeList.get(i).setBookmarkIsCheck(
+                bookmarkService.isBookmark(securityUserInfo.getUsername(), recipeList.get(i).getId())
+            );
+        }
+        
         // for(int i=0;i<recipeList.size();i++){
         // System.out.println(recipeList.get(i).getImg());
         // }
@@ -115,27 +125,43 @@ public class TestController {
 
         return "resultList";
     }
-
-    @RequestMapping(value = "/testFetch", method = RequestMethod.POST)
-    @ResponseBody
-    public BookmarkVO requestMethodName(@RequestBody BookmarkVO resBody,
-            @AuthenticationPrincipal SecurityUserInfo securityUserInfo) {
-        // 세션에 저장 되어 있는 id를 가져옴
+    @RequestMapping(value="/insertBookmark", method=RequestMethod.POST)
+    @ResponseBody public BookmarkVO insertBookmark(@RequestBody BookmarkVO resBody, @AuthenticationPrincipal SecurityUserInfo securityUserInfo) {
+        //세션에 저장 되어 있는 id를 가져옴
         String userID = securityUserInfo.getUsername();
         // 브라우저에서 json으로 넘어온 레시피 id를 int로 변환
         int recipeID = resBody.getRecipeID();
         // 체크 되었는지 안되었는지 확인 할 수 있는 변수
         // db로 보낼 VO객체 생성
         BookmarkVO bookmarkVO = new BookmarkVO(userID, recipeID);
-
-        if (bookmarkService.selectBookmark(bookmarkVO) != null) {
+        
+        if(bookmarkService.selectBookmark(bookmarkVO) != null){
             bookmarkService.deleteBookmark(bookmarkVO);
         } else {
             bookmarkService.insertBookmark(bookmarkVO);
         }
-
         System.out.println("userID: " + bookmarkVO.getUserID() + "recipeID: " + bookmarkVO.getRecipeID());
+        System.out.println(bookmarkService.loadBookmark(userID));
+        bookmarkVO.setRecipeIDList(bookmarkService.loadBookmark(userID));
+        return bookmarkVO;
+    }
+    @RequestMapping(value="/loadBookmark", method=RequestMethod.GET)
+    @ResponseBody public BookmarkVO loadBookmark(@AuthenticationPrincipal SecurityUserInfo securityUserInfo) {
+        String userID = securityUserInfo.getUsername();
 
+        BookmarkVO bookmarkVO = new BookmarkVO();
+        ArrayList<Integer> bookmarkRecipeIDLists = bookmarkService.loadBookmark(userID);
+
+
+        if(bookmarkService.loadBookmark(userID) != null){
+            bookmarkVO.setRecipeIDList(bookmarkService.loadBookmark(userID));
+
+            List<RecommandListVO> recommandList = userInfoService.readRecipeList(bookmarkRecipeIDLists);
+            // System.out.println("re" + recommandList);
+            // System.out.println(bookmarkRecipeIDLists);
+            bookmarkVO.setRecommandList(recommandList);
+        }
+        
         return bookmarkVO;
     }
 
