@@ -3,7 +3,8 @@ from flask import Flask, jsonify, escape, request, render_template
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer, HashingVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 from detecto import core, utils, visualize
-from sqlalchemy import create_engine
+# from sqlalchemy import create_engine
+import pymysql
 import pandas as pd
 import xml.etree.ElementTree as elemTree
 import numpy as np
@@ -244,10 +245,13 @@ if __name__ == '__main__':
     labels = ['chilli', 'egg', 'pork meat', 'potato', 'pa', 'onion', 'carrot', 'cucumber']
     vectorize = HashingVectorizer()
 
-    engine = create_engine('mysql://root:root@localhost:3306/final?charset=utf8', convert_unicode=True,encoding='UTF-8')
-    # engine = create_engine('mysql://JKS:12345678@sts.c2yt44rkrmcp.us-east-2.rds.amazonaws.com:3306/finalproject?charset=utf8', convert_unicode=True,encoding='UTF-8')
-    conn = engine.connect()
-    data = pd.read_sql_table('recipe', conn)
+    # engine = create_engine('mysql://root:root@localhost:3306/final?charset=utf8', convert_unicode=True,encoding='UTF-8')
+    # conn = engine.connect()
+    # data = pd.read_sql_table('recipe', conn)
+    # df = pd.read_sql("select * from tbl01", conn)
+    mysql_conn = pymysql.connect(host='localhost', user='root', password='root', db='final', charset='utf8', port=3306, cursorclass=pymysql.cursors.DictCursor)
+    sql = "SELECT * FROM `recipe`"
+    data = pd.read_sql(sql, mysql_conn)
     data = data.fillna(0)
     data["id"] = data['id'].astype("float")
     data["size"] = data['size'].astype("float")
