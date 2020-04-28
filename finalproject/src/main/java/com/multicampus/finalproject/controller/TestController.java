@@ -105,8 +105,6 @@ public class TestController {
         // for(String label : name){
         // System.out.println(label);
         // }
-        
-        
         System.out.println("추천 전: " + name);
         ResponseEntity<LabelJsonVO> recomandResult = restTemplateService.getRecomandData(name);
         ArrayList<Integer> recomandList = recomandResult.getBody().getRecomandResult();
@@ -114,21 +112,23 @@ public class TestController {
         // for(int i=0;i<recomandList.size();i++){
         // System.out.println(recomandList.get(i));
         // }
-
         List<RecommandListVO> recipeList = userInfoService.readRecipeList(recomandList);
-        for(int i = 0; i < recipeList.size(); i++){
-            System.out.print(bookmarkService.isBookmark(securityUserInfo.getUsername(), recipeList.get(i).getId()));
-            recipeList.get(i).setBookmarkIsCheck(
-                bookmarkService.isBookmark(securityUserInfo.getUsername(), recipeList.get(i).getId())
-            );
-        }
-        
-        // for(int i=0;i<recipeList.size();i++){
-        // System.out.println(recipeList.get(i).getImg());
-        // }
-        model.addAttribute("recipeList", recipeList);
+        try {
+            for(int i = 0; i < recipeList.size(); i++){
+                System.out.print(bookmarkService.isBookmark(securityUserInfo.getUsername(), recipeList.get(i).getId()));
+                recipeList.get(i).setBookmarkIsCheck(
+                    bookmarkService.isBookmark(securityUserInfo.getUsername(), recipeList.get(i).getId())
+                );
+            }
+            
+            model.addAttribute("recipeList", recipeList);
 
-        return "resultList";
+            return "resultList";            
+        } catch (NullPointerException e) {
+            model.addAttribute("recipeList", recipeList);
+
+            return "resultList";
+        }
     }
     @RequestMapping(value="/insertBookmark", method=RequestMethod.POST)
     @ResponseBody public BookmarkVO insertBookmark(@RequestBody BookmarkVO resBody, @AuthenticationPrincipal SecurityUserInfo securityUserInfo) {
@@ -166,19 +166,17 @@ public class TestController {
             // System.out.println(bookmarkRecipeIDLists);
             bookmarkVO.setRecommandList(recommandList);
         }
-        
         return bookmarkVO;
     }
 
     @RequestMapping(value = "/recipe/{recipeId}")
     public String viewRecipe(Model model, @PathVariable("recipeId") int recipeId) {
         RecommandListVO recipe = userInfoService.readRecipe(recipeId);
-
+        
         System.out.println(recipe.getDescription());
         System.out.println(recipe.getImg_complete());
         System.out.println(recipe.getDescription());
         model.addAttribute("recipe", recipe);
         return "resultRecipe";
     }
-
 }
