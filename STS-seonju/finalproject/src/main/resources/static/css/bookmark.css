@@ -16,25 +16,24 @@
   z-index: 998;
 }
 
-#내용 {
-  max-height: 500px;
-  overflow-y: scroll;
-}
-
-.bookmark-modal-content {
+.bookmark-content-lists {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* align-items: center; */
-  width: 800px;
+  width: 830px;
   height: 700px;
   background-color: white;
   padding: 30px 30px;
-  text-align: center;
   position: relative;
   top: 0px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   border-radius: 20px;
+}
+
+.bookmark-modal-content {
+  /* height: auto; */
+  max-height: 580px;
+  overflow-y: scroll;
 }
 
 .hidden {

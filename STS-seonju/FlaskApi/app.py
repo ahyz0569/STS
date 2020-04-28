@@ -16,8 +16,8 @@ import torch
 import torchvision
 from torchvision import transforms
 import matplotlib
+from matplotlib import font_manager as fm
 import matplotlib.pyplot as plt
-import matplotlib.font_manager as fm
 import matplotlib.patches as patches
 
 app = Flask(__name__)
@@ -37,6 +37,8 @@ ingre = None
 #     name = request.args.get("name", "World")
 # #    return f'Hello, {escape(name)}!'
 #     return render_template('main.html')
+
+# When user can choose main ingredient - recommend recipe with main ingredient
 def recommend(ingre_input, main):
     srch_vector = vectorize.transform([ingre_input])
     cosine_similar = linear_kernel(srch_vector, X).flatten()
@@ -62,7 +64,9 @@ def recommend(ingre_input, main):
     vect = CountVectorizer(min_df=0, tokenizer=lambda x: x.split())
     vect.fit(ingre_for_cv)
     cv = vect.transform(ingre_for_cv).toarray()
-    print(vect.get_feature_names())
+    # print(vect.get_feature_names())
+
+    print(cv)
     for idx, val in enumerate(cv[0:-1]):
         df['calc'][idx] = (val * cv[-1]).sum() / val.sum()
         # print(idx, (val*cv[-1]).sum()/val.sum())
@@ -92,24 +96,24 @@ def show_labeled_image(image, boxes, labels=None, scores=None):
     if labels is not None and not utils._is_iterable(labels):
         labels = [labels]
 
-    # for i in range(len(labels)):
-    #     if labels[i] == "chilli":
-    #         labels[i] = "고추"
-    #     elif labels[i] == "egg":
-    #         labels[i] = "계란"
-    #     elif labels[i] == "pork meat":
-    #         labels[i] = "돼지고기"
-    #     elif labels[i] == "potato":
-    #         labels[i] = "감자"
-    #     elif labels[i] == "pa":
-    #         labels[i] = "파"
-    #     elif labels[i] == "onion":
-    #         labels[i] = "양파"
-    #     elif labels[i] == "carrot":
-    #         labels[i] = "당근"
-    #     elif labels[i] == "cucumber":
-    #         labels[i] = "오이"
-
+    for i in range(len(labels)):
+        if labels[i] == "chilli":
+            labels[i] = "고추"
+        elif labels[i] == "egg":
+            labels[i] = "계란"
+        elif labels[i] == "pork meat":
+            labels[i] = "돼지고기"
+        elif labels[i] == "potato":
+            labels[i] = "감자"
+        elif labels[i] == "pa":
+            labels[i] = "파"
+        elif labels[i] == "onion":
+            labels[i] = "양파"
+        elif labels[i] == "carrot":
+            labels[i] = "당근"
+        elif labels[i] == "cucumber":
+            labels[i] = "오이"
+    
     fm.get_fontconfig_fonts()
     font_location = 'C:/Windows/Fonts/malgun.ttf' # for Windows
     font_name = fm.FontProperties(fname=font_location).get_name()
@@ -145,7 +149,7 @@ def test():
 
     with open('static/images/detection_result.jpg', 'rb') as img:
         response_img = base64.b64encode(img.read())
-    # print(type(response_img.decode('utf-8')))
+    print(type(response_img.decode('utf-8')))
 
     for i in range(len(labels)):
         if labels[i] == "chilli":
@@ -175,32 +179,12 @@ def recomand():
     labelsXml = elemTree.fromstring(labels)
 
     items = []
-    # items_KOR = ""
     for item in labelsXml.findall("./item"):
         items.append(item.text)
         print('*' + item.text + '*')
 
-    # for i in range(len(items)):
-    #     if (items[i] == "chilli"):
-    #         items[i] = "고추"
-    #     elif (items[i] == "egg"):
-    #         items[i] = "계란"
-    #     elif (items[i] == "pork meat"):
-    #         items[i] = "돼지고기"
-    #     elif (items[i] == "potato"):
-    #         items[i] = "감자"
-    #     elif (items[i] == "pa"):
-    #         items[i] = "파"
-    #     elif (items[i] == "onion"):
-    #         items[i] = "양파"
-    #     elif (items[i] == "carrot"):
-    #         items[i] = "당근"
-    #     elif (items[i] == "cucumber"):
-    #         items[i] = "오이"
-
     items = " ".join(items)
-    # print("하하하하: " + items_KOR)
-    df=recommend(items,'돼지고기')
+    df = recommend(items, "돼지고기")
     
     responseData = []
     for i in range(100):
@@ -261,6 +245,7 @@ if __name__ == '__main__':
     vectorize = HashingVectorizer()
 
     engine = create_engine('mysql://root:root@localhost:3306/final?charset=utf8', convert_unicode=True,encoding='UTF-8')
+    # engine = create_engine('mysql://JKS:12345678@sts.c2yt44rkrmcp.us-east-2.rds.amazonaws.com:3306/finalproject?charset=utf8', convert_unicode=True,encoding='UTF-8')
     conn = engine.connect()
     data = pd.read_sql_table('recipe', conn)
     data = data.fillna(0)

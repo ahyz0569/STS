@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SEARCH PAGE</title>
+  <title>SEARCH RESULT PAGE</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
   <link rel="stylesheet" href="/css/styles.css">
 </head>
@@ -24,7 +24,7 @@
 
       <!--start--서치컨텐츠-->
       <div id="search__contents">
-        <input id="recipe__search" type="text" placeholder="요리를 검색해보세요!">
+        <input id="recipe__search" type="text" placeholder="요리를 검색해보세요!" onkeyup="enterkey()">
         <div id="recipe__category">
           <span>레시피</span>
         </div>
@@ -55,8 +55,13 @@
   </div>
   <!--end--페이지 전체 컨테이너-->
 
-  <script src="js/main.js"></script>
-  <script src="js/search.js"></script>
+  <script src="/js/main.js"></script>
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    var recipeList = /*[[${recipeList}]]*/ "recipe";
+    /*]]>*/
+  </script>
+  <script src="/js/searchResult.js"></script>
   <script src="/js/bookmark.js"></script>
 
 </body>
