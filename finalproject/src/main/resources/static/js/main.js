@@ -4,7 +4,6 @@ const mainHeader = document.getElementById("main__header");
 mainHeader.innerHTML = ` <div id="mySidenav" class="sidenav">
       <a class="nav-menu-6" href="/">HOME</a>
       <a class="nav-menu-1" href="/search">SEARCH</a>
-      <a class="nav-menu-2" href="/guide">GUIDE</a>
       <a class="closebtn" onclick="closeNav()">&times;</a>
       <a class="nav-menu-3" href="/camera">CAMERA</a>
       <a onclick="bookmarkOpenModal()" class="nav-menu-4">BOOKMARK</a>

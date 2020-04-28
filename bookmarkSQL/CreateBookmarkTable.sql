@@ -5,4 +5,3 @@ CREATE TABLE `bookmark`(
 )ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 SELECT * FROM bookmark;
-

@@ -1,27 +1,18 @@
 const mainContents = document.getElementById("main__contents");
-// const bookmarkModalContent = document.querySelector("bookmark-modal-content");
-// const bookmarkModalOpenButton = document.getElementById("bookmark");
-// const bookMarkOverlay = document.querySelector(".modal__overlay");
-// const bookmarkModalCloseBtn = document.getElementById("bookmark-modal__close");
-
-let i = "";
-
 
 // 레시피 리스트 우측 사진 별표 모양 북마크 기능
-// function addBookmark(event) {
-//   event.stopPropagation();
-//   const addBm = event.target;
-//   if (addBm.getAttribute("src") == "images/bm-logo.png") {
-//     addBm.setAttribute("src", "images/bm-logo-checked.png");
-//   } else if (addBm.getAttribute("src") == "images/bm-logo-checked.png") {
-//     addBm.setAttribute("src", "images/bm-logo.png");
-//   }
-// }
+function addBookmark(event) {
+  bookmarkDeleteModal();
+  event.stopPropagation();
+  const addBm = event.target;
+  if (addBm.getAttribute("src") == "images/bm-logo.png") {
+    addBm.setAttribute("src", "images/bm-logo-checked.png");
+  } else if (addBm.getAttribute("src") == "images/bm-logo-checked.png") {
+    addBm.setAttribute("src", "images/bm-logo.png");
+  }
+}
 
-
-
-
-// 북마크 클릭 시 북마크한 레시피가 저장되어 있는 모달창을 띄움 
+// 북마크 클릭 시 북마크한 레시피가 저장되어 있는 모달창을 띄움
 const bookmarkOpenModal = () => {
   // 왼쪽 네비바에서 북마크 클릭 시 네비바 닫고 북마크 모달 열기
   closeNav();
@@ -31,7 +22,12 @@ const bookmarkOpenModal = () => {
 
   let bookmarkCloseModalOverlay = document.createElement("div");
   bookmarkCloseModalOverlay.className = "modal__overlay";
-  bookmarkCloseModalOverlay.setAttribute("onclick", "bookmarkCloseModal()")
+  bookmarkCloseModalOverlay.setAttribute("onclick", "bookmarkCloseModal()");
+
+  let bookmarkContentLists = document.createElement("div");
+  bookmarkContentLists.className = "bookmark-content-lists"
+
+
 
   let bmc = document.createElement("ul");
   bmc.className = "bookmark-modal-content";
@@ -39,58 +35,32 @@ const bookmarkOpenModal = () => {
   let bookmarkCloseModal = document.createElement("button");
   bookmarkCloseModal.innerHTML = "X";
   bookmarkCloseModal.id = "bookmark-modal__close";
-  bookmarkCloseModal.setAttribute("onclick", "bookmarkCloseModal()")
+  bookmarkCloseModal.setAttribute("onclick", "bookmarkCloseModal()");
 
-  bmc.appendChild(bookmarkCloseModal);
   bookmarkContents.appendChild(bookmarkCloseModalOverlay);
-  bookmarkContents.appendChild(bmc);
-  
+  bookmarkContents.appendChild(bookmarkContentLists);
+  bookmarkContentLists.appendChild(bmc);
+  bmc.appendChild(bookmarkCloseModal);
+
   let frag = document.createDocumentFragment();
   frag.appendChild(bookmarkContents)
   mainContents.appendChild(frag);
 
-  ///////////////////////////////이부분은 안건들어도 댐!!!!!!
-  ///////////////////////////////이부분은 안건들어도 댐!!!!!!
-  ///////////////////////////////이부분은 안건들어도 댐!!!!!!
-  ///////////////////////////////이부분은 안건들어도 댐!!!!!!
+
 
   const odj = {
     //권한 설정이 되어 있을때만 fetch실행
-    credentials: 'same-origin'
+    credentials: "same-origin",
   };
-  fetch("http://localhost:8080/loadBookmark", odj)
-    .then(res => {
-      //정상 응답이 왔을 때 로직 실행
-      if (res.status == 200) {
-        res
-          .json()
-          // .then(json => newDiv.innerHTML = json.recommandList)
-          // .then(json => printJsonList(json.recommandList));
-          .then(json => printJsonList(json.recommandList));
-      }
-    });
+  fetch("http://localhost:8080/loadBookmark", odj).then((res) => {
+    //정상 응답이 왔을 때 로직 실행
+    if (res.status == 200) {
+      res
+        .json()
+        .then((json) => printJsonList(json.recommandList));
+    }
+  });
 }
-
-///////////////////////////////이부분은 안건들어도 댐!!!!!!
-///////////////////////////////이부분은 안건들어도 댐!!!!!!
-///////////////////////////////이부분은 안건들어도 댐!!!!!!
-///////////////////////////////이부분은 안건들어도 댐!!!!!!
-///////////////////////////////이부분은 안건들어도 댐!!!!!!
-///////////////////////////////이부분은 안건들어도 댐!!!!!!
-
-
-//printJsonList함수는 매개변수 즉 printJsonList(bookmarkList) <- 괄호 안에 들어가는 recipeList를 가져오는 함수이고
-//매개변수 recipeList는 경석이가 말하던 타입리프 써서 가저온 변수랑 똑같은데 우리는 fetch를 사용해서 html에서 값을 가져오는게 아니라 js에서 가져오는 거라 #{} <-요거 안써도 댐
-//타이틀은 recipeList[i].title이 아니라 recipeList[i]["title"]로 표현 된다.
-//메인이랑
-//마이너도 마찬가지 이고
-//console.log로 데이터 잘 들어오는거 까지 확인 했음
-//지금 printJsonList는 77라인에서 함수 사용을 한다.
-//이거 조금 만져 보다가 8시쯤에 나 집 빨리 갈테니까
-//조금만 기다려주셈 ㅠㅠ
-//이해 안가는거는 갠톡으로 적어주구
-//지금 늦어서 가봐야겠따
-//쏘리 ㅠㅠ
 
 function printJsonList(bookmarkList) {
   //json의 list를 출력하기 위한 for문
@@ -139,7 +109,7 @@ function printJsonList(bookmarkList) {
     bmImgCover.appendChild(bmImg);
     bmImg.className = "bookmark-image"
     bmImg.src = "/images/bm-logo-checked.png";
-    bmImg.value=bookmarkList[i]["id"];
+    bmImg.value = bookmarkList[i]["id"];
     bmImg.addEventListener("click", addBookmark_);
     recipeImgContainer.appendChild(bmImgCover);
 
@@ -164,70 +134,45 @@ function printJsonList(bookmarkList) {
     menuList.addEventListener("click", function event() {
       location.href = this.href;
     });
-  }
-};
-
+  };
+}
 
 function addBookmark_(event) {
   event.stopPropagation();
 
-
-  console.log("recipeID", this.value);
-    const odj = {
-        method: 'POST',
-        body: JSON.stringify({userID: 0, recipeID: this.value}),
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        },
-        credentials: 'same-origin'
-    };
-    //fetch를 사용할때 url과 odj로 GET ,POST 메서드를 설정해 준다.
-    fetch("http://localhost:8080/insertBookmark", odj)
+  const odj = {
+    method: 'POST',
+    body: JSON.stringify({
+      userID: 0,
+      recipeID: this.value
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    },
+    credentials: 'same-origin'
+  };
+  //fetch를 사용할때 url과 odj로 GET ,POST 메서드를 설정해 준다.
+  fetch("http://localhost:8080/insertBookmark", odj)
     //reponse를 가져와서
-        .then(res => {
-        //status가 200이라면
-        if (res.status == 200) {
-            //servlet에서 return된 json값을 가져 온다.
-            res
-                .json()
-                .then(json => console.log(json.recipeIDList));
-                // .then(loadBookmark(event));
-        }
+    .then(res => {
+      //status가 200이라면
+      if (res.status == 200) {
+        //servlet에서 return된 json값을 가져 온다.
+        res
+          .json()
+          .then(json => console.log(json.recipeIDList));
+        // .then(loadBookmark(event));
+      }
     })
-    bookmarkDeleteModal(event);
+  bookmarkDeleteModal(event);
 }
-function loadBookmark(e){
-  
-    const odj2 = {
-      //권한 설정이 되어 있을때만 fetch실행
-      credentials: 'same-origin'
-    };
-    fetch("http://localhost:8080/loadBookmark", odj2)
-      .then(res => {
-        //정상 응답이 왔을 때 로직 실행
-        if (res.status == 200) {
-          res
-            .json()
-            // .then(json => newDiv.innerHTML = json.recommandList)
-            .then(json => printJsonList(json.recommandList));
-            // .then(json => printJsonList(json.recommandList));
-        }
-      });
-}
-
 
 //오버레이, X버튼 누르면 북마크 닫기
 const bookmarkCloseModal = () => {
   let bookmarkContents = document.querySelector(".bookmark__modal");
   mainContents.removeChild(bookmarkContents);
 };
-// const bookmarkDeleteModal = () => {
-//   let bmc = document.querySelector(".bookmark-modal-content");
-//   let menuList = document.querySelectorAll(".menu__list_");
-//   for(let i = 0; i < menuList.length; i++){
-//     bmc.removeChild(menuList[i]);
-//   }
-// }
+
 function bookmarkDeleteModal(e) {
   let aa = e.target
   let pn = aa.parentNode.parentNode.parentNode;

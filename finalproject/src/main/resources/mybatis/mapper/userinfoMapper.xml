@@ -55,4 +55,11 @@
         SELECT EXISTS (SELECT * from bookmark WHERE userid = #{userID} AND recipeid=#{recipeID})
     </select>
 
+    <select id="searchRecipeList" resultType="com.multicampus.finalproject.model.RecommandListVO">
+        SELECT * FROM recipe WHERE title LIKE "%"#{keyword}"%" or "%"#{keyword} or #{keyword}"%" LIMIT #{page},10
+    </select>
+
+    <select id="getSearchPageNum" resultType="Integer">
+        SELECT COUNT(*) FROM recipe WHERE title LIKE "%"#{keyword}"%" or "%"#{keyword} or #{keyword}"%"
+    </select>
 </mapper>

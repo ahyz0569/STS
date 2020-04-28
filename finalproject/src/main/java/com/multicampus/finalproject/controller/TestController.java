@@ -47,11 +47,6 @@ public class TestController {
         return "main";
     }
 
-    @RequestMapping("/search")
-    public String search() {
-        return "search";
-    }
-
     @RequestMapping("/guide")
     public String guide() {
         return "guide";
@@ -60,11 +55,6 @@ public class TestController {
     @RequestMapping("/camera")
     public String camera() {
         return "camera";
-    }
-
-    @RequestMapping("/bookmark")
-    public String bookmark() {
-        return "bookmark";
     }
 
     @RequestMapping("/upload_img")
@@ -100,8 +90,10 @@ public class TestController {
 
         return "resultCheck";
     }
-    @RequestMapping(value="/recomand", method=RequestMethod.GET)
-    public String recomand(Model model ,@RequestParam("label") ArrayList<String> name, @AuthenticationPrincipal SecurityUserInfo securityUserInfo) throws Exception {
+
+    @RequestMapping(value = "/recomand", method = RequestMethod.GET)
+    public String recomand(Model model, @RequestParam("label") ArrayList<String> name,
+            @AuthenticationPrincipal SecurityUserInfo securityUserInfo) throws Exception {
         // for(String label : name){
         // System.out.println(label);
         // }
@@ -114,33 +106,35 @@ public class TestController {
         // }
         List<RecommandListVO> recipeList = userInfoService.readRecipeList(recomandList);
         try {
-            for(int i = 0; i < recipeList.size(); i++){
+            for (int i = 0; i < recipeList.size(); i++) {
                 System.out.print(bookmarkService.isBookmark(securityUserInfo.getUsername(), recipeList.get(i).getId()));
                 recipeList.get(i).setBookmarkIsCheck(
-                    bookmarkService.isBookmark(securityUserInfo.getUsername(), recipeList.get(i).getId())
-                );
+                        bookmarkService.isBookmark(securityUserInfo.getUsername(), recipeList.get(i).getId()));
             }
-            
+
             model.addAttribute("recipeList", recipeList);
 
-            return "resultList";            
+            return "resultList";
         } catch (NullPointerException e) {
             model.addAttribute("recipeList", recipeList);
 
             return "resultList";
         }
     }
-    @RequestMapping(value="/insertBookmark", method=RequestMethod.POST)
-    @ResponseBody public BookmarkVO insertBookmark(@RequestBody BookmarkVO resBody, @AuthenticationPrincipal SecurityUserInfo securityUserInfo) {
-        //세션에 저장 되어 있는 id를 가져옴
+
+    @RequestMapping(value = "/insertBookmark", method = RequestMethod.POST)
+    @ResponseBody
+    public BookmarkVO insertBookmark(@RequestBody BookmarkVO resBody,
+            @AuthenticationPrincipal SecurityUserInfo securityUserInfo) {
+        // 세션에 저장 되어 있는 id를 가져옴
         String userID = securityUserInfo.getUsername();
         // 브라우저에서 json으로 넘어온 레시피 id를 int로 변환
         int recipeID = resBody.getRecipeID();
         // 체크 되었는지 안되었는지 확인 할 수 있는 변수
         // db로 보낼 VO객체 생성
         BookmarkVO bookmarkVO = new BookmarkVO(userID, recipeID);
-        
-        if(bookmarkService.selectBookmark(bookmarkVO) != null){
+        System.out.println(bookmarkVO.getRecipeID());
+        if (bookmarkService.selectBookmark(bookmarkVO) != null) {
             bookmarkService.deleteBookmark(bookmarkVO);
         } else {
             bookmarkService.insertBookmark(bookmarkVO);
@@ -150,15 +144,16 @@ public class TestController {
         bookmarkVO.setRecipeIDList(bookmarkService.loadBookmark(userID));
         return bookmarkVO;
     }
-    @RequestMapping(value="/loadBookmark", method=RequestMethod.GET)
-    @ResponseBody public BookmarkVO loadBookmark(@AuthenticationPrincipal SecurityUserInfo securityUserInfo) {
+
+    @RequestMapping(value = "/loadBookmark", method = RequestMethod.GET)
+    @ResponseBody
+    public BookmarkVO loadBookmark(@AuthenticationPrincipal SecurityUserInfo securityUserInfo) {
         String userID = securityUserInfo.getUsername();
 
         BookmarkVO bookmarkVO = new BookmarkVO();
         ArrayList<Integer> bookmarkRecipeIDLists = bookmarkService.loadBookmark(userID);
 
-
-        if(bookmarkService.loadBookmark(userID) != null){
+        if (bookmarkService.loadBookmark(userID) != null) {
             bookmarkVO.setRecipeIDList(bookmarkService.loadBookmark(userID));
 
             List<RecommandListVO> recommandList = userInfoService.readRecipeList(bookmarkRecipeIDLists);
@@ -178,5 +173,44 @@ public class TestController {
         System.out.println(recipe.getDescription());
         model.addAttribute("recipe", recipe);
         return "resultRecipe";
+    }
+
+    @RequestMapping(value = "/search")
+    public String search() {
+        return "search";
+    }
+
+    @RequestMapping(value = "/search/{keyword}/{page}")
+    public String searchResult(Model model, @AuthenticationPrincipal SecurityUserInfo securityUserInfo,
+            @PathVariable(required = false, value = "keyword") String keyword,
+            @PathVariable(required = false, value = "page") int page) {
+        page = (page - 1) * 10;
+        int pageNum = userInfoService.getSearchPageNum(keyword);
+
+        if (pageNum % 10 != 0) {
+            pageNum = pageNum / 10 + 1;
+        }
+
+        List<RecommandListVO> searchResult = userInfoService.searchRecipeList(page, keyword);
+        try {
+            for (int i = 0; i < searchResult.size(); i++) {
+                System.out
+                        .print(bookmarkService.isBookmark(securityUserInfo.getUsername(), searchResult.get(i).getId()));
+                searchResult.get(i).setBookmarkIsCheck(
+                        bookmarkService.isBookmark(securityUserInfo.getUsername(), searchResult.get(i).getId()));
+            }
+
+            model.addAttribute("pageNum", pageNum);
+            model.addAttribute("recipeList", searchResult);
+            System.out.println(searchResult);
+
+            return "searchResult";
+        } catch (NullPointerException e) {
+
+            model.addAttribute("pageNum", pageNum);
+            model.addAttribute("recipeList", searchResult);
+            return "searchResult";
+        }
+
     }
 }

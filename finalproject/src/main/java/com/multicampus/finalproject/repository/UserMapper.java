@@ -46,5 +46,8 @@ public interface UserMapper {
 
     public RecommandListVO readRecipe(int recipeId);
 
+    public int getSearchPageNum(String keyword);
+
+    public List<RecommandListVO> searchRecipeList(int page, String keyword);
     public int isBookmark(String userID , int recipeID);
 }
