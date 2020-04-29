@@ -7,25 +7,20 @@ from io import BytesIO
 from torchvision import transforms
 from detecto import core, utils, visualize
 from sqlalchemy import create_engine
+
+
 import pandas as pd
 import xml.etree.ElementTree as elemTree
 import mysql.connector
 import numpy as np
-import xml.etree.ElementTree as elemTree
 import csv
 import pickle
-from detecto import core, utils, visualize
 import base64
-from PIL import Image
-from io import BytesIO
 import torch
 import torchvision
-from torchvision import transforms
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
-from sqlalchemy import create_engine
-import mysql.connector
 
 app = Flask(__name__)
 
@@ -36,14 +31,7 @@ data = None
 ingre = None
 
 
-# app.route 를 사용해 매핑해준다.
-# render_template -> 사용해 templates의 html 파일을 불러오겠다는 뜻
 
-# @app.route('/main')
-# def hello():
-#     name = request.args.get("name", "World")
-# #    return f'Hello, {escape(name)}!'
-#     return render_template('main.html')
 def recommend(ingre_input, main):
     srch_vector = vectorize.transform([ingre_input])
     cosine_similar = linear_kernel(srch_vector, X).flatten()
@@ -111,11 +99,12 @@ def show_labeled_image(image, boxes, labels=None, scores=None):
     fig.savefig('static/images/detection_result.jpg', dpi=100)
 
 
-@app.route('/testapi', methods=["POST", "GET"])
-def test():
-    # data = request.getJson()
-    # print(data)
-
+# 식재료 이미지를 요청데이터로 받아와
+# Detection모델을 실행하는 route
+@app.route('/groceryDetection', methods=["POST", "GET"])
+def groceryDetection():
+    # request.get_data()를 통해 요청 데이터를 받아온다.
+    # base64로 encoding한다.
     im = base64.b64decode(request.get_data())
     image = Image.open(BytesIO(im))
 
@@ -127,21 +116,27 @@ def test():
     labels, boxes, scores = predictions
     show_labeled_image(image, boxes, labels, scores)
 
+    # detection 결과 이미지를 불러와 base64로 encoding한다.
     with open('static/images/detection_result.jpg', 'rb') as img:
         response_img = base64.b64encode(img.read())
     print(type(response_img.decode('utf-8')))
 
+    # json형태로 detection결과 이미지, 찾은 식재료 목록을 반환한다.
     return jsonify(response_img=response_img.decode('utf-8'), labels=labels)
 
 
-@app.route('/recomandApi', methods=["POST", "GET"])
-def recomand():
-    # try:
+# 요청데이터로 식재료 목록을 받는다.
+# 식재료목록과 연관성이 높은 레시피를 반환한다.
+@app.route('/findRecipeList', methods=["POST", "GET"])
+def findRecipeList():
     labels = request.get_data().decode("utf-8")
+    
+    # 요청과 함께 넘어온 식재료 목록을 string형태로 받는다.
     labelsXml = elemTree.fromstring(labels)
 
     items = []
     items_KOR = ""
+
     for item in labelsXml.findall("./item"):
         items.append(item.text)
         print('*' + item.text + '*')
@@ -165,80 +160,48 @@ def recomand():
             items[i] = "오이"
 
     items_KOR = " ".join(items)
-    # print("하하하하: " + items_KOR)
+    # 앞서 정의한 recommend 함수 실행
     df=recommend(items_KOR,'돼지고기')
     
     responseData = []
+    # 연관성높은 순으로 100가지의 recipeId를 추려낸다.
     for i in range(100):
         responseData.append(data.iloc[df['idx_filtering'][i]]['id'])
     
-    # print("type: ",type(data.iloc[df['idx_filtering'][0]]))
-    # print("list_type: ",type(data.iloc[df['idx_filtering'][0]].tolist()))
-
-    # for index , i in enumerate(data.iloc[df['idx_filtering'][0]]):
-    #     if i!='':
-    #         print(index ,":",i)
-	# except:
-	# 	recomandResult = ["한가지 이상의 음식을 촬영해주세요"]
     for col in df.columns:
         print(df[col].dtypes)
-	#int64변수가 있어서 send 오류
     
-    print(responseData)
+    # 연관성높은 레시피의 recipeId 100개를 json형태로 반환한다.
     return jsonify(recomandResult = responseData)
 
-    ###############################
-    # print("하하하하: " + items_KOR)
-    # df = recommend(items_KOR, '돼지고기')
-    # print("type: ", type(data.iloc[df['idx_filtering'][0]]))
-    # print("list_type: ", type(data.iloc[df['idx_filtering'][0]].tolist()))
 
-    # for index, i in enumerate(data.iloc[df['idx_filtering'][0]]):
-    #     if i != '':
-    #         print(index, ":", i)
-    # # except:
-    # # 	recomandResult = ["한가지 이상의 음식을 촬영해주세요"]
-
-    # # int64변수가 있어서 send 오류
-    # return jsonify(recomandResult=data.iloc[df['idx_filtering'][0]].tolist())
-    ################################
-
-@app.route('/testModel', methods=["POST", "GET"])
-def test2():
-    return "성공"
-
-
-@app.route('/testjson')
-def json():
-    # flask 에서 기본적으로 제공하는 jsonify함수를 통해 값을 json형태로 전환할 수 있다.
-
-    return jsonify(name="JKS")
-
-
-# @app.route('/testjson')
-# def json():
-#     # flask 에서 기본적으로 제공하는 jsonify함수를 통해 값을 json형태로 전환할 수 있다.
-#     print(jsonify(name='JKS'))
-#     return jsonify(name='JKS')
-
-
+# lazy Loading을 하여 모델을 불러오는 시간을 단축한다.
 if __name__ == '__main__':
+    #현재 인식할 수 있는 식재료들
     labels = ['chilli', 'egg', 'pork meat', 'potato', 'pa', 'onion', 'carrot', 'cucumber']
+    #벡터라이저 선언
     vectorize = HashingVectorizer()
 
+    # DB와의 연동하는 부분
+    # DB와의 연결을 생성
     engine = create_engine('mysql://root:1234@localhost:3307/testDB?charset=utf8', convert_unicode=True,encoding='UTF-8')
     # engine = create_engine('mysql://JKS:12345678@sts.c2yt44rkrmcp.us-east-2.rds.amazonaws.com:3306/finalproject?charset=utf8', convert_unicode=True,encoding='UTF-8')
     conn = engine.connect()
+    # recipe 테이블을 읽어온다.
     data = pd.read_sql_table('recipe', conn)
+    # 누락된 값을 0으로 전환
     data = data.fillna(0)
+    # json형태로 반환하기 위해 int32 or int64 형태의 변수를 float로 전환
     data["id"] = data['id'].astype("float")
     data["size"] = data['size'].astype("float")
     data["time"] = data['time'].astype("float")
-    print(data.dtypes)
+
     ingre = data['ingre_main_oneline']
     ingre = np.array(ingre.tolist())
+    # 이미지 detection 모델을 load
     model = core.Model.load('static/model/detection_weights_v3.pth', labels)
     # load model
     with open('static/model/hv.pkl', 'rb') as f:
         X = pickle.load(f)
+
     app.run(debug=True, host='0.0.0.0')

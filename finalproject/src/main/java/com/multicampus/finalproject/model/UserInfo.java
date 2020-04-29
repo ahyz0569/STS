@@ -1,7 +1,6 @@
 package com.multicampus.finalproject.model; 
 import java.util.Collection;
 
-import org.apache.ibatis.type.Alias;
 // Spring Security를 추가한 후 새로 넣은부분!
 import org.springframework.security.core.GrantedAuthority;
 

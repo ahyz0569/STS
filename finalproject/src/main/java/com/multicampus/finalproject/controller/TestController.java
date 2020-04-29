@@ -2,10 +2,7 @@ package com.multicampus.finalproject.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
 
 import com.multicampus.finalproject.model.BookmarkVO;
 import com.multicampus.finalproject.model.JsonVO;
@@ -14,6 +11,7 @@ import com.multicampus.finalproject.model.SecurityUserInfo;
 import com.multicampus.finalproject.service.BookmarkService;
 import com.multicampus.finalproject.service.RestTemplateService;
 import com.multicampus.finalproject.service.UserInfoService;
+import com.multicampus.finalproject.service.RecipeInfoService;
 import com.multicampus.finalproject.model.RecommandListVO;
 
 import org.apache.commons.codec.binary.Base64;
@@ -30,34 +28,42 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+// 웹 자원을 관리하는 Controller
 @Controller
 public class TestController {
+    @Autowired
+    RestTemplateService restTemplateService;
 
     @Autowired
     UserInfoService userInfoService;
 
     @Autowired
-    RestTemplateService restTemplateService;
-
+    RecipeInfoService RecipeInfoService;
+    
     @Autowired
     BookmarkService bookmarkService;
 
+    // 메인페이지
     @RequestMapping("/")
     public String home() {
         return "main";
     }
+    
+    // 설명서 페이지 (미구현)
+    // @RequestMapping("/guide")
+    // public String guide() {
+    //     return "guide";
+    // }
 
-    @RequestMapping("/guide")
-    public String guide() {
-        return "guide";
-    }
-
+    // 이미지분석 사진 업로드를 위한 페이지
     @RequestMapping("/camera")
     public String camera() {
         return "camera";
     }
 
+    // camera.html에서 /upload_img value에 대한 처리
     @RequestMapping("/upload_img")
+    // 업로드한 파일을 MultipartFile 형태로 불러온다.
     public String upload_img(Model model, @RequestParam("file") MultipartFile img) {
         byte[] imgtext;
         String imgtext2;
@@ -88,24 +94,31 @@ public class TestController {
             System.out.println("파일이 이상함!");
         }
 
+        // 이미지 분석결과 확인 페이지
         return "resultCheck";
     }
 
-    @RequestMapping(value = "/recomand", method = RequestMethod.GET)
-    public String recomand(Model model, @RequestParam("label") ArrayList<String> name,
+    // resultCheck.html 에서 /recommand value 처리 로직
+    @RequestMapping(value = "/recommand", method = RequestMethod.GET)
+    public String recommand(Model model, @RequestParam("label") ArrayList<String> name,
             @AuthenticationPrincipal SecurityUserInfo securityUserInfo) throws Exception {
         // for(String label : name){
         // System.out.println(label);
         // }
         System.out.println("추천 전: " + name);
+
+        // recipeId 를 받아오는 로직 Flask API에 식자재데이터를 전송 후 응답받음
         ResponseEntity<LabelJsonVO> recomandResult = restTemplateService.getRecomandData(name);
         ArrayList<Integer> recomandList = recomandResult.getBody().getRecomandResult();
 
         // for(int i=0;i<recomandList.size();i++){
         // System.out.println(recomandList.get(i));
         // }
-        List<RecommandListVO> recipeList = userInfoService.readRecipeList(recomandList);
+
+        // Mybatis 로직을 통해 recipeID로 레시피 데이터를 받아옴
+        List<RecommandListVO> recipeList = RecipeInfoService.readRecipeList(recomandList);
         try {
+            // 북마크 확인하는 로직
             for (int i = 0; i < recipeList.size(); i++) {
                 System.out.print(bookmarkService.isBookmark(securityUserInfo.getUsername(), recipeList.get(i).getId()));
                 recipeList.get(i).setBookmarkIsCheck(
@@ -122,6 +135,8 @@ public class TestController {
         }
     }
 
+    // fetch를 통해 호출되는 로직
+    // bookmark table에 userid와 recipeid를 insert한다.
     @RequestMapping(value = "/insertBookmark", method = RequestMethod.POST)
     @ResponseBody
     public BookmarkVO insertBookmark(@RequestBody BookmarkVO resBody,
@@ -145,6 +160,8 @@ public class TestController {
         return bookmarkVO;
     }
 
+    // fetch를 통해 호출되는 로직
+    // 레시피 출력 전 레시피가 북마크되어있는 여부를 확인한다.
     @RequestMapping(value = "/loadBookmark", method = RequestMethod.GET)
     @ResponseBody
     public BookmarkVO loadBookmark(@AuthenticationPrincipal SecurityUserInfo securityUserInfo) {
@@ -156,7 +173,7 @@ public class TestController {
         if (bookmarkService.loadBookmark(userID) != null) {
             bookmarkVO.setRecipeIDList(bookmarkService.loadBookmark(userID));
 
-            List<RecommandListVO> recommandList = userInfoService.readRecipeList(bookmarkRecipeIDLists);
+            List<RecommandListVO> recommandList = RecipeInfoService.readRecipeList(bookmarkRecipeIDLists);
             // System.out.println("re" + recommandList);
             // System.out.println(bookmarkRecipeIDLists);
             bookmarkVO.setRecommandList(recommandList);
@@ -165,34 +182,45 @@ public class TestController {
         return bookmarkVO;
     }
 
+    // 각 레시피별 UI
+    // pathvariable을 사용해 동적으로 페이지 UI가 구성된다.
     @RequestMapping(value = "/recipe/{recipeId}")
     public String viewRecipe(Model model, @PathVariable("recipeId") int recipeId) {
-        RecommandListVO recipe = userInfoService.readRecipe(recipeId);
+        // DB연동을 통해 pathvariable로 넘어온 값을 활용 DB에 접근한다.
+        RecommandListVO recipe = RecipeInfoService.readRecipe(recipeId);
 
         System.out.println(recipe.getDescription());
         System.out.println(recipe.getImg_complete());
         System.out.println(recipe.getDescription());
         model.addAttribute("recipe", recipe);
+
+        // 동적으로 구성되는 레시피 정보 페이지
         return "resultRecipe";
     }
 
+
+    
+    // 검색 페이지
     @RequestMapping(value = "/search")
     public String search() {
         return "search";
     }
 
+    // 검색결과페이지 -> 레시피들을 리스트형태로 출력하도록한다.
+    // pathvariable을 활용해 동적으로 페이지를 구성하도록 한다.
     @RequestMapping(value = "/search/{keyword}/{page}")
     public String searchResult(Model model, @AuthenticationPrincipal SecurityUserInfo securityUserInfo,
             @PathVariable(required = false, value = "keyword") String keyword,
             @PathVariable(required = false, value = "page") int page) {
         page = (page - 1) * 10;
-        int pageNum = userInfoService.getSearchPageNum(keyword);
+        int pageNum = RecipeInfoService.getSearchPageNum(keyword);
 
         if (pageNum % 10 != 0) {
             pageNum = pageNum / 10 + 1;
         }
 
-        List<RecommandListVO> searchResult = userInfoService.searchRecipeList(page, keyword);
+        // 각 페이지별 10개의 레시피를 출력하도록 DB의 sql문을 작성했다.
+        List<RecommandListVO> searchResult = RecipeInfoService.searchRecipeList(page, keyword);
         try {
             for (int i = 0; i < searchResult.size(); i++) {
                 System.out
