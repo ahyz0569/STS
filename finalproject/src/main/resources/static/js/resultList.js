@@ -1,5 +1,41 @@
 resultListFunction();
 
+function addBookmark(event) {
+  event.stopPropagation();
+
+  console.log("recipeID", this.value);
+  const odj = {
+    method: 'POST',
+    body: JSON.stringify({
+      userID: 0,
+      recipeID: this.value
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    },
+    credentials: 'same-origin'
+  };
+  //fetch를 사용할때 url과 odj로 GET ,POST 메서드를 설정해 준다.
+  fetch("http://localhost:8080/insertBookmark", odj)
+    //reponse를 가져와서
+    .then(res => {
+      //status가 200이라면
+      if (res.status == 200) {
+        //servlet에서 return된 json값을 가져 온다.
+        res
+          .json()
+          .then(json => console.log(json.recipeIDList));
+      }
+    })
+
+  const addBm = event.target;
+  if (addBm.getAttribute("src") == "/images/bm-logo.png") {
+    addBm.setAttribute("src", "/images/bm-logo-checked.png");
+  } else if (addBm.getAttribute("src") == "/images/bm-logo-checked.png") {
+    addBm.setAttribute("src", "/images/bm-logo.png");
+  }
+}
+
 function resultListFunction() {
 
   const menuLists = document.getElementById("menu__lists");
@@ -45,8 +81,8 @@ function resultListFunction() {
     // }
     bmImg.value = recipeList[i].id;
     // bmImg.addEventListener("click", addBookmark);
-    bm_img_isLogin(bmImg)
-    recipeImgContainer.appendChild(bmImgCover);
+    bm_img_isLogin(bmImg,bmImgCover,recipeImgContainer,i)
+    // recipeImgContainer.appendChild(bmImgCover);
 
     menuList.appendChild(aboutMenu);
     aboutMenu.appendChild(recipeTitle);
@@ -65,39 +101,5 @@ function resultListFunction() {
     });
   }
 
-  function addBookmark(event) {
-    event.stopPropagation();
-
-    console.log("recipeID", this.value);
-    const odj = {
-      method: 'POST',
-      body: JSON.stringify({
-        userID: 0,
-        recipeID: this.value
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      },
-      credentials: 'same-origin'
-    };
-    //fetch를 사용할때 url과 odj로 GET ,POST 메서드를 설정해 준다.
-    fetch("http://localhost:8080/insertBookmark", odj)
-      //reponse를 가져와서
-      .then(res => {
-        //status가 200이라면
-        if (res.status == 200) {
-          //servlet에서 return된 json값을 가져 온다.
-          res
-            .json()
-            .then(json => console.log(json.recipeIDList));
-        }
-      })
-
-    const addBm = event.target;
-    if (addBm.getAttribute("src") == "images/bm-logo.png") {
-      addBm.setAttribute("src", "images/bm-logo-checked.png");
-    } else if (addBm.getAttribute("src") == "images/bm-logo-checked.png") {
-      addBm.setAttribute("src", "images/bm-logo.png");
-    }
-  }
+  
 }

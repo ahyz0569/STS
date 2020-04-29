@@ -94,7 +94,7 @@
 
   <script type="text/javascript" th:inline="javascript">
     /*[# sec:authorize="isAuthenticated()"]*/
-      function bm_img_isLogin(bmImg,bmImgCover,recipeImgContainer){
+      function bm_img_isLogin(bmImg,bmImgCover,recipeImgContainer,i){
         if (recipeList[i].bookmarkIsCheck == 0) {
           bmImg.src = "/images/bm-logo.png";
         } else {
@@ -107,7 +107,7 @@
 
 
     /*[# sec:authorize="!isAuthenticated()"]*/
-      function bm_img_isLogin(bmImg,bmImgCover,recipeImgContainer){
+      function bm_img_isLogin(bmImg,bmImgCover,recipeImgContainer,i){
         recipeImgContainer=""
         
       }

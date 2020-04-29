@@ -47,7 +47,7 @@ for (i in recipeList) {
   // }
   bmImg.value = recipeList[i].id;
   // bmImg.addEventListener("click", addBookmark);
-  bm_img_isLogin(bmImg,bmImgCover,recipeImgContainer)
+  bm_img_isLogin(bmImg,bmImgCover,recipeImgContainer,i)
   // recipeImgContainer.appendChild(bmImgCover);
 
 

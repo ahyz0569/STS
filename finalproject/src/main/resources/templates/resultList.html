@@ -81,21 +81,23 @@
     /*]]>*/
   </script>
 
-    <script type="text/javascript" th:inline="javascript">
+  <script type="text/javascript" th:inline="javascript">
     /*[# sec:authorize="isAuthenticated()"]*/
-      function bm_img_isLogin(bmImg){
+      function bm_img_isLogin(bmImg,bmImgCover,recipeImgContainer,i){
         if (recipeList[i].bookmarkIsCheck == 0) {
           bmImg.src = "/images/bm-logo.png";
         } else {
           bmImg.src = "/images/bm-logo-checked.png";
         }
         bmImg.addEventListener("click",addBookmark)
+        recipeImgContainer.appendChild(bmImgCover)
       }
     /*[/]*/
 
 
     /*[# sec:authorize="!isAuthenticated()"]*/
-      function bm_img_isLogin(bmImg){
+      function bm_img_isLogin(bmImg,bmImgCover,recipeImgContainer,i){
+        recipeImgContainer=""
         
       }
     /*[/]*/
