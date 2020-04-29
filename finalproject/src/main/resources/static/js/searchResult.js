@@ -30,6 +30,7 @@ for (i in recipeList) {
   recipeImgContainer.appendChild(recipeImgCover);
   recipeImgCover.appendChild(recipeImg)
 
+  
   recipeImg.src = recipeList[i].img_complete;
   recipeImg.className = "menu__list-image";
 
@@ -39,14 +40,16 @@ for (i in recipeList) {
   bmImgCover.appendChild(bmImg);
   bmImg.className = "bookmark-image"
   // bmImg.src = "/images/bm-logo.png";
-  if (recipeList[i].bookmarkIsCheck == 0) {
-    bmImg.src = "/images/bm-logo.png";
-  } else {
-    bmImg.src = "/images/bm-logo-checked.png";
-  }
+  // if (recipeList[i].bookmarkIsCheck == 0) {
+  //   bmImg.src = "/images/bm-logo.png";
+  // } else {
+  //   bmImg.src = "/images/bm-logo-checked.png";
+  // }
   bmImg.value = recipeList[i].id;
-  bmImg.addEventListener("click", addBookmark);
-  recipeImgContainer.appendChild(bmImgCover);
+  // bmImg.addEventListener("click", addBookmark);
+  bm_img_isLogin(bmImg,bmImgCover,recipeImgContainer)
+  // recipeImgContainer.appendChild(bmImgCover);
+
 
   menuList.appendChild(aboutMenu);
   aboutMenu.appendChild(recipeTitle);

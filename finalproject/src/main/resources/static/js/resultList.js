@@ -38,13 +38,14 @@ function resultListFunction() {
     let bmImg = document.createElement("img");
     bmImgCover.appendChild(bmImg);
     bmImg.className = "bookmark-image"
-    if (recipeList[i].bookmarkIsCheck == 0) {
-      bmImg.src = "images/bm-logo.png";
-    } else {
-      bmImg.src = "images/bm-logo-checked.png";
-    }
+    // if (recipeList[i].bookmarkIsCheck == 0) {
+    //   bmImg.src = "images/bm-logo.png";
+    // } else {
+    //   bmImg.src = "images/bm-logo-checked.png";
+    // }
     bmImg.value = recipeList[i].id;
-    bmImg.addEventListener("click", addBookmark);
+    // bmImg.addEventListener("click", addBookmark);
+    bm_img_isLogin(bmImg)
     recipeImgContainer.appendChild(bmImgCover);
 
     menuList.appendChild(aboutMenu);
