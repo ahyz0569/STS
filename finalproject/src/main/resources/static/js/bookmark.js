@@ -171,6 +171,7 @@ function addBookmark_(event) {
 const bookmarkCloseModal = () => {
   let bookmarkContents = document.querySelector(".bookmark__modal");
   mainContents.removeChild(bookmarkContents);
+  window.location.reload()
 };
 
 function bookmarkDeleteModal(e) {

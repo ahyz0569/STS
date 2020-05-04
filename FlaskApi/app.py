@@ -32,24 +32,49 @@ ingre = None
 
 
 
-def recommend(ingre_input, main):
+# def recommend(ingre_input, main):
+#     srch_vector = vectorize.transform([ingre_input])
+#     cosine_similar = linear_kernel(srch_vector, X).flatten()
+#     rank_idx = cosine_similar.argsort()[::-1]
+#     count = 0
+#     idx_filtering = []
+#     for i in rank_idx:
+#         if cosine_similar[i] > 0:
+#             if main in ingre[i]:
+#                 # ingre_for_cv.append(ingre[i])
+#                 idx_filtering.append(i)
+#                 count += 1
+#                 if count > 100:
+#                     break
+
+#     df = pd.DataFrame(ingre[idx_filtering], columns=['ingre'])
+#     df['idx_filtering'] = idx_filtering
+#     df['calc'] = 0.
+
+#     ingre_for_cv = df['ingre'].tolist()
+#     ingre_for_cv.append(ingre_input)
+
+#     vect = CountVectorizer(min_df=0, tokenizer=lambda x: x.split())
+#     vect.fit(ingre_for_cv)
+#     cv = vect.transform(ingre_for_cv).toarray()
+#     # print(vect.get_feature_names())
+#     for idx, val in enumerate(cv[0:-1]):
+#         df['calc'][idx] = (val * cv[-1]).sum() / val.sum()
+#         # print(idx, (val*cv[-1]).sum()/val.sum())
+
+#     df = df.sort_values(by=['calc'], axis=0, ascending=False)
+#     df = df.reset_index(drop=True)
+
+#     return df
+def recommend(ingre_input):
     srch_vector = vectorize.transform([ingre_input])
     cosine_similar = linear_kernel(srch_vector, X).flatten()
     rank_idx = cosine_similar.argsort()[::-1]
-    count = 0
-    idx_filtering = []
-    for i in rank_idx:
-        if cosine_similar[i] > 0:
-            if main in ingre[i]:
-                # ingre_for_cv.append(ingre[i])
-                idx_filtering.append(i)
-                count += 1
-                if count > 100:
-                    break
-
+    idx_filtering = rank_idx[0:101]
     df = pd.DataFrame(ingre[idx_filtering], columns=['ingre'])
     df['idx_filtering'] = idx_filtering
     df['calc'] = 0.
+    df['len'] = 0.
 
     ingre_for_cv = df['ingre'].tolist()
     ingre_for_cv.append(ingre_input)
@@ -60,13 +85,18 @@ def recommend(ingre_input, main):
     # print(vect.get_feature_names())
     for idx, val in enumerate(cv[0:-1]):
         df['calc'][idx] = (val * cv[-1]).sum() / val.sum()
+        df['len'][idx] = len(df['ingre'][idx].replace('  ',' ').split(' '))
         # print(idx, (val*cv[-1]).sum()/val.sum())
 
     df = df.sort_values(by=['calc'], axis=0, ascending=False)
+    df1 = df[df['calc']>=0.7]
+    df1 = df1.sort_values(by=['calc','len'],axis=0,ascending=False)
+    df2 = df[df['calc']<0.7]
+    df2 = df2.sort_values(by=['calc','len'],axis=0,ascending=[False,True])
+    df = pd.concat([df1,df2])
     df = df.reset_index(drop=True)
 
     return df
-
 
 def show_labeled_image(image, boxes, labels=None, scores=None):
     plt.rcParams.update({'font.size': 14})
@@ -161,7 +191,8 @@ def findRecipeList():
 
     items_KOR = " ".join(items)
     # 앞서 정의한 recommend 함수 실행
-    df=recommend(items_KOR,'돼지고기')
+    # df=recommend(items_KOR,'돼지고기')
+    df=recommend(items_KOR)
     
     responseData = []
     # 연관성높은 순으로 100가지의 recipeId를 추려낸다.

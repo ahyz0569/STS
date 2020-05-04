@@ -70,11 +70,13 @@ public class TestController {
         try {
             // bytes로 변환한 이미지
             imgtext = Base64.encodeBase64(img.getBytes());
+
             // Flask_API로 보내줘야 하기 때문에 String으로 변환한다
             imgtext2 = new String(imgtext);
+
             // string으로 바꾼 img를 api로 보내주고 만들어 놓은 JsonVO형태로 Flask api에서 보내준 Json을 받는다.
             ResponseEntity<JsonVO> detectResultJson = restTemplateService.addData(imgtext2);
-
+            //코드 수정
             // jsonVO의 필드 변수로 있는 Reponse_img를 img_json에 저장
             String img_json = detectResultJson.getBody().getResponse_img();
             // 라벨 가져 오기
