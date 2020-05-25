@@ -16,7 +16,9 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
  
+// java 정의파일
 @Configuration
+// Mapper가 정의된 경로 설정
 @MapperScan(basePackages="com.multicampus.finalproject.repository")
 @EnableTransactionManagement
 public class DatabaseConfig {

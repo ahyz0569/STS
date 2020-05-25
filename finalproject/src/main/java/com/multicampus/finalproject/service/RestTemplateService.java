@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.multicampus.finalproject.util.RestTemplateUtil;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.ArrayList;
 
 import com.multicampus.finalproject.model.JsonVO;

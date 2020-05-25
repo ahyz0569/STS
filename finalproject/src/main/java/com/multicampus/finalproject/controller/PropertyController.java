@@ -1,25 +1,16 @@
 package com.multicampus.finalproject.controller;
  
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import javax.servlet.http.HttpServletRequest;
 
 import com.multicampus.finalproject.model.SecurityUserInfo;
 import com.multicampus.finalproject.model.UserInfo;
 import com.multicampus.finalproject.service.CustomUserDetailsService;
-import com.multicampus.finalproject.service.RestTemplateService;
  
 @Controller
 public class PropertyController {
@@ -38,9 +29,13 @@ public class PropertyController {
     //     return "login";
     // }
 
+    // 로그인 페이지
+    // Spring security에 의해 /login value가 로그인 UI로 지정됨
     @RequestMapping("/login")
     public String login(HttpServletRequest request){
         String referer;
+        // 로그인 이후 이전페이지로 redirect하기 위한 로직 추가
+        // session 내 이전페이지를 호출함
         if(request.getSession().getAttribute("prevPage")==null){
             referer = request.getHeader("Referer");
             request.getSession().setAttribute("prevPage",referer);
@@ -51,11 +46,15 @@ public class PropertyController {
     
         return "login";
     }
+
+    // 회원가입페이지
     @RequestMapping("/signUp_page")
     public String signUp_page(){
 
         return "signUp";
     }
+
+    // 회원가입 submit 버튼 동작
     @RequestMapping(value = "/signUp", method = RequestMethod.POST)
     //브라우저에서 요청과 함께 날라온 id , password , name 값을 매개변수로 받아 온다.
     public String inser_member(
@@ -68,6 +67,7 @@ public class PropertyController {
         // Service에서 구현해 놓은 insert_Member메서드를 실행 시켜준다
         
         System.out.println("id"+id);
+        // Mybatis로 정의된 메소드를 실행 (회원정보를 넣어준다.)
         boolean isMemberExistDB = customUserDetailsService.Insert_Member(userInfo);
        
         if(isMemberExistDB == false){

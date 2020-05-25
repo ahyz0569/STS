@@ -1,7 +1,9 @@
 package com.multicampus.finalproject.service;
 
+import java.util.ArrayList;
+
 import com.multicampus.finalproject.model.BookmarkVO;
-import com.multicampus.finalproject.repository.UserMapper;
+import com.multicampus.finalproject.repository.BookmarkMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,16 +12,21 @@ import org.springframework.stereotype.Service;
 public class BookmarkService {
     
     @Autowired
-    UserMapper userMapper;
+    BookmarkMapper bookmarkMapper;
 
     public void insertBookmark(BookmarkVO bookmarkVO){
-        userMapper.insertBookmark(bookmarkVO);
+        bookmarkMapper.insertBookmark(bookmarkVO);
     }
     public BookmarkVO selectBookmark(BookmarkVO bookmarkVO){
-        return userMapper.selectBookmark(bookmarkVO);
+        return bookmarkMapper.selectBookmark(bookmarkVO);
     }
     public void deleteBookmark(BookmarkVO bookmarkVO){
-        userMapper.deleteBookmark(bookmarkVO);
+        bookmarkMapper.deleteBookmark(bookmarkVO);
     }
-    
+    public ArrayList<Integer> loadBookmark(String userID){
+        return bookmarkMapper.loadBookmark(userID);
+    }
+    public int isBookmark(String userID , int recipeID){
+        return bookmarkMapper.isBookmark(userID, recipeID);
+    }
 }

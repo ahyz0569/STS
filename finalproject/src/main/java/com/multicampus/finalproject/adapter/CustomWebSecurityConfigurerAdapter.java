@@ -66,9 +66,6 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
         .formLogin().loginPage("/login")
         .usernameParameter("email")
         .passwordParameter("password")
-        // .loginProcessingUrl("/login")
-        // .defaultSuccessUrl("/home")
-        // .failureUrl("/fail")
         .successHandler(myLoginSuccessHandler())
 
         .and()

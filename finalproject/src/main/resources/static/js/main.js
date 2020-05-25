@@ -1,15 +1,16 @@
 const mainHeader = document.getElementById("main__header");
-
+      
+      
 //--start--헤더 전체
-mainHeader.innerHTML =
-  ` <div id="mySidenav" class="sidenav">
+mainHeader.innerHTML = ` <div id="mySidenav" class="sidenav">  
       <a class="nav-menu-6" href="/">HOME</a>
       <a class="nav-menu-1" href="/search">SEARCH</a>
-      <a class="nav-menu-2" href="/guide">GUIDE</a>
       <a class="closebtn" onclick="closeNav()">&times;</a>
-      <a class="nav-menu-3" href="/camera">CAMERA</a>
-      <a class="nav-menu-4" href="/bookmark">BOOKMARK</a>
-      <a class="nav-menu-5" href="/user/info">USER</a>
+      <a class="nav-menu-3" href="/camera">CAMERA</a>`
+      +
+        nav_isLogin
+      +
+      `    
     </div>
 
     
@@ -24,8 +25,8 @@ mainHeader.innerHTML =
 
 
       <a href="/">
-        <img class="main-logo" src="images/main-logo.png">
-        <img class="main-logo2" src="images/main-logo2.png">
+        <img class="main-logo" src="/images/main-logo.png">
+        <img class="main-logo2" src="/images/main-logo2.png">
       </a>
 
 
@@ -41,23 +42,13 @@ mainHeader.innerHTML =
           <i class="fas fa-camera-retro"></i>
           <span>촬영</span>
         </a>
-      </span>
-      <span class="nav__icon">
-        <a href="/bookmark">
-          <i class="far fa-bookmark"></i>
-          <span>북마크</span>
-        </a>
-      </span>
-      <span class="nav__icon">
-        <a href="/login">
-          <i class="far fa-user"></i>
-          <span>로그인</span>
-        </a>
-      </span>
+      </span>`
+      +
+        nav_icon_isLogin
+      +
+      `
     </div>`;
 //--end--헤더 전체
-
-
 
 // 햄버거 메뉴바 열기
 function openNav() {

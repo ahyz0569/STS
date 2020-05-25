@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MAIN PAGE</title>
+  <title>MAIN Page</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body id="main-page">
@@ -37,6 +37,36 @@
   <!--end--페이지 전체 컨테이너-->
 </body>
 
-<script src="js/main.js"></script>
+<script type="text/javascript" th:inline="javascript">
+  /*[# sec:authorize="isAuthenticated()"]*/
+    nav_isLogin = 
+    `<a onclick="bookmarkOpenModal()" class="nav-menu-4">BOOKMARK</a>
+    <a class="nav-menu-5" href="/user/info">USER</a>`
+    nav_icon_isLogin = 
+    `<span onclick="bookmarkOpenModal()" class="nav__icon">
+          <i class="far fa-bookmark"></i>
+          <span>북마크</span>
+      </span>
+      <span class="nav__icon">
+        <a href="/logout">
+          <i class="far fa-user"></i>
+          <span>로그아웃</span>
+        </a>
+      </span>`
+  /*[/]*/
+
+  /*[# sec:authorize="!isAuthenticated()"]*/
+    nav_isLogin = `<a class="nav-menu-5" href="/user/info">USER</a>`
+    nav_icon_isLogin = 
+    `<span class="nav__icon">
+        <a href="/login">
+          <i class="far fa-user"></i>
+          <span>사용자</span>
+        </a>
+      </span>`
+  /*[/]*/
+</script>
+<script src="/js/main.js"></script>
+<script src="/js/bookmark.js"></script>
 
 </html>

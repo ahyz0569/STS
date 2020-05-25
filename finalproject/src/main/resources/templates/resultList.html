@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RESULT LIST PAGE</title>
+  <title>RECIPE LIST PAGE</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
@@ -43,14 +43,69 @@
 
   </div>
   <!--end--페이지 전체 컨테이너-->
-  
-  <script src="js/main.js"></script>
+
+
+  <script type="text/javascript" th:inline="javascript">
+    /*[# sec:authorize="isAuthenticated()"]*/
+      nav_isLogin = 
+      `<a onclick="bookmarkOpenModal()" class="nav-menu-4">BOOKMARK</a>
+      <a class="nav-menu-5" href="/user/info">USER</a>`
+      nav_icon_isLogin = 
+      `<span onclick="bookmarkOpenModal()" class="nav__icon">
+            <i class="far fa-bookmark"></i>
+            <span>북마크</span>
+        </span>
+        <span class="nav__icon">
+          <a href="/logout">
+            <i class="far fa-user"></i>
+            <span>로그아웃</span>
+          </a>
+        </span>`
+    /*[/]*/
+
+    /*[# sec:authorize="!isAuthenticated()"]*/
+      nav_isLogin = `<a class="nav-menu-5" href="/user/info">USER</a>`
+      nav_icon_isLogin = 
+      `<span class="nav__icon">
+          <a href="/login">
+            <i class="far fa-user"></i>
+            <span>사용자</span>
+          </a>
+        </span>`
+    /*[/]*/
+  </script>
+  <script src="/js/main.js"></script>
   <script th:inline="javascript">
     /*<![CDATA[*/
-      var recipeList = /*[[${recipeList}]]*/ "recipe";
+    var recipeList = /*[[${recipeList}]]*/ "recipe";
     /*]]>*/
   </script>
-  <script src="js/resultList.js"></script>
+
+  <script type="text/javascript" th:inline="javascript">
+    /*[# sec:authorize="isAuthenticated()"]*/
+      function bm_img_isLogin(bmImg,bmImgCover,recipeImgContainer,i){
+        if (recipeList[i].bookmarkIsCheck == 0) {
+          bmImg.src = "/images/bm-logo.png";
+        } else {
+          bmImg.src = "/images/bm-logo-checked.png";
+        }
+        bmImg.addEventListener("click",addBookmark)
+        recipeImgContainer.appendChild(bmImgCover)
+      }
+    /*[/]*/
+
+
+    /*[# sec:authorize="!isAuthenticated()"]*/
+      function bm_img_isLogin(bmImg,bmImgCover,recipeImgContainer,i){
+        recipeImgContainer=""
+        
+      }
+    /*[/]*/
+  </script>
+
+  <script src="/js/resultList.js"></script>
+  <script src="/js/bookmark.js"></script>
+
 </body>
 
 </html>

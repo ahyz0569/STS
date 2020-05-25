@@ -1,11 +1,12 @@
 body {
   font-family: "omniGothic";
   transition: background-color .5s;
-<<<<<<< HEAD
-  height: 150vh;
-=======
   /* height: 150vh; */
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
+}
+
+#main__footer {
+  text-align: center;
+
 }
 
 .main-logo {
@@ -83,6 +84,10 @@ body {
   transition: .3s;
 }
 
+/* .fa-user {
+  margin-right: 10px;
+} */
+
 .icon-bar+.icon-bar {
   margin-top: 5px;
 }
@@ -106,6 +111,7 @@ body {
 /* --- Menu-bar end--- */
 
 #main__header {
+  z-index: 800;
   top: 0;
   left: 0;
   right: 0;
@@ -114,12 +120,9 @@ body {
   display: flex;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   justify-content: space-between;
-<<<<<<< HEAD
   background: antiquewhite;
-=======
-  background: floralwhite;
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
   align-items: center;
+
 }
 
 #main__contents {
@@ -141,7 +144,12 @@ body {
 
 .nav__icon {
   font-size: 20px;
-  margin-left: 30px;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.nav__icon>span:hover {
+  font-weight: bold;
 }
 
 .nav__icon>a:hover {
@@ -166,11 +174,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-<<<<<<< HEAD
   background-color: #f1f2f6;
-=======
-  background-color: #fdfdfd;
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 }
 
 .sidenav a {
@@ -182,6 +186,9 @@ body {
   font-weight: bold;
 }
 
+.sidenav>.nav-menu-4 {
+  cursor: pointer;
+}
 
 .sidenav>.closebtn {
   position: absolute;
@@ -238,7 +245,6 @@ body {
   to {
     opacity: 1;
   }
-<<<<<<< HEAD
 }
 
 #bg {
@@ -248,6 +254,4 @@ body {
   height: 100vh;
   background: rgba(0, 0, 0, 0.4);
   display: none;
-=======
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 }

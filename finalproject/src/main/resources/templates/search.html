@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SEARCH PAGE</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
@@ -24,77 +24,15 @@
 
       <!--start--서치컨텐츠-->
       <div id="search__contents">
-        <input id="recipe__search" type="text" placeholder="요리를 검색해보세요!">
+        <input id="recipe__search" type="text" placeholder="요리를 검색해보세요!" onkeyup="enterkey()" autofocus>
         <div id="recipe__category">
-          <span>요리분류</span>
-        </div>
-        <div id="recipe__types">
-          <div id="recipe__type">
-            <img class="type__name" src="images/Kfood.png" alt="KoreanFood">
-            한식
-          </div>
-          <div id="recipe__type">
-            <img class="type__name" src="images/Wfood.png" alt="WesternFood">
-            양식
-          </div>
-          <div id="recipe__type">
-            <img class="type__name" src="images/Cfood.png" alt="ChineseFood">
-            중식
-          </div>
-          <div id="recipe__type">
-            <img class="type__name" src="images/Jfood.png" alt="JapaneseFood">
-            일식
-          </div>
+          <span>레시피</span>
         </div>
         <ul id="menu__lists">
-          <li class="menu__list">
-            <div class="about__menu">
-              <h1>시원하고 얼큰한 김치찌개</h1>
-              <span>직접 담근 김치로 만든 얼큰한 국물</span>
-            </div>
-            <img class="menu__list-image" src="images/1.jpg" alt="">
-          </li>
-          <li class="menu__list">
-            <div class="about__menu">
-              <h1>요리2</h1>
-              <span>설명2</span>
-            </div>
-            <img class="menu__list-image" src="images/2.jpg" alt="">
-          </li>
-          <li class="menu__list">
-            <div class="about__menu">
-              <h1>요리3</h1>
-              <span>설명3</span>
-            </div>
-            <img class="menu__list-image" src="images/3.jpg" alt="">
-          </li>
-          <li class="menu__list">
-            <div class="about__menu">
-              <h1>요리4</h1>
-              <span>설명4</span>
-            </div>
-            <img class="menu__list-image" src="images/4.jpg" alt="">
-          </li>
-          <li class="menu__list">
-            <div class="about__menu">
-              <h1>요리5</h1>
-              <span>설명5</span>
-            </div>
-            <img class="menu__list-image" src="images/5.jpg" alt="">
-          </li>
+          <!-- 메뉴 리스트 들어오는 곳 -->
         </ul>
       </div>
       <!--end--서치컨텐츠-->
-      <div class="pagination">
-        <a href="#">&laquo;</a>
-        <a href="#" class="active">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">6</a>
-        <a href="#">&raquo;</a>
-      </div>
     </div>
     <!--end--메인컨텐츠-->
 
@@ -107,7 +45,40 @@
   </div>
   <!--end--페이지 전체 컨테이너-->
 
-  <script src="js/main.js"></script>
+
+  <script type="text/javascript" th:inline="javascript">
+    /*[# sec:authorize="isAuthenticated()"]*/
+      nav_isLogin = 
+      `<a onclick="bookmarkOpenModal()" class="nav-menu-4">BOOKMARK</a>
+      <a class="nav-menu-5" href="/user/info">USER</a>`
+      nav_icon_isLogin = 
+      `<span onclick="bookmarkOpenModal()" class="nav__icon">
+            <i class="far fa-bookmark"></i>
+            <span>북마크</span>
+        </span>
+        <span class="nav__icon">
+          <a href="/logout">
+            <i class="far fa-user"></i>
+            <span>로그아웃</span>
+          </a>
+        </span>`
+    /*[/]*/
+
+    /*[# sec:authorize="!isAuthenticated()"]*/
+      nav_isLogin = `<a class="nav-menu-5" href="/user/info">USER</a>`
+      nav_icon_isLogin = 
+      `<span class="nav__icon">
+          <a href="/login">
+            <i class="far fa-user"></i>
+            <span>사용자</span>
+          </a>
+        </span>`
+    /*[/]*/
+  </script>
+  <script src="/js/bookmark.js"></script>
+  <script src="/js/search.js"></script>
+  <script src="/js/main.js"></script>
+
 </body>
 
 </html>

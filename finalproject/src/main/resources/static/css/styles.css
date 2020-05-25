@@ -3,21 +3,15 @@
 @import "logIn.css";
 @import "signUp.css";
 @import "camera.css";
-<<<<<<< HEAD
 @import "resultList.css";
 @import "resultCheck.css";
 @import "resultRecipe.css";
-
-@font-face {
-  font-family: omniGothic;
-  src: url('/font/omniGothic.ttf');
-=======
 @import "search.css";
+@import "bookmark.css";
 
 @font-face {
   font-family: omniGothic;
-  src: url('static/font/omniGothic.ttf');
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
+  src: url("/font/omniGothic.ttf");
 }
 
 * {
@@ -29,21 +23,17 @@
 }
 
 body {
-<<<<<<< HEAD
   background-color: white;
-=======
-  background-color: #fdfdfd;
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
 }
 
-@media (max-width:1550px) {
+@media (max-width: 1550px) {
   #main__bg-one {
     margin-top: 30px;
     width: 90%;
   }
 }
 
-@media (max-width:1350px) {
+@media (max-width: 1350px) {
   #main__bg-one {
     margin-top: 50px;
   }
@@ -54,10 +44,19 @@ body {
   }
 }
 
-@media (max-width:1260px) {
+@media (max-width: 1260px) {
+  .bookmark-content-lists {
+    height: 80%;
+  }
+
   .nav__nav-column>.nav__icon>a>span {
     display: none;
   }
+
+  .nav__icon>span {
+    display: none;
+  }
+
 
   #main__bg-one {
     margin-top: 80px;
@@ -70,7 +69,7 @@ body {
   }
 }
 
-@media(max-width:1024px) {
+@media (max-width: 1024px) {
   #main__contents>.img__container {
     width: 450px;
     height: 400px;
@@ -86,7 +85,56 @@ body {
   }
 }
 
-@media (max-width:680px) {
+@media (max-width: 835px) {
+  .ingredients-types {
+    width: 130px;
+  }
+
+  .ingredients-types>input {
+    width: 100px;
+  }
+
+  .info {
+    font-size: 18px;
+  }
+
+  .info-delete-btn {
+    font-size: 20px;
+  }
+
+  #result-main {
+    max-width: 720px;
+  }
+}
+
+@media (max-width: 680px) {
+  .ingredients-types {
+    width: 120px;
+  }
+
+  .ingredients-types>input {
+    width: 90px;
+  }
+
+  .info {
+    font-size: 14px;
+  }
+
+  .info-delete-btn {
+    font-size: 16px;
+  }
+
+  #result-main {
+    max-width: 530px;
+  }
+
+  #info-plus-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+    padding-top: 0.5px;
+  }
+
   #main__bg-two {
     display: block;
     width: 100%;
@@ -138,7 +186,8 @@ body {
 
   #email-id,
   #email-password,
-  #email-password-check {
+  #email-password-check,
+  #name {
     border: none;
     padding-left: 15px;
     font-size: 15px;
@@ -159,20 +208,110 @@ body {
     padding-left: 20px;
   }
 
-  .menu__list-image {
-    width: 120px;
-    height: 120px;
-  }
-<<<<<<< HEAD
-
   #bg {
     top: 51px;
   }
-=======
->>>>>>> d5540d74119adea1e212dc64b4f249ed3da30205
+
+  .cook-Step {
+    font-size: 15px;
+    line-height: 19px;
+  }
+
+  .cook-Step>.step-Number {
+    font-size: 18px;
+    margin-bottom: 5px;
+    font-weight: 0;
+  }
+
+  .recipe-steps>img {
+    max-width: 150px;
+    max-height: 200px;
+  }
+
+  .main-ingredients-info {
+    font-size: 17px;
+  }
+
+  .minor-ingredients-info {
+    font-size: 17px;
+  }
+
+  #result-img {
+    width: 80%;
+  }
+
+  .recipeTitle {
+    font-size: 25px;
+  }
+
+  .recipeDescription {
+    font-size: 14px;
+  }
+
+  #serving-info>img {
+    width: 40px;
+  }
+
+  #serving-info>span {
+    font-size: 13px;
+  }
+
+  #time-info>img {
+    width: 40px;
+  }
+
+  #time-info>span {
+    font-size: 13px;
+  }
+
+  #difficulty-info>img {
+    width: 40px;
+  }
+
+  #difficulty-info>span {
+    font-size: 13px;
+  }
+
+  .main-ingredients-info {
+    font-size: 14px;
+  }
+
+  .minor-ingredients-info {
+    font-size: 14px;
+  }
+
+  .cook-Step {
+    font-size: 14px;
+  }
+
+  #ingredients-infos {
+    margin-top: 40px;
+    padding: 15px 20px;
+  }
+
+  #recipe-steps-header {
+    font-size: 20px;
+    padding: 10px 15px;
+  }
 }
 
-@media (max-width:550px) {
+@media (max-width: 550px) {
+  .ingredients-types {
+    width: 100px;
+  }
+
+  .ingredients-types>input {
+    width: 85px;
+  }
+
+  .info {
+    font-size: 13px;
+  }
+
+  .info-delete-btn {
+    font-size: 15px;
+  }
+
   #recipe__search {
     height: 50px;
     font-size: 15px;
@@ -193,13 +332,9 @@ body {
     font-size: 14px;
   }
 
-  .menu__list-image {
-    width: 80px;
-    height: 80px;
-  }
-
   .about__menu>h1 {
-    font-size: 12px;
+    font-size: 16px;
+    line-height: 22px;
   }
 
   .about__menu>span {
@@ -216,9 +351,86 @@ body {
   .pagination a {
     padding: 5px 10px;
   }
+
+  .recipe-img-container {
+    width: 120px;
+    height: 120px;
+  }
+
+  .recipe-img-cover {
+    width: 120px;
+    height: 120px;
+  }
+
+  .menu__list-image {
+    width: 120px;
+    height: 120px;
+  }
+
+  #recipe-main-ingredients {
+    font-size: 12px;
+    margin-top: 0px;
+    line-height: 16px;
+  }
+
+  #recipe-main-ingredients>span {
+    font-size: 13px;
+  }
+
+  #recipe-minor-ingredients {
+    font-size: 12px;
+    margin-top: 0px;
+    line-height: 16px;
+  }
+
+  #recipe-minor-ingredients>span {
+    font-size: 13px;
+  }
+
+  .bm-img-cover {
+    width: 30px;
+  }
+
+  .bm-img-cover>img {
+    width: 30px;
+  }
+
+  #ingredients-infos {
+    margin-top: 40px;
+    padding: 15px 20px;
+  }
 }
 
-@media (max-width:480px) {
+@media (max-width: 480px) {
+  #result-header {
+    font-size: 28px;
+  }
+
+  #camera-upload {
+    width: 180px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  #next-btn {
+    width: 180px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  #result-main {
+    width: 380px;
+  }
+
+  #result__info {
+    padding-left: 15px;
+  }
+
+  #recipe-steps-header {
+    font-size: 16px;
+    padding: 10px 15px;
+  }
+
   #main__contents>.img__container {
     width: 350px;
     height: 300px;
@@ -226,7 +438,7 @@ body {
 
   #signUp-form>h1 {
     font-weight: bold;
-    font-size: 35px;
+    font-size: 30px;
   }
 
   #signUp-form>p {
@@ -244,9 +456,105 @@ body {
   #user-help>span {
     font-size: 20px;
   }
+
+  #ingredients-infos {
+    margin-top: 40px;
+    padding: 15px 20px;
+  }
+
+  #main-ingredients-info {
+    padding-bottom: 5px;
+    line-height: 16px;
+  }
+
+  #minor-ingredients-info {
+    line-height: 16px;
+  }
+
+  .recipeTitle {
+    font-size: 22px;
+    line-height: 27px;
+  }
+
+  .recipeDescription {
+    line-height: 20px;
+  }
+
+  .main-ingredients-info>span {
+    font-size: 13px;
+  }
+
+  .main-ingredients-info {
+    font-size: 12px;
+  }
+
+  .minor-ingredients-info>span {
+    font-size: 13px;
+  }
+
+  .minor-ingredients-info {
+    font-size: 12px;
+  }
+
+  #serving-info>img {
+    width: 35px;
+  }
+
+  #serving-info>span {
+    font-size: 12px;
+  }
+
+  #time-info>img {
+    width: 35px;
+  }
+
+  #time-info>span {
+    font-size: 12px;
+  }
+
+  #difficulty-info>img {
+    width: 35px;
+  }
+
+  #difficulty-info>span {
+    font-size: 12px;
+  }
+
+  .recipe-steps>img {
+    max-width: 120px;
+    max-height: 200px;
+  }
+
+  .cook-Step {
+    font-size: 12px;
+  }
+
+  #step-Number {
+    font-size: 15px;
+  }
+
+  #steps-end {
+    font-size: 16px;
+  }
+
+  #login-form>h1 {
+    font-size: 30px;
+  }
 }
 
-@media (max-width:400px) {
+@media (max-width: 400px) {
+  #next-btn {
+    width: 180px;
+    font-size: 15px;
+    height: 40px;
+  }
+
+  #camera-upload {
+    width: 180px;
+    height: 40px;
+    font-size: 15px;
+  }
+
   #login-form>h1 {
     font-size: 25px;
     padding-top: 5px;
@@ -274,11 +582,7 @@ body {
   #google-signUp-btn,
   #password-find,
   #go-to-signUp {
-    font-size: 20px;
-  }
-
-  #google-login-btn>span {
-    margin-left: -8px;
+    font-size: 15px;
   }
 
   #user-help {
@@ -324,9 +628,95 @@ body {
     width: 10px;
   }
 
+  .recipeTitle {
+    font-size: 17px;
+    line-height: 22px;
+  }
+
+  .recipeDescription {
+    font-size: 12px;
+    line-height: 17px;
+  }
+
+  #serving-info>img {
+    width: 30px;
+  }
+
+  #serving-info>span {
+    font-size: 11px;
+  }
+
+  #time-info>img {
+    width: 30px;
+  }
+
+  #time-info>span {
+    font-size: 11px;
+  }
+
+  #difficulty-info>img {
+    width: 30px;
+  }
+
+  #difficulty-info>span {
+    font-size: 11px;
+  }
+
+  .main-ingredients-info {
+    font-size: 11px;
+  }
+
+  .main-ingredients-info>span {
+    font-size: 12px;
+  }
+
+  .minor-ingredients-info {
+    font-size: 11px;
+  }
+
+  .minor-ingredients-info>span {
+    font-size: 12px;
+  }
+
+  #recipe-steps-header {
+    font-size: 16px;
+    padding: 10px 15px;
+  }
+
+  #result-main {
+    width: 100%;
+  }
+
+  #result__info {
+    padding-right: 0;
+  }
 }
 
 @media (max-width: 380px) {
+  #result-main {
+    width: 100%;
+  }
+
+  #result__info {
+    padding-left: 0;
+  }
+
+  .ingredients-types {
+    width: 90px;
+  }
+
+  .ingredients-types>input {
+    width: 60px;
+  }
+
+  .info {
+    font-size: 11px;
+  }
+
+  .info-delete-btn {
+    font-size: 16px;
+  }
+
   #main__contents>.img__container {
     width: 250px;
     height: 200px;
@@ -345,7 +735,6 @@ body {
     font-size: 15px;
   }
 
-  /*  */
   #signUp-form>h1 {
     font-size: 25px;
     font-weight: bold;
@@ -399,5 +788,66 @@ body {
   #privacy-modal__close {
     top: 15px;
     right: 50px;
+  }
+
+  .recipe-img-container {
+    width: 100px;
+    height: 100px;
+  }
+
+  .recipe-img-cover {
+    width: 100px;
+    height: 100px;
+  }
+
+  .menu__list-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .about__menu>h1 {
+    font-size: 13px;
+    line-height: 16px;
+  }
+
+  #recipe-main-ingredients {
+    font-size: 10px;
+    margin-top: 0px;
+    line-height: 16px;
+  }
+
+  #recipe-main-ingredients>span {
+    font-size: 11px;
+  }
+
+  #recipe-minor-ingredients {
+    font-size: 10px;
+    margin-top: 0px;
+    line-height: 16px;
+  }
+
+  #recipe-minor-ingredients>span {
+    font-size: 11px;
+  }
+
+  #next-btn {
+    width: 180px;
+    font-size: 15px;
+    height: 40px;
+  }
+
+  #camera-upload {
+    width: 180px;
+    height: 40px;
+    font-size: 15px;
+  }
+
+  #cook-Step {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  #steps-end {
+    font-size: 14px;
   }
 }

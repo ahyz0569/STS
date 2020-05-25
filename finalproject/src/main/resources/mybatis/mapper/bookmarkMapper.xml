@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multicampus.finalproject.repository.BookmarkMapper">
+    <select id="loadBookmark" parameterType="String" resultType="int">
+        SELECT recipeid FROM bookmark WHERE userID = #{userID}
+    </select>
+
+    <select id="selectBookmark" parameterType="com.multicampus.finalproject.model.BookmarkVO" resultType="com.multicampus.finalproject.model.BookmarkVO">
+        select * from bookmark where userID = #{userID, jdbcType = VARCHAR} and recipeID = #{recipeID}
+    </select>
+
+    <delete id="deleteBookmark" parameterType="com.multicampus.finalproject.model.BookmarkVO">
+        delete from bookmark where userID = #{userID} and recipeID = #{recipeID};
+    </delete>
+
+    <insert id="insertBookmark" parameterType = "com.multicampus.finalproject.model.BookmarkVO">
+        INSERT INTO `bookmark` (`userid`,`recipeid`) VALUES(#{userID, jdbcType = VARCHAR},#{recipeID});
+    </insert>
+
+    <select id="isBookmark" resultType="Integer">
+        SELECT EXISTS (SELECT * from bookmark WHERE userid = #{userID} AND recipeid=#{recipeID})
+    </select>
+</mapper>

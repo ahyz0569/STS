@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LOGIN PAGE</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="/css/styles.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <style>
   </style>
@@ -30,7 +30,7 @@
         <div class="login__layout-form">
           <!--start--로그인 폼-->
 
-          <form class="loginForm" id="login-form" action="/login" method="POST">
+          <form onsubmit="return validate()" class="loginForm" id="login-form" action="/login" method="POST">
             <h1>오늘 뭐 해먹지?</h1>
             <input id="email-id" type="email" name="email" placeholder="이메일을 입력해주세요." autofocus autocomplete="off">
             <input id="email-password" type="password" name="password" placeholder="비밀번호를 입력해주세요." autocomplete="off">
@@ -38,7 +38,7 @@
               로그인
             </button>
             <button id="google-login-btn" type="submit">
-              <img src="images/google-logo.png">
+              <img src="/images/google-logo.png">
               <span style="padding-right: 15px;">
                 구글로 로그인
               </span>
@@ -76,8 +76,38 @@
   </div>
   <!--end--페이지 전체 컨테이너-->
 
-  <script src="js/main.js"></script>
-  <script src="js/autofocus.js"></script>
+  <script type="text/javascript" th:inline="javascript">
+    /*[# sec:authorize="isAuthenticated()"]*/
+      nav_isLogin = 
+      `<a onclick="bookmarkOpenModal()" class="nav-menu-4">BOOKMARK</a>
+      <a class="nav-menu-5" href="/user/info">USER</a>`
+      nav_icon_isLogin = 
+      `<span onclick="bookmarkOpenModal()" class="nav__icon">
+            <i class="far fa-bookmark"></i>
+            <span>북마크</span>
+        </span>
+        <span class="nav__icon">
+          <a href="/logout">
+            <i class="far fa-user"></i>
+            <span>로그아웃</span>
+          </a>
+        </span>`
+    /*[/]*/
+
+    /*[# sec:authorize="!isAuthenticated()"]*/
+      nav_isLogin = `<a class="nav-menu-5" href="/user/info">USER</a>`
+      nav_icon_isLogin = 
+      `<span class="nav__icon">
+          <a href="/login">
+            <i class="far fa-user"></i>
+            <span>사용자</span>
+          </a>
+        </span>`
+    /*[/]*/
+  </script>
+  <script src="/js/main.js"></script>
+  <script src="/js/login.js"></script>
+  <script src="/js/bookmark.js"></script>
 
 </body>
 
